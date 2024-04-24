@@ -41,7 +41,7 @@ $basePath    = $_SESSION['basePath'];
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="expires" content="0">
     <!--favicon-->
-    <link rel="icon" href="<?php echo $basePath ?>assets/images/favicon-32x32.png" type="image/png">
+    <link rel="icon" href="<?php echo $basePath ?>/assets/images/favicon-32x32.png" type="image/png">
     <!--plugins-->
     <!-- Bootstrap CSS -->
     <link href="<?php echo $basePath ?>/assets/css/bootstrap.min.css" rel="stylesheet">
