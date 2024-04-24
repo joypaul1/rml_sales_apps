@@ -242,13 +242,13 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
 <!--********* Header end  ******-->
 
 <script>
-    document.getElementById("dlAppsApk").addEventListener("click", function() {
-        var fileUrl = "<?php echo $basePath . '/cl_7.apk' ?>";
-        var link = document.createElement('a');
-        link.href = fileUrl;
-        link.download = 'collection_apps'; // Specify the filename
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    });
+    // document.getElementById("dlAppsApk").addEventListener("click", function() {
+    //     var fileUrl = "<?php echo $basePath . '/cl_7.apk' ?>";
+    //     var link = document.createElement('a');
+    //     link.href = fileUrl;
+    //     link.download = 'collection_apps'; // Specify the filename
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    // });
 </script>
