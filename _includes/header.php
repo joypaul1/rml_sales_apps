@@ -22,9 +22,7 @@
     <link href="<?php echo $basePath ?>/assets/css/style.css" rel="stylesheet" type="text/css" />
 
     <!-- loader-->
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.8/sweetalert2.min.css" integrity="sha512-y4S4cBeErz9ykN3iwUC4kmP/Ca+zd8n8FDzlVbq5Nr73gn1VBXZhpriQ7avR+8fQLpyq4izWm0b8s6q4Vedb9w==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <?php
     if (isset($dynamic_link_css) && count($dynamic_link_css) > 0) {
@@ -33,5 +31,4 @@
         }
     }
     ?>
-    <script src="<?php echo $basePath ?>/assets/js/jquery.min.js"></script>
 </head>

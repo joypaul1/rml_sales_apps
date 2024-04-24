@@ -20,7 +20,7 @@
         }
     });
 </script>
-<script src="<?php echo $basePath ?>/assets/js/app.js"></script>
+<!-- <script src="<?php echo $basePath ?>/assets/js/app.js"></script> -->
 <?php if (isset($dynamic_link_js) && count($dynamic_link_js) > 0) {
     foreach ($dynamic_link_js as $key => $linkJs) {
         echo "<script src='$linkJs'></script>";
