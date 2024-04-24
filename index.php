@@ -11,14 +11,14 @@ if (isset($_POST['login_submit'])) {
         $v_password   = trim($_POST['password']);
         $md5Password  = md5($v_password);
 
-        $sql = "SELECT * FROM tbl_users WHERE emp_id = '" . $v_user_rml_id . "' and password = '" . $md5Password . "'";
+        $sql = "SELECT A.*, B.user_role FROM tbl_users A , tbl_user_role b WHERE A.emp_id ='$v_user_rml_id' AND A.password = '$md5Password' AND A.user_role_id = b.id";
+        // echo $sql;
         $rs = mysqli_query($conn, $sql);
         $getNumRows = mysqli_num_rows($rs);
 
         if ($getNumRows == 1) {
             $getUserRow = mysqli_fetch_assoc($rs);
             unset($getUserRow['password']);
-
             $_SESSION['USER_INFO'] = $getUserRow;
             $_SESSION['basePath']  = $basePath;
 

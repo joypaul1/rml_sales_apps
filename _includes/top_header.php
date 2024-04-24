@@ -7,10 +7,10 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
 
 <!--******** Nav header start **************-->
 <div class="nav-header">
-    <a href="demo/index" class="brand-logo" aria-label="Gymove">
-        <img class="logo-abbr" src="demo/public/assets/images/logo.png" alt="">
-        <img class="logo-compact" src="demo/public/assets/images/logo-text.png" alt="">
-        <img class="brand-title" src="demo/public/assets/images/logo-text.png" alt="">
+    <a href="<?php echo  $basePath  ?>/home/dashboard.php" class="brand-logo" aria-label="Gymove">
+        <!-- <img class="logo-abbr"      src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
+        <img class="logo-compact"   src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">
+        <img class="brand-title"    src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">
     </a>
     <div class="nav-control">
         <div class="hamburger">
@@ -203,10 +203,10 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
                     </li>
                     <li class="nav-item dropdown header-profile">
                         <a class="nav-link" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">
-                            <img src="demo/public/assets/images/profile/17.jpg" width="20" alt="">
+                            <img src="<?= $basePath . '/' . 'assets/images/avatar/default_user.png' ?>" width="20" alt="">
                             <div class="header-info">
-                                <span class="text-black"><strong>Peter Parkur</strong></span>
-                                <p class="fs-12 mb-0">Super Admin</p>
+                                <span class="text-black"><strong><?= $_SESSION['USER_INFO']['name'] ?></strong></span>
+                                <p class="fs-12 mb-0">  <?php echo $_SESSION['USER_INFO']['user_role'] ?></p>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
@@ -224,7 +224,7 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
                                 </svg>
                                 <span class="ms-2">Inbox </span>
                             </a>
-                            <a href="demo/page_login" class="dropdown-item ai-icon">
+                            <a href="<?php echo $basePath ?>/index.php?logout_hr=true" class="dropdown-item ai-icon">
                                 <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
                                     <polyline points="16 17 21 12 16 7"></polyline>
