@@ -85,7 +85,7 @@ if (isset($_GET['logout_hr']) && $_GET['logout_hr'] == true) {
 
     <meta property="og:title" content="Gymove  - CodeIgniter Fitness Admin Dashboard Template">
     <meta property="og:description" content="Discover Gymove, the ultimate fitness solution that is designed to help you achieve a healthier lifestyle with its cutting-edge features and personalized programs. Gymove is a fully mobile-responsive admin dashboard template that provides the perfect blend of exercise, nutrition, and motivation. Begin your fitness journey today with Gymove and visit DexignZone for more information.">
-    <meta property="og:image" content="https://gymove.dexignzone.com/codeigniter/social-image.png">
+    <meta property="og:image" content="social-image.png">
     <meta name="format-detection" content="telephone=no">
 
     <!-- Mobile Specific -->
