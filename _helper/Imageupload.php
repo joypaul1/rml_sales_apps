@@ -82,7 +82,7 @@ class Imageupload
                     $insert = false; //
                     // if ($filename) {
                     //     // delet previous image
-                    //     $sql = "select * from tbl_users where emp_id='$emp_sesssion_id'";
+                    //     $sql = "select * from tbl_users where emp_id='$emp_session_id'";
                     //     $query = mysqli_query($conn_hr, $sql);
                     //     $data = mysqli_fetch_assoc($query);
 
@@ -93,7 +93,7 @@ class Imageupload
                     //         }
                     //     }  // end delet previous image
                     //     // update image 
-                    //     $sql = "update tbl_users set image_url='$filename' where emp_id = '$emp_sesssion_id' ";
+                    //     $sql = "update tbl_users set image_url='$filename' where emp_id = '$emp_session_id' ";
                     //     $insert = mysqli_query($conn_hr, $sql);
                     //     if ($insert) {
                     //         $_SESSION['USER_INFO']['emp_image_hr'] = $filename;

@@ -13,6 +13,7 @@ include_once('../_config/connoracle.php');
 include_once('../_config/sqlConfig.php');
 $basePath = $_SESSION['basePath'];
 $emp_session_id  = $_SESSION['USER_INFO']['emp_id'];
+ 
 $emp_sesssion_band  = $_SESSION['USER_INFO']['brand'];
 
 include_once('../_includes/header.php');
