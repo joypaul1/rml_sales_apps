@@ -20,26 +20,29 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="title">Select Brand:</label>
-                                        <select required="" name="product_brand" class="form-control">
+                                        <select required name="product_brand" id="product_brand" class="form-control">
                                             <?php
-                                            if ($emp_sesssion_band == "EICHER") {
-                                            ?>
-                                                <option selected value="Eicher">Eicher</option>
-                                                <option value="Mahindra">MM</option>
-                                            <?php
-                                            }
                                             if ($emp_sesssion_band == "MM") {
-                                            ?>
-                                                <option selected value="Mahindra">MM</option>
-                                                <option value="Eicher">Eicher</option>
-                                            <?php
+                                                renderOption('Mahindra', 'Mahindra');
+                                                renderOption('Eicher', 'Eicher');
+                                                renderOption('Dongfeng', 'DONGFENG');
+                                            } elseif ($emp_sesssion_band == "EICHER") {
+                                                renderOption('Eicher', 'Eicher');
+                                                renderOption('Mahindra', 'Mahindra');
+                                                renderOption('Dongfeng', 'DONGFENG');
+                                            }
+
+                                            function renderOption($label, $value)
+                                            {
+                                                $selected = isset($_POST['product_brand']) && $_POST['product_brand'] == $value ? 'selected="selected"' : '';
+                                                echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="title">Entry From:</label>
+                                    <label for="title">Entry From: <?php echo $emp_sesssion_band; ?></label>
                                     <div class="input-group">
                                         <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? $_POST['start_date'] : ''; ?>' />
                                     </div>
@@ -53,32 +56,13 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="title">Select Product:</label>
-                                        <select name="product_type" class="form-control">
-                                            <option value="">....</option>
-                                            <?php
-                                            if ($emp_sesssion_band == "EICHER") {
-                                            ?>
-
-                                                <option value="Bus">BUS</option>
-                                                <option value="Truck">TRUCK</option>
-                                            <?php
-                                            }
-                                            if ($emp_sesssion_band == "MM") {
-                                            ?>
-                                                <option value="Human Huler">Human Huler</option>
-                                                <option value="3 Wheeler">3 Wheeler</option>
-                                                <option value="PICUK UP">PICUK UP</option>
-                                            <?php
-                                            }
-                                            ?>
-
-                                        </select>
+                                        <select name="product_type" id="product_type" class="form-control"></select>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="text-end">
-                                    <button class="btn btn-primary" type="submit" value="Load Data">
+                            <div class="d-flex justify-content-end">
+                                <div class=" text-end">
+                                    <button class=" btn btn-primary" type="submit" value="Load Data">
                                         Load Data
                                     </button>
                                 </div>
@@ -103,14 +87,14 @@ include_once('../../_helper/2step_com_conn.php');
                     ?>
 
 
-                        <div class="row mt-3 mt-2">
-                            <div class="col-sm-6">
+                        <div class="row mt-3">
+                            <div class="col-12">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="md-form">
                                             <div class=" d-flex flex-column flex-md-row">
-                                                <table  class="small table-bordered">
-                                                    <thead >
+                                                <table class="small table-bordered">
+                                                    <thead class="bg-light">
                                                         <tr>
                                                             <th class="bg-success text-white" colspan="20">
                                                                 <center>PH Wise Inquiry Summary</center>
@@ -175,7 +159,7 @@ include_once('../../_helper/2step_com_conn.php');
 										   WHERE A.ENTRY_BY = B.RML_ID 
 										   AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
 										   AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-										   AND B.USER_FOR='$v_user_tag'
+										   --AND B.USER_FOR='$v_user_tag'
 										   AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy') AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
 										 GROUP BY INTERESTED_MODEL,SAL_MM_ZH_ID
 										 )
@@ -308,13 +292,13 @@ include_once('../../_helper/2step_com_conn.php');
 
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-12">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="md-form">
                                             <div class=" d-flex flex-column flex-md-row">
-                                                <table  class="small table-bordered table-responsive">
-                                                    <thead >
+                                                <table class="small table-bordered table-responsive">
+                                                    <thead class="bg-light">
 
                                                         <tr>
                                                             <th class="bg-success text-white" colspan="20">
@@ -460,3 +444,59 @@ include_once('../../_helper/2step_com_conn.php');
 include_once('../../_includes/footer_info.php');
 include_once('../../_includes/footer.php');
 ?>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const productBrandSelector = '#product_brand';
+        const productTypeSelector = '#product_type';
+
+        $(productBrandSelector).on('change', function() {
+            updateProductTypeOptions();
+        });
+
+        function updateProductTypeOptions() {
+            const selectedBrand = $(productBrandSelector).val();
+            const productTypeSelect = $(productTypeSelector);
+
+            // Clear existing options using Bootstrap Select method
+            productTypeSelect.empty();
+            productTypeSelect.selectpicker('refresh');
+            switch (selectedBrand) {
+                case 'Mahindra':
+                    addProductTypeOption(productTypeSelect, '','ALL');
+                    addProductTypeOption(productTypeSelect, 'Human Huler','Human Huler');
+                    addProductTypeOption(productTypeSelect, '3 Wheeler','3 Wheeler');
+                    addProductTypeOption(productTypeSelect, 'PICUK UP','PICUK UP');
+                    break;
+                case 'Eicher':
+                    addProductTypeOption(productTypeSelect, '','ALL');
+                    addProductTypeOption(productTypeSelect, 'Bus', 'Bus');
+                    addProductTypeOption(productTypeSelect, 'Truck', 'Truck');
+                    break;
+                    // Add cases for other brands if needed
+                case 'DONGFENG':
+                    addProductTypeOption(productTypeSelect, '', 'ALL');
+                    addProductTypeOption(productTypeSelect, 'Captain', 'Captain');
+                    break;
+                    // Add cases for other brands if needed
+                default:
+                    // Handle unknown brand
+                    break;
+            }
+
+            // Refresh Bootstrap Select plugin after updating options
+            productTypeSelect.selectpicker('refresh');
+        }
+
+        function addProductTypeOption(selectElement,inValue, inText) {
+            // Add new option using Bootstrap Select method
+            
+            selectElement.append($('<option>', {
+                value: inValue,
+                text: inText
+            }));
+        }
+
+        // Call the function initially
+        updateProductTypeOptions();
+    });
+</script>
