@@ -79,7 +79,7 @@ include_once('../../_helper/2step_com_conn.php');
                             <div class="row">
                                 <div class="text-end">
                                     <button class="btn btn-primary" type="submit" value="Load Data">
-                                    Load Data
+                                        Load Data
                                     </button>
                                 </div>
                             </div>
@@ -108,8 +108,8 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="md-form">
-                                            <div class="resume-item d-flex flex-column flex-md-row">
-                                                <table id="mainTable" class="small table-bordered">
+                                            <div class=" d-flex flex-column flex-md-row">
+                                                <table  class="small table-bordered">
                                                     <thead class="bg-light">
                                                         <tr>
                                                             <th class="bg-success text-white" colspan="20">
@@ -248,7 +248,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                                 } else {
                                                                 ?>
                                                                     <td align="center">
-                                                                        <a target="_blank" href="dashboard_ph_dtls.php?want_id=<?php echo $row['RML_ID'] . '&start_date=' . $v_start_date . '&end_date=' . $v_end_date . '&brand=' . $V_INTERESTED_BRAND . '&product_type=' . $v_product_type  ?>">
+                                                                        <a target="_blank" href="ph_dtls.php?want_id=<?php echo $row['RML_ID'] . '&start_date=' . $v_start_date . '&end_date=' . $v_end_date . '&brand=' . $V_INTERESTED_BRAND . '&product_type=' . $v_product_type  ?>">
                                                                             <?php echo $row['EMP_NAME'] . '-' . $row['RML_ID'];
                                                                             $v_RML_ID = $row['RML_ID']; ?>
                                                                         </a>
@@ -312,8 +312,8 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="md-form">
-                                            <div class="resume-item d-flex flex-column flex-md-row">
-                                                <table id="mainTable" class="small table-bordered table-responsive">
+                                            <div class=" d-flex flex-column flex-md-row">
+                                                <table  class="small table-bordered table-responsive">
                                                     <thead class="bg-light">
 
                                                         <tr>

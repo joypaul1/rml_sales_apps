@@ -108,8 +108,8 @@ if (isset($_POST['end_date'])) {
 				   <div class="row mt-3">
 				   <div class="col-sm-6 mt-3">
 					    <div class="md-form">
-						<div class="resume-item d-flex flex-column flex-md-row">
-							<table id="mainTable" class="small table-bordered">
+						<div class=" d-flex flex-column flex-md-row">
+							<table  class="small table-bordered">
 								<thead class="bg-light">
 									<tr style="width:100%" align="center">
 										<th class="table-primary" colspan="5">==MAHINDRA==<br>Collection Summary</th>
@@ -212,8 +212,8 @@ if (isset($_POST['end_date'])) {
 				    </div>
 					<div class="col-sm-6 mt-3">
 					<div class="md-form">
-						<div class="resume-item d-flex flex-column flex-md-row">
-							<table id="mainTable" class="small table-bordered">
+						<div class=" d-flex flex-column flex-md-row">
+							<table  class="small table-bordered">
 								<thead class="bg-light">
 									<tr style="width:100%" align="center">
 										<th class="table-primary" colspan="7">=EICHER=</br>Collection Summary</th>
