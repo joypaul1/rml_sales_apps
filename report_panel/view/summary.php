@@ -110,7 +110,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         <div class="md-form">
                                             <div class=" d-flex flex-column flex-md-row">
                                                 <table  class="small table-bordered">
-                                                    <thead class="bg-light">
+                                                    <thead >
                                                         <tr>
                                                             <th class="bg-success text-white" colspan="20">
                                                                 <center>PH Wise Inquiry Summary</center>
@@ -314,7 +314,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         <div class="md-form">
                                             <div class=" d-flex flex-column flex-md-row">
                                                 <table  class="small table-bordered table-responsive">
-                                                    <thead class="bg-light">
+                                                    <thead >
 
                                                         <tr>
                                                             <th class="bg-success text-white" colspan="20">

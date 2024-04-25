@@ -27,7 +27,7 @@ if ($product_band == "Eicher") {
                         <div class="md-form">
                             <div class=" d-flex flex-column flex-md-row">
                                 <table class="small table-bordered">
-                                    <thead class="bg-light">
+                                    <thead >
                                         <tr>
                                             <th>
                                                 <center>ZH Wise Inquiry Summary</center>
