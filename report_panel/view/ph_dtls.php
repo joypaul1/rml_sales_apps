@@ -4,11 +4,8 @@ include_once('../../_helper/2step_com_conn.php');
 $v_want_id = $_GET['want_id'];
 $v_start_date = $_GET['start_date'];
 $v_end_date = $_GET['end_date'];
-
-
 $product_band = $_GET['brand'];
 $v_product_type = $_GET['product_type'];
-
 $v_user_tag = '';
 if ($product_band == "Eicher") {
     $v_user_tag = "EICHER";
