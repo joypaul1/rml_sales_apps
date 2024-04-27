@@ -43,7 +43,7 @@ $monthlySQL = @oci_parse($objConnect, $monthSQL);
                                     <span class="title text-black font-w600"><?= $data['TOTAL_NUMBER'] ?></span>
                                 </div>
                             </div>
-                            <center> <small>[Criteria wise Last 30 Days]</small></center>
+                            <center> <small class="">[Criteria wise Last 30 Days]</small></center>
                         </div>
                         <div class="effect <?= $bgColor2 ?>" style="top: -4px; left: -1.00003px;"></div>
                     </div>
