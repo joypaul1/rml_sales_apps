@@ -80,7 +80,7 @@ if ($emp_sesssion_band == "EICHER")
                     <div class="card card-body ">
                         <div class="row col-12 table-responsive">
                             <table class="table  table-bordered table-sm" id="table" cellspacing="0" width="100%">
-                                <thead>
+                                <thead class="table-success">
                                     <tr>
                                         <th>
                                             <center>Sl</center>

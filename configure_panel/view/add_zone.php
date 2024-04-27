@@ -112,7 +112,7 @@ include_once('../../_helper/2step_com_conn.php');
                     <div class="card card-body ">
                         <div class="row col-12 col-sm-12 cpl-md-12">
                             <table class="table table-bordered">
-                                <thead class="bg-light">
+                                <thead class="table-success">
                                     <tr>
                                         <th scope="col">Sl</th>
                                         <th scope="col">Zone Name</th>

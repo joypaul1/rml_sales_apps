@@ -90,7 +90,7 @@ include_once('../../_helper/2step_com_conn.php');
                         <div class="card card-body ">
                             <div class="row col-12 col-sm-12 cpl-md-12">
                                 <table class="small table-bordered">
-                                    <thead class="bg-light">
+                                    <thead class="table-success">
                                         <tr>
                                             <th class="bg-success text-white" colspan="20">
                                                 <center>PH Wise Inquiry Summary</center>
@@ -283,7 +283,7 @@ include_once('../../_helper/2step_com_conn.php');
                             </div>
                             <div class="row col-12 col-sm-12 col-md-12 mt-3">
                                 <table class="small table-bordered table-responsive">
-                                    <thead class="bg-light">
+                                    <thead class="table-success">
                                         <tr>
                                             <th class="bg-success text-white" colspan="20">
                                                 <center>Inquiry Summary Till Date</center>

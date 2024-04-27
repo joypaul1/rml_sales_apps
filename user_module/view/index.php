@@ -21,7 +21,7 @@ include_once('../../_helper/2step_com_conn.php');
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered align-middle mb-0">
-                                <thead class="table-light text-uppercase text-center ">
+                                <thead class="table-success text-uppercase text-center ">
                                     <tr>
                                         <th>SL.</th>
                                         <th>Action</th>

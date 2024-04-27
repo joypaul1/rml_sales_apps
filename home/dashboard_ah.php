@@ -498,7 +498,7 @@ $v_sesstion_id=$emp_session_id;
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table align-middle mb-0">
-                                <thead class="table-light">
+                                <thead class="table-success">
                                     <tr>
                                         <th>Product</th>
                                         <th>Photo</th>
