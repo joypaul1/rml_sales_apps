@@ -15161,13 +15161,15 @@ body ::-webkit-scrollbar-thumb {
 }
 
 .footer {
-   padding-left: 21.563rem;
-   background-color: transparent
+   text-align: center;
+   color: black;
+   background-color: #eadbc859 !important
 }
 
 @media only screen and (max-width: 1400px) {
    .footer {
-      padding-left: 17rem
+      /* padding-left: 17rem; */
+
    }
 }
 
@@ -15277,7 +15279,7 @@ body ::-webkit-scrollbar-thumb {
 
 .nav-header .brand-title {
    margin-left: 10px;
-   max-width: 120px;
+   max-width: 100%;
    margin-top: 0px
 }
 
@@ -17250,7 +17252,7 @@ svg.pulse-svg .third-circle {
 
 @media only screen and (max-width: 1400px) {
    [data-sidebar-style="full"][data-layout="vertical"] .deznav .metismenu>li>a {
-      padding: 20px 20px;
+      padding: 15px 15px;
       font-size: 16px
    }
 }

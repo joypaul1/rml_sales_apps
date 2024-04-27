@@ -6,7 +6,7 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
 ?>
 
 <!--******** Nav header start **************-->
-<div class="nav-header">
+<div class="nav-header" style="background: darkblue;">
     <a href="<?php echo  $basePath  ?>/home/dashboard.php" class="brand-logo" aria-label="Gymove">
         <!-- <img class="logo-abbr"      src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
         <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">
