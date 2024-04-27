@@ -46,6 +46,7 @@
                     <ul aria-expanded="false" class="mm-collapse"> 
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/product_list.php">Product List </a></li>
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/add_zone.php">Zone List </a></li>
+                        <li><a href="<?php echo $basePath ?>/configure_panel/view/add_zone.php">Zone List </a></li>
                     </ul>
                 </li>
             </ul>

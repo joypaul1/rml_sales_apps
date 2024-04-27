@@ -12,7 +12,7 @@ include_once('../../_helper/2step_com_conn.php');
                     <div class="card-header">
                         <div class="card-title">
                             <i class="flaticon-381-diploma"></i>
-                            Zone List & Create
+                            Application List & Create
                         </div>
                     </div>
                     <div class="card-body">
@@ -20,8 +20,8 @@ include_once('../../_helper/2step_com_conn.php');
                             <div class="row justify-content-center align-items-center">
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="title">Zone Name:</label>
-                                        <input type="text" required="" name="zone_name" class="form-control" id="title">
+                                        <label for="title">Application name:</label>
+                                        <input type="text" required="" name="department_name" class="form-control" id="title">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -39,11 +39,6 @@ include_once('../../_helper/2step_com_conn.php');
                                         <!-- <label for="title"> &nbsp;  </label> -->
                                         <input class="btn btn-primary btn pull-right" type="submit" value="Submit to Create">
                                     </div>
-                                    <!-- <div class="form-group">
-                                        <label for="title">Zone Status:</label>
-
-                                        
-                                    </div> -->
                                 </div>
                             </div>
 
@@ -51,30 +46,21 @@ include_once('../../_helper/2step_com_conn.php');
                     </div>
 
                     <?php
-                    // $emp_session_id = $_SESSION['emp_id'];
-                    @$zone_name = $_REQUEST['zone_name'];
-                    @$zone_status = $_REQUEST['zone_status'];
+                    @$department_name = $_REQUEST['department_name'];
+                    @$department_status = $_REQUEST['department_status'];
 
-                    if (isset($_POST['zone_status'])) {
+                    if (isset($_POST['department_status'])) {
 
-                        $strSQL  = oci_parse($objConnect, "INSERT INTO SALL_ZONE_TREE (
-																		 LABEL, 
-																		 LINK,
-                                                                         PARENT,
-                                                                         SORT,
-                                                                         CREATED_BY,																		 
-																		 CREATED_DATE,
-                                                                         FLAG,																		 
+                        $strSQL  = oci_parse($objConnect, "INSERT INTO SAL_APPLICATION (
+																		 TITLE, 
+																		 CREATED_BY, 
+																		 CREATED_DATE, 
 																		 IS_ACTIVE) 
 																VALUES ( 
-																		'$zone_name' ,
-                                                                         '#',
-																		 '0',
-																		 '',
+																		'$department_name'  ,
 																		'$emp_session_id',
-																		 SYSDATE,
-																		'ZONE',
-																	   '$zone_status')");
+																		SYSDATE,
+																	   '$department_status')");
 
                         if (@oci_execute($strSQL)) {
                     ?>
@@ -83,7 +69,7 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="md-form mt-5">
                                     <ol class="breadcrumb">
                                         <li class="breadcrumb-item">
-                                            Zone is created successfully.
+                                            Application is created successfully.
                                         </li>
                                     </ol>
                                 </div>
@@ -92,14 +78,13 @@ include_once('../../_helper/2step_com_conn.php');
                         } else {
                             $lastError = error_get_last();
                             $error = $lastError ? "" . $lastError["message"] . "" : "";
-                            // echo $error;
-                            if (strpos($error, '(CONSTRAINT_FOLDER_NAME)') !== false) {
+                            if (strpos($error, '(DEVELOPERS.TITLE_NAME)') !== false) {
                             ?>
                                 <div class="container-fluid">
                                     <div class="md-form mt-5">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item">
-                                                <?php echo $error ?>
+                                                This Application is already created. You can not create duplicate Application .
                                             </li>
                                         </ol>
                                     </div>
@@ -129,14 +114,10 @@ include_once('../../_helper/2step_com_conn.php');
                                     @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
                                     @$attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
 
-                                    $strSQL  = oci_parse($objConnect, "select ID,LABEL AS ZONE_NAME,CREATED_BY,CREATED_DATE,IS_ACTIVE from SALL_ZONE_TREE
-                                                                where PARENT=0 order by LABEL");
-
-
+                                    $strSQL  = oci_parse($objConnect, "SELECT ID,LABEL AS ZONE_NAME,CREATED_BY,CREATED_DATE,IS_ACTIVE from SALL_ZONE_TREE where PARENT=0 order by LABEL");
 
                                     oci_execute($strSQL);
                                     $number = 0;
-
 
                                     while ($row = oci_fetch_assoc($strSQL)) {
                                         $number++;
@@ -151,7 +132,6 @@ include_once('../../_helper/2step_com_conn.php');
                                                     echo 'Active';
                                                 else
                                                     echo 'In-Active';
-
                                                 ?></td>
 
                                         </tr>
