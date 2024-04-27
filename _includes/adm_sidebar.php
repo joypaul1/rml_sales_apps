@@ -23,11 +23,21 @@
                 <li class="<?php echo isActive('/report_panel/view/ph_dtls.php') ?><?php echo isActive('/report_panel/view/dse_leave_report.php') ?>">
                     <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-network"></i>
-                        <span class="nav-text">Report Panel </span>
+                        <span class="nav-text">Lead Report Panel </span>
                     </a>
                     <ul aria-expanded="false" class="mm-collapse" style="height: 10px;">
                         <li><a href="<?php echo $basePath ?>/report_panel/view/summary.php">Report Summary</a></li>
                         <li><a href="<?php echo $basePath ?>/report_panel/view/dse_leave_report.php">DSE Lead Report </a></li>
+                    </ul>
+                </li>
+                <li class="<?php echo isActive('/distributor_panel/view/ph_dtls.php') ?>">
+                    <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-network"></i>
+                        <span class="nav-text">Distributor Panel </span>
+                    </a>
+                    <ul aria-expanded="false" class="mm-collapse" style="height: 10px;">
+                        <li><a href="<?php echo $basePath ?>/distributor_panel/view/report.php">Distributor Report </a></li>
+                        <li><a href="<?php echo $basePath ?>/distributor_panel/view/dse_leave_report.php">District Assign Report </a></li>
                     </ul>
                 </li>
             </ul>

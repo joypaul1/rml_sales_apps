@@ -27,7 +27,7 @@ $attn_end_date=$_REQUEST['end_date'];
                    <div class="col-lg-12">
 					<div class="md-form">
 					 <div class=" d-flex flex-column flex-md-row">
-					  <table class="table table-striped table-bordered table-sm" id="table" cellspacing="0" width="100%"> 
+					  <table class="table  table-bordered table-sm" id="table" cellspacing="0" width="100%"> 
 						<thead >
 								<tr>
 								  <th scope="col">Sl</th>
