@@ -1,9 +1,5 @@
 <?php
-$dynamic_link_js[]  = 'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js';
-$dynamic_link_css[] = 'https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css';
-$dynamic_link_css[] = '../../assets/plugins/select2/css/select2.min.css';
-$dynamic_link_css[] = '../../assets/plugins/select2/css/select2-bootstrap4.css';
-$dynamic_link_js[]  = '../../assets/plugins/select2/js/select2.min.js';
+
 include_once('../../_helper/2step_com_conn.php');
 
 
