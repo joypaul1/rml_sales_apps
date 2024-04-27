@@ -8,8 +8,24 @@ group by MODE_TYPE
 ORDER BY TOTAL_NUMBER DESC";
 $monthlySQL = @oci_parse($objConnect, $monthSQL);
 @oci_execute($monthlySQL);
-//  @oci_fetch_assoc($strSQL);
-// print_r($monthlyData);
+
+// apaxChartData
+$apaxChartData = [];
+$salesSQL = "SELECT INTERESTED_BRAND, PRODUCT_TYPE, COUNT(PRODUCT_TYPE) AS TOTAL_NUMBER FROM SAL_LEADS_GEN
+             WHERE TRUNC(ENTRY_DATE) BETWEEN SYSDATE - 30 AND SYSDATE
+             GROUP BY INTERESTED_BRAND, PRODUCT_TYPE
+             ORDER BY INTERESTED_BRAND";
+$salesSQL = @oci_parse($objConnect, $salesSQL);
+@oci_execute($salesSQL);
+
+while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative array
+    $apaxChartData[] = array(
+        'INTERESTED_BRAND' => $data['INTERESTED_BRAND'],
+        'PRODUCT_TYPE' => $data['PRODUCT_TYPE'],
+        'TOTAL_NUMBER' => $data['TOTAL_NUMBER']
+    );
+}
+
 ?>
 
 <!--start page wrapper -->
@@ -115,23 +131,21 @@ include_once('../_includes/footer_info.php');
 include_once('../_includes/footer.php');
 ?>
 <script>
+    var apaxChartData = <?php echo json_encode($apaxChartData) ?>;
+    console.log(apaxChartData, 'apaxChartData');
     (function($) {
         /* "use strict" */
-
-
         var dzChartlist = function() {
-            //let draw = Chart.controllers.line.__super__.draw; //draw shadow
+            // let draw = Chart.controllers.line.__super__.draw; //draw shadow
             var screenWidth = $(window).width();
             var chartBarRunning = function() {
 
                 var chartBarRunningOptions = {
                     series: [{
-                            name: 'Running',
-                            data: [50, 18, 70, 40, 90, 70, 20, 75, 80, 25, 70, 45],
-                        },
-                        {
-                            name: 'Cycling',
-                            data: [80, 40, 55, 20, 45, 30, 80, 90, 85, 90, 30, 85]
+                            name: 'TOTAL',
+                            data: apaxChartData.map(function(entry) {
+                                return entry.TOTAL_NUMBER;
+                            })
                         },
 
                     ],
@@ -153,7 +167,7 @@ include_once('../_includes/footer.php');
 
                         },
                     },
-                    colors: ['#70349D', '#FF3282'],
+                    colors: ['#70349D'],
                     dataLabels: {
                         enabled: false,
                     },
@@ -186,7 +200,9 @@ include_once('../_includes/footer.php');
                     },
                     xaxis: {
 
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        categories: apaxChartData.map(function(entry) {
+                            return entry.PRODUCT_TYPE;
+                        }),
                         labels: {
                             style: {
                                 colors: '#787878',
@@ -218,15 +234,9 @@ include_once('../_includes/footer.php');
                     },
                     fill: {
                         opacity: 1,
-                        colors: ['#70349D', '#FF3282'],
+                        colors: ['#70349D'],
                     },
-                    tooltip: {
-                        y: {
-                            formatter: function(val) {
-                                return "$ " + val + " thousands"
-                            }
-                        }
-                    },
+                   
                     responsive: [{
                         breakpoint: 575,
                         options: {
@@ -376,7 +386,7 @@ include_once('../_includes/footer.php');
 
                 load: function() {
                     chartBarRunning();
-                    chartBarCycle();
+                    // chartBarCycle();
                 },
 
                 resize: function() {
