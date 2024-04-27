@@ -16,7 +16,7 @@ include_once('../../_helper/2step_com_conn.php');
                     </div>
                     <div class="card-body">
                         <form action="" method="post">
-                            <div class="row justify-content-center">
+                            <div class="row justify-content-center align-items-center">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label for="title">Zone Name:</label>
@@ -33,17 +33,81 @@ include_once('../../_helper/2step_com_conn.php');
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <button class="btn btn-primary" type="submit" value="Load Data">
-                                        Search Data
-                                    </button>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <!-- <label for="title"> &nbsp;  </label> -->
+                                        <input class="btn btn-primary btn pull-right" type="submit" value="Submit to Create">
+                                    </div>
+                                    <!-- <div class="form-group">
+                                        <label for="title">Zone Status:</label>
+
+                                        
+                                    </div> -->
                                 </div>
                             </div>
 
                         </form>
                     </div>
 
+                    <?php
+                    // $emp_session_id = $_SESSION['emp_id'];
+                    @$zone_name = $_REQUEST['zone_name'];
+                    @$zone_status = $_REQUEST['zone_status'];
 
+                    if (isset($_POST['zone_status'])) {
+
+                        $strSQL  = oci_parse($objConnect, "INSERT INTO SALL_ZONE_TREE (
+																		 LABEL, 
+																		 LINK,
+                                                                         PARENT,
+                                                                         SORT,
+                                                                         CREATED_BY,																		 
+																		 CREATED_DATE,
+                                                                         FLAG,																		 
+																		 IS_ACTIVE) 
+																VALUES ( 
+																		'$zone_name' ,
+                                                                         '#',
+																		 '0',
+																		 '',
+																		'$emp_session_id',
+																		 SYSDATE,
+																		'ZONE',
+																	   '$zone_status')");
+
+                        if (@oci_execute($strSQL)) {
+                    ?>
+
+                            <div class="container-fluid">
+                                <div class="md-form mt-5">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item">
+                                            Zone is created successfully.
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                            <?php
+                        } else {
+                            $lastError = error_get_last();
+                            $error = $lastError ? "" . $lastError["message"] . "" : "";
+                            // echo $error;
+                            if (strpos($error, '(CONSTRAINT_FOLDER_NAME)') !== false) {
+                            ?>
+                                <div class="container-fluid">
+                                    <div class="md-form mt-5">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item">
+                                                <?php echo $error ?>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                    <?php
+                            }
+                        }
+                    }
+                    ?>
 
                     <div class="card card-body ">
                         <div class="row col-12 col-sm-12 cpl-md-12">
@@ -51,84 +115,47 @@ include_once('../../_helper/2step_com_conn.php');
                                 <thead class="bg-light">
                                     <tr>
                                         <th scope="col">Sl</th>
-                                        <th scope="col">Emp Name</th>
-                                        <th scope="col">District Name</th>
-                                        <th scope="col">Created By</th>
+                                        <th scope="col">Zone Name</th>
                                         <th scope="col">Created Date</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col">Created By</th>
+                                        <th scope="col">Zone Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     <?php
-                                    @$user_selected_id = $_REQUEST['user_selected_id'];
+                                    @$attn_status = $_REQUEST['attn_status'];
+                                    @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
+                                    @$attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
 
-                                    if (isset($_POST['user_selected_id'])) {
+                                    $strSQL  = oci_parse($objConnect, "select ID,LABEL AS ZONE_NAME,CREATED_BY,CREATED_DATE,IS_ACTIVE from SALL_ZONE_TREE
+                                                                where PARENT=0 order by LABEL");
 
-                                        $strSQL  = oci_parse($objConnect, "SELECT ID,
-                                                                    (select EMP_NAME || ' ('||RML_ID || ')' from RML_COLL_APPS_USER where RML_ID=CONCERN_ID )EMP_NAME,
-						                                            DISTRICT_NAME,
-																	CREATED_BY,
-																	CREATED_DATE,
-																	IS_ACTIVE,
-																	CONCERN_ID 
-						                                       from SALL_EMP_DISTRICT
-															   where CONCERN_ID='$user_selected_id'");
 
-                                        oci_execute(@$strSQL);
-                                        $number = 0;
 
-                                        while ($row = oci_fetch_assoc($strSQL)) {
-                                            $number++;
+                                    oci_execute($strSQL);
+                                    $number = 0;
+
+
+                                    while ($row = oci_fetch_assoc($strSQL)) {
+                                        $number++;
                                     ?>
-                                            <tr>
-                                                <td><?php echo $number; ?></td>
-                                                <td><?php echo $row['EMP_NAME']; ?></td>
-                                                <td><?php echo $row['DISTRICT_NAME']; ?></td>
-                                                <td><?php echo $row['CREATED_BY']; ?></td>
-                                                <td><?php echo $row['CREATED_DATE']; ?></td>
-                                                <td><?php
+                                        <tr>
+                                            <td><?php echo $number; ?></td>
+                                            <td><?php echo $row['ZONE_NAME']; ?></td>
+                                            <td><?php echo $row['CREATED_BY']; ?></td>
+                                            <td><?php echo $row['CREATED_DATE']; ?></td>
+                                            <td><?php
+                                                if ($row['IS_ACTIVE'] == 1)
+                                                    echo 'Active';
+                                                else
+                                                    echo 'In-Active';
 
-                                                    if ($row['IS_ACTIVE'] == '1')
-                                                        echo 'Active';
-                                                    else
-                                                        echo 'In-Active';
-                                                    ?></td>
-                                            </tr>
-                                            <?php
-                                        }
-                                    } else {
+                                                ?></td>
 
-                                        $allDataSQL  = oci_parse($objConnect, "SELECT ID,
-						                                            DISTRICT_NAME,
-																	CREATED_BY,
-																	CREATED_DATE,
-																	IS_ACTIVE,
-																	(select EMP_NAME || ' ('||RML_ID || ')' from RML_COLL_APPS_USER where RML_ID=CONCERN_ID )EMP_NAME
-						                                       from SALL_EMP_DISTRICT");
-
-                                        $number = 0;
-                                        if (@oci_execute(@$allDataSQL)) {
-                                            while ($row = oci_fetch_assoc($allDataSQL)) {
-                                                $number++;
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $number; ?></td>
-                                                    <td><?php echo $row['EMP_NAME']; ?></td>
-                                                    <td><?php echo $row['DISTRICT_NAME']; ?></td>
-                                                    <td><?php echo $row['CREATED_BY']; ?></td>
-                                                    <td><?php echo $row['CREATED_DATE']; ?></td>
-                                                    <td><?php
-
-                                                        if ($row['IS_ACTIVE'] == '1')
-                                                            echo 'Active';
-                                                        else
-                                                            echo 'In-Active';
-                                                        ?></td>
-                                                </tr>
+                                        </tr>
                                     <?php
-                                            }
-                                        }
+
                                     }
                                     ?>
                                 </tbody>

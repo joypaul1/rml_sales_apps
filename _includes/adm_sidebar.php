@@ -43,9 +43,9 @@
                         <i class="flaticon-381-bookmark"></i>
                         <span class="nav-text">Configure Panel</span>
                     </a>
-                    <ul aria-expanded="false" class="mm-collapse">
+                    <ul aria-expanded="false" class="mm-collapse"> 
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/product_list.php">Product List </a></li>
-                        <!-- <li><a href="<?php echo $basePath ?>/configure_panel/view/district_assign_report.php">District Assign Report </a></li> -->
+                        <li><a href="<?php echo $basePath ?>/configure_panel/view/add_zone.php">Zone List </a></li>
                     </ul>
                 </li>
             </ul>
