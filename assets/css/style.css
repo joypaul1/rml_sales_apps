@@ -44427,6 +44427,7 @@ span#counter {
 }
 
 .avtivity-card p,
+.avtivity-card center,
 .avtivity-card .media-body span {
    -webkit-transition: all 0.5s;
    -ms-transition: all 0.5s;
@@ -44443,6 +44444,10 @@ span#counter {
 }
 
 .avtivity-card:hover p {
+   color: #fff
+}
+
+.avtivity-card:hover center {
    color: #fff
 }
 
@@ -45768,3 +45773,6 @@ a:hover {
 }
 
 /*# sourceMappingURL=style.css.map */
+.card-body2 {
+   padding: 0.875rem !important
+}

@@ -6,11 +6,16 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
 ?>
 
 <!--******** Nav header start **************-->
-<div class="nav-header" style="background: darkblue;">
-    <a href="<?php echo  $basePath  ?>/home/dashboard.php" class="brand-logo" aria-label="Gymove">
-        <!-- <img class="logo-abbr"      src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
-        <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">
-        <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">
+<div class="nav-header" >
+    <!-- <a href="<?php echo  $basePath  ?>/home/dashboard.php" class="brand-logo" aria-label="Gymove"> -->
+    <!-- <img class="logo-abbr"      src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">  -->
+    <!-- <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
+    <!-- <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
+    <!-- </a> -->
+    <a href="https://gymove.dexignzone.com/codeigniter/demo/index" class="brand-logo" aria-label="Gymove">
+        <img class="logo-abbr" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo.png" alt="">
+        <img class="logo-compact" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo-text.png" alt="">
+        <img class="brand-title" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo-text.png" alt="">
     </a>
     <div class="nav-control">
         <div class="hamburger">
@@ -217,7 +222,7 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
                                 </svg>
                                 <span class="ms-2">Password Change </span>
                             </a>
-                            
+
                             <a href="<?php echo $basePath ?>/index.php?logout_hr=true" class="dropdown-item ai-icon">
                                 <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
