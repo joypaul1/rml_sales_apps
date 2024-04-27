@@ -96,7 +96,7 @@ class Imageupload
                     //     $sql = "update tbl_users set image_url='$filename' where emp_id = '$emp_session_id' ";
                     //     $insert = mysqli_query($conn_hr, $sql);
                     //     if ($insert) {
-                    //         $_SESSION['USER_INFO']['emp_image_hr'] = $filename;
+                    //         $_SESSION['SALES_USER_INFO']['emp_image_hr'] = $filename;
                     //         $imageStatus = "The file has been uploaded successfully.";
                     //         session_start();
                     //         $_SESSION['imageStatus'] = $imageStatus;

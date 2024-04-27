@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['USER_INFO'])) {
+if (!isset($_SESSION['SALES_USER_INFO'])) {
     $currentScriptPath = __FILE__;
     $directoryPath     = dirname($currentScriptPath);
     $includeFilePath   = $directoryPath . '/../config_file_path.php';
@@ -12,9 +12,9 @@ if (!isset($_SESSION['USER_INFO'])) {
 include_once('../_config/connoracle.php');
 include_once('../_config/sqlConfig.php');
 $basePath = $_SESSION['basePath'];
-$emp_session_id  = $_SESSION['USER_INFO']['emp_id'];
+$emp_session_id  = $_SESSION['SALES_USER_INFO']['emp_id'];
  
-$emp_session_band  = $_SESSION['USER_INFO']['brand'];
+$emp_session_band  = $_SESSION['SALES_USER_INFO']['brand'];
 
 include_once('../_includes/header.php');
 include_once('../_includes/top_header.php');
@@ -28,7 +28,7 @@ include_once('../_includes/top_header.php');
     <div id="main-wrapper">
 
     <?php
-    if ($_SESSION['USER_INFO']['user_role_id'] == 2) {
+    if ($_SESSION['SALES_USER_INFO']['user_role_id'] == 2) {
         include_once('../_includes/adm_sidebar.php');
     } else {
         include_once('../_includes/sidebar.php');

@@ -1,6 +1,6 @@
 <?php
 include_once('../../_helper/2step_com_conn.php');
-$V_USER_BRAND = $_SESSION['USER_INFO']['brand'];
+$V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 ?>
 
 <!--start page wrapper -->

@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['USER_INFO'])) {
+if (!isset($_SESSION['SALES_USER_INFO'])) {
     $currentScriptPath = __FILE__;
     $directoryPath     = dirname($currentScriptPath);
     $includeFilePath   = $directoryPath . '../../../../config_file_path.php';
@@ -10,18 +10,18 @@ if (!isset($_SESSION['USER_INFO'])) {
     exit;
 }
 $basePath = $_SESSION['basePath'];
-$emp_session_id  = $_SESSION['USER_INFO']['emp_id'];
+$emp_session_id  = $_SESSION['SALES_USER_INFO']['emp_id'];
 
 include_once('../../../../_config/connoracle.php');
 include_once('../../../../_includes/header.php');
 
-if ($_SESSION['USER_INFO']['user_role_id'] == 2) {
+if ($_SESSION['SALES_USER_INFO']['user_role_id'] == 2) {
     include_once('../../../../_includes/adm_sidebar.php');
 }
-if ($_SESSION['USER_INFO']['user_role_id'] == 3) {
+if ($_SESSION['SALES_USER_INFO']['user_role_id'] == 3) {
     include_once('../../../../_includes/ah_sidebar.php');
 }
-if ($_SESSION['USER_INFO']['user_role_id'] == 4) {
+if ($_SESSION['SALES_USER_INFO']['user_role_id'] == 4) {
     include_once('../../../../_includes/zh_sidebar.php');
 }
 include_once('../../../../_includes/top_header.php');

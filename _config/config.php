@@ -69,7 +69,7 @@ function getUserWisePermissionName()
 {
 	global $conn_hr;
 
-	$user_id = $_SESSION['USER_INFO']['id_hr'];
+	$user_id = $_SESSION['SALES_USER_INFO']['id_hr'];
 	$permissionArray = [];
 	$permissionSlug = [];
 	$sql        = "SELECT * FROM tbl_users_permissions  Where user_id=" . $user_id; //  select query execution

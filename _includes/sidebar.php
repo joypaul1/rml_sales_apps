@@ -17,7 +17,7 @@
                 <li >
                     <a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-networking"></i>
-                        <span class="nav-text"><?= $_SESSION['USER_INFO']['user_role'] ?> Dashboard</span>
+                        <span class="nav-text"><?= $_SESSION['SALES_USER_INFO']['user_role'] ?> Dashboard</span>
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="demo/index">Dashboard</a></li>

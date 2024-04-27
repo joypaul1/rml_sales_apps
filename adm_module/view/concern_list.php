@@ -71,7 +71,7 @@ include_once('../../_helper/2step_com_conn.php');
                             </thead>
                             <tbody>
                                 <?php
-                                // print_r($_SESSION['USER_INFO']);
+                                // print_r($_SESSION['SALES_USER_INFO']);
                                 $query =    "SELECT ID,TARGET,TARGETSHOW,
                                                 ZONE,RML_ID,CONCERN,OVER_DUE,
                                                 CURRENT_MONTH_DUE,

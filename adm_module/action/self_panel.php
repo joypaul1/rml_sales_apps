@@ -6,7 +6,7 @@ $basePath   = $_SESSION['basePath'];
 $folderPath = $rs_img_path;
 ini_set('memory_limit', '2560M');
 $valid_formats = array("jpg", "png", "gif", "bmp", "jpeg", "PNG", "JPG", "JPEG", "GIF", "BMP");
-$log_user_id   = $_SESSION['USER_INFO']['id'];
+$log_user_id   = $_SESSION['SALES_USER_INFO']['id'];
 
 
 

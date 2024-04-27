@@ -2,7 +2,7 @@
 
 <?php
 
-$USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
+$USER_ROLE = $_SESSION['SALES_USER_INFO']['user_role_id'];
 ?>
 
 <!--******** Nav header start **************-->
@@ -210,8 +210,8 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
                         <a class="nav-link" href="javascript:void(0)" role="button" data-bs-toggle="dropdown">
                             <img src="<?= $basePath . '/' . 'assets/images/avatar/default_user.png' ?>" width="20" alt="">
                             <div class="header-info">
-                                <span class="text-black"><strong><?= $_SESSION['USER_INFO']['name'] ?></strong></span>
-                                <p class="fs-12 mb-0"> <?php echo $_SESSION['USER_INFO']['user_role'] ?></p>
+                                <span class="text-black"><strong><?= $_SESSION['SALES_USER_INFO']['name'] ?></strong></span>
+                                <p class="fs-12 mb-0"> <?php echo $_SESSION['SALES_USER_INFO']['user_role'] ?></p>
                             </div>
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">

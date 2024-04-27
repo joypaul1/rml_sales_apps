@@ -17,7 +17,7 @@
                 <li class="<?php echo isActive('/home/dashboard.php') ?>">
                     <a href="<?php echo $basePath ?>/home/dashboard.php" class="ai-icon <?php echo isActive('/home/dashboard.php') ?>" aria-expanded="false">
                         <i class="flaticon-381-home"></i>
-                        <span class="nav-text"> <?= $_SESSION['USER_INFO']['user_role'] ?> Dashboard</span>
+                        <span class="nav-text"> <?= $_SESSION['SALES_USER_INFO']['user_role'] ?> Dashboard</span>
                     </a>
                 </li>
 

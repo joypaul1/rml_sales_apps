@@ -19,11 +19,11 @@ if (isset($_POST['login_submit'])) {
         if ($getNumRows == 1) {
             $getUserRow = mysqli_fetch_assoc($rs);
             unset($getUserRow['password']);
-            $_SESSION['USER_INFO'] = $getUserRow;
+            $_SESSION['SALES_USER_INFO'] = $getUserRow;
             $_SESSION['basePath']  = $basePath;
 
             // For Separation Dashbord
-            $USER_ROLE = getUserAccessRoleByID($_SESSION['USER_INFO']['user_role_id']);
+            $USER_ROLE = getUserAccessRoleByID($_SESSION['SALES_USER_INFO']['user_role_id']);
             // echo $USER_ROLE;
             // die();
             // if ($USER_ROLE == "IT") {

@@ -3,7 +3,7 @@
 include_once('../../_helper/2step_com_conn.php');
 include_once('../../_config/sqlConfig.php');
 $data = [];
-$edit_id = $_SESSION['USER_INFO']["id"];
+$edit_id = $_SESSION['SALES_USER_INFO']["id"];
 $query   = "SELECT * FROM tbl_users UP WHERE UP.id = '$edit_id'";
 $strSQL = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($strSQL);
