@@ -26,8 +26,8 @@ include_once('../../_helper/2step_com_conn.php');
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
-                                        <label for="title">Zone Status:</label>
-                                        <select required="" name="zone_status" class="form-control">
+                                        <label for="title">Application Status:</label>
+                                        <select required="" name="department_status" class="form-control">
                                             <option selected value="">Select Status</option>
                                             <option value="1">Active</option>
                                             <option value="0">In-Active</option>
@@ -101,10 +101,10 @@ include_once('../../_helper/2step_com_conn.php');
                                 <thead class="table-success">
                                     <tr>
                                         <th scope="col">Sl</th>
-                                        <th scope="col">Zone Name</th>
+                                        <th scope="col">Application Name</th>
                                         <th scope="col">Created Date</th>
                                         <th scope="col">Created By</th>
-                                        <th scope="col">Zone Status</th>
+                                        <th scope="col">Application Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -114,7 +114,13 @@ include_once('../../_helper/2step_com_conn.php');
                                     @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
                                     @$attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
 
-                                    $strSQL  = oci_parse($objConnect, "SELECT ID,LABEL AS ZONE_NAME,CREATED_BY,CREATED_DATE,IS_ACTIVE from SALL_ZONE_TREE where PARENT=0 order by LABEL");
+                                    $strSQL  = oci_parse($objConnect, "select ID,
+                                                            TITLE,
+                                                            CREATED_BY,
+                                                            CREATED_DATE,
+                                                            IS_ACTIVE 
+                                                    from SAL_APPLICATION
+                                                    order by TITLE");
 
                                     oci_execute($strSQL);
                                     $number = 0;
@@ -124,14 +130,15 @@ include_once('../../_helper/2step_com_conn.php');
                                     ?>
                                         <tr>
                                             <td><?php echo $number; ?></td>
-                                            <td><?php echo $row['ZONE_NAME']; ?></td>
-                                            <td><?php echo $row['CREATED_BY']; ?></td>
+                                            <td><?php echo $row['TITLE']; ?></td>
                                             <td><?php echo $row['CREATED_DATE']; ?></td>
+                                            <td><?php echo $row['CREATED_BY']; ?></td>
                                             <td><?php
                                                 if ($row['IS_ACTIVE'] == 1)
                                                     echo 'Active';
                                                 else
                                                     echo 'In-Active';
+
                                                 ?></td>
 
                                         </tr>
