@@ -39,6 +39,15 @@
                         <li><a href="<?php echo $basePath ?>/distributor_panel/view/district_assign_report.php">District Assign Report </a></li>
                     </ul>
                 </li>
+                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-bookmark"></i>
+                        <span class="nav-text">Configure Panel</span>
+                    </a>
+                    <ul aria-expanded="false" class="mm-collapse">
+                        <li><a href="<?php echo $basePath ?>/configure_panel/view/product_list.php">Product List </a></li>
+                        <!-- <li><a href="<?php echo $basePath ?>/configure_panel/view/district_assign_report.php">District Assign Report </a></li> -->
+                    </ul>
+                </li>
             </ul>
 
         </div>
