@@ -18,6 +18,7 @@ if ($emp_sesssion_band == "EICHER")
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
+                            <i class="flaticon-381-diploma"></i>
                             Sales Executive Wise Lead Information Report
                         </div>
                     </div>
@@ -317,12 +318,12 @@ include_once('../../_includes/footer_info.php');
 include_once('../../_includes/footer.php');
 ?>
 <script>
-	function exportF(elem) {
-		  var table = document.getElementById("table");
-		  var html = table.outerHTML;
-		  var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
-		  elem.setAttribute("href", url);
-		  elem.setAttribute("download", "Lead_Info.xls"); // Choose the file name
-		  return false;
-		}
-	</script>
+    function exportF(elem) {
+        var table = document.getElementById("table");
+        var html = table.outerHTML;
+        var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+        elem.setAttribute("href", url);
+        elem.setAttribute("download", "Lead_Info.xls"); // Choose the file name
+        return false;
+    }
+</script>

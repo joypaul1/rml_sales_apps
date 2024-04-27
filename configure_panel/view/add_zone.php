@@ -11,6 +11,7 @@ include_once('../../_helper/2step_com_conn.php');
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
+                            <i class="flaticon-381-diploma"></i>
                             Zone List & Create
                         </div>
                     </div>

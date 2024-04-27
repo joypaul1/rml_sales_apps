@@ -18,6 +18,7 @@ if ($emp_sesssion_band == "EICHER")
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
+                            <i class="flaticon-381-diploma"></i>
                             Distributor Report
                         </div>
                     </div>

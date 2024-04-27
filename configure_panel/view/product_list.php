@@ -12,7 +12,7 @@ $V_USER_BRAND = $_SESSION['USER_INFO']['brand'];
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            Product List
+                            <i class="flaticon-381-diploma"></i> Product List
                         </div>
                     </div>
 

@@ -11,7 +11,8 @@ include_once('../../_helper/2step_com_conn.php');
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                             Assign Report
+                            <i class="flaticon-381-diploma"></i>
+                            Assign Report
                         </div>
                     </div>
                     <div class="card-body">

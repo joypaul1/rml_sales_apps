@@ -18,7 +18,7 @@ $data = mysqli_fetch_assoc($strSQL);
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            Your Password Change
+                            <i class="flaticon-381-edit-1"></i> Your Password Change
                         </div>
                     </div>
 
