@@ -12,7 +12,7 @@ $USER_ROLE = $_SESSION['USER_INFO']['user_role_id'];
     <!-- <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
     <!-- <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
     <!-- </a> -->
-    <a href="https://gymove.dexignzone.com/codeigniter/demo/index" class="brand-logo" aria-label="Gymove">
+    <a href="<?php echo  $basePath  ?>/home/dashboard.php"class="brand-logo" aria-label="Gymove">
         <img class="logo-abbr" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo.png" alt="">
         <img class="logo-compact" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo-text.png" alt="">
         <img class="brand-title" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo-text.png" alt="">
