@@ -110,7 +110,6 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                         }
                     </style>
                     <div class="card-body">
-
                         <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
                             <div class="row ">
                                 <input hidden name="product_type" value="">
@@ -160,20 +159,18 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
+                                        <input required="" id="start_date" name="start_date" class="form-control" value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
 
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='end_date' value='<?php echo isset($_POST['end_date']) ? date('Y-m-d', strtotime($_POST['end_date'])) : ''; ?>' />
+                                        <input required="" class="form-control" id='end_date' name='end_date' value='<?php echo isset($_POST['end_date']) ? date('Y-m-d', strtotime($_POST['end_date'])) : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="text-end">
-                                        <button class=" btn btn-primary" type="submit" value="Load Data">
-                                            Load Data
-                                        </button>
+                                        <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
                                     </div>
                                 </div>
                             </div>
