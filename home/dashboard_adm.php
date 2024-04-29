@@ -11,16 +11,15 @@ $monthlySQL = @oci_parse($objConnect, $monthSQL);
 
 // apaxChartData
 $apaxChartData = [];
-$salesSQL = "SELECT INTERESTED_BRAND, PRODUCT_TYPE, COUNT(PRODUCT_TYPE) AS TOTAL_NUMBER FROM SAL_LEADS_GEN
-             WHERE TRUNC(ENTRY_DATE) BETWEEN SYSDATE - 30 AND SYSDATE
-             GROUP BY INTERESTED_BRAND, PRODUCT_TYPE
-             ORDER BY INTERESTED_BRAND";
+$salesSQL = "SELECT  PRODUCT_TYPE, COUNT(PRODUCT_TYPE) AS TOTAL_NUMBER FROM SAL_LEADS_GEN
+             --WHERE TRUNC(ENTRY_DATE) BETWEEN SYSDATE - 30 AND SYSDATE
+             GROUP BY  PRODUCT_TYPE";
 $salesSQL = @oci_parse($objConnect, $salesSQL);
 @oci_execute($salesSQL);
 
 while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative array
     $apaxChartData[] = array(
-        'INTERESTED_BRAND' => $data['INTERESTED_BRAND'],
+        
         'PRODUCT_TYPE' => $data['PRODUCT_TYPE'],
         'TOTAL_NUMBER' => $data['TOTAL_NUMBER']
     );
@@ -48,7 +47,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                         <div class="card-body2">
                             <div class="media align-items-center">
                                 <span class="activity-icon <?= $bgColor ?> me-md-4 me-3">
-                                    <svg class="me-3" width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg  width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="51" height="51" rx="25.5" fill="#0B2A97"></rect>
                                         <g clip-path="url()">
                                             <path d="M23.8586 19.226L18.8712 24.5542C18.5076 25.0845 18.6439 25.8068 19.1717 26.1679L24.1945 29.6098L24.1945 32.9558C24.1945 33.5921 24.6995 34.125 25.3359 34.1376C25.9874 34.1477 26.5177 33.6249 26.5177 32.976L26.5177 29.0012C26.5177 28.6174 26.3283 28.2588 26.0126 28.0442L22.7904 25.8346L25.5025 22.9583L26.8914 26.1225C27.0758 26.5442 27.4949 26.8169 27.9546 26.8169L32.1844 26.8169C32.8207 26.8169 33.3536 26.3119 33.3662 25.6755C33.3763 25.024 32.8536 24.4937 32.2046 24.4937L28.7172 24.4937C28.2576 23.4482 27.7677 22.4129 27.3409 21.3522C27.1237 20.8169 27.0025 20.5846 26.6036 20.2159C26.5227 20.1401 25.9596 19.625 25.4571 19.1654C24.995 18.7462 24.2828 18.7739 23.8586 19.226Z" fill="white"></path>
@@ -167,8 +166,8 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
     <div class="card">
         <div class="card-header d-sm-flex d-block pb-0 border-0">
             <div class="me-auto pe-3">
-                <h4 class="text-black fs-20">Lead Summary</h4>
-                <p class="fs-13 mb-0">According to your select Data</p>
+                <h4 class="text-black fs-20"><i class="flaticon-381-album-3"></i> Lead Summary</h4>
+                <p class="fs-13 mb-0">According To Your Lead Entry Data <i class="flaticon-381-database-2"></i></p>
             </div>
             <div class="card-action card-tabs style-1 mt-2 mb-sm-0 mb-3 mt-sm-0">
                 <ul class="nav nav-tabs" role="tablist">
@@ -190,7 +189,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                             <span class="bg-secondary"></span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#Cycling" role="tab">
                             <svg class="me-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M10.8586 5.22599L5.87121 10.5543C5.50758 11.0846 5.64394 11.8068 6.17172 12.1679L11.1945 15.6098V18.9558C11.1945 19.5921 11.6995 20.125 12.3359 20.1376C12.9874 20.1477 13.5177 19.625 13.5177 18.976V15.0013C13.5177 14.6174 13.3283 14.2588 13.0126 14.0442L9.79041 11.8346L12.5025 8.95836L13.8914 12.1225C14.0758 12.5442 14.4949 12.817 14.9546 12.817H19.1844C19.8207 12.817 20.3536 12.3119 20.3662 11.6755C20.3763 11.024 19.8536 10.4937 19.2046 10.4937H15.7172C15.2576 9.44824 14.7677 8.41288 14.3409 7.35228C14.1237 6.81693 14.0025 6.5846 13.6036 6.21592C13.5227 6.14016 12.9596 5.62501 12.4571 5.16541C11.995 4.74619 11.2828 4.77397 10.8586 5.22599Z" fill="#FF3282" />
@@ -201,7 +200,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                             All Data
                             <span class="bg-danger"></span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
