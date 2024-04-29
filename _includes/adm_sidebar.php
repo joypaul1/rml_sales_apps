@@ -11,7 +11,7 @@
     }
     ?>
     <!--********* Sidebar start **************-->
-    <div class="deznav" style="background-color: #eadbc859;">
+    <div class="deznav" >
         <div class="deznav-scroll">
             <ul class="metismenu" id="menu">
                 <li class="<?php echo isActive('/home/dashboard.php') ?>">
