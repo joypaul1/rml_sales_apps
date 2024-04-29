@@ -112,6 +112,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
 
                     <div class="col-xl-7 col-xxl-12 me-auto">
                         <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
+                        <input hidden name="product_type"  value="">
                             <div class="row justify-content-between">
                                 <div class="col-sm-3">
                                     <div class="form-group">
