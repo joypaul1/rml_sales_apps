@@ -43,7 +43,7 @@ include_once('../../_helper/2step_com_conn.php');
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label for="title">Entry From: <?php echo $emp_session_band; ?></label>
+                                    <label for="title">Entry From:</label>
                                     <div class="input-group">
                                         <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
 
