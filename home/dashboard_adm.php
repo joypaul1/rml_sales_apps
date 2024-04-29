@@ -48,10 +48,19 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                         <div class="card-body2">
                             <div class="media align-items-center">
                                 <span class="activity-icon <?= $bgColor ?> me-md-4 me-3">
-                                    <svg width="40" height="37" viewBox="0 0 40 37" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M1.64826 26.5285C0.547125 26.7394 -0.174308 27.8026 0.0366371 28.9038C0.222269 29.8741 1.07449 30.5491 2.02796 30.5491C2.15453 30.5491 2.28531 30.5364 2.41188 30.5112L10.7653 28.908C11.242 28.8152 11.6682 28.5578 11.9719 28.1781L15.558 23.6554L14.3599 23.0437C13.4739 22.5965 12.8579 21.7865 12.6469 20.8035L9.26338 25.0688L1.64826 26.5285Z" fill="#A02CFA"></path>
-                                        <path d="M31.3999 8.89345C33.8558 8.89345 35.8467 6.90258 35.8467 4.44673C35.8467 1.99087 33.8558 0 31.3999 0C28.9441 0 26.9532 1.99087 26.9532 4.44673C26.9532 6.90258 28.9441 8.89345 31.3999 8.89345Z" fill="#A02CFA"></path>
-                                        <path d="M21.6965 3.33297C21.2282 2.85202 20.7937 2.66217 20.3169 2.66217C20.1439 2.66217 19.971 2.68748 19.7853 2.72967L12.1534 4.53958C11.0986 4.78849 10.4489 5.84744 10.6979 6.89795C10.913 7.80079 11.7146 8.40831 12.6048 8.40831C12.7567 8.40831 12.9086 8.39144 13.0605 8.35347L19.5618 6.81357C19.9837 7.28187 22.0974 9.57273 22.4813 9.97775C19.7938 12.855 17.1064 15.7281 14.4189 18.6054C14.3767 18.6519 14.3388 18.6982 14.3008 18.7446C13.5161 19.7445 13.7566 21.3139 14.9379 21.9088L23.1774 26.1151L18.8994 33.0467C18.313 34.0002 18.6083 35.249 19.5618 35.8396C19.8951 36.0464 20.2621 36.1434 20.6249 36.1434C21.3042 36.1434 21.9707 35.8017 22.3547 35.1815L27.7886 26.3766C28.0882 25.8915 28.1683 25.305 28.0122 24.7608C27.8561 24.2123 27.4806 23.7567 26.9702 23.4993L21.3885 20.66L27.2571 14.3823L31.6869 18.1371C32.0539 18.4493 32.5054 18.6012 32.9526 18.6012C33.4335 18.6012 33.9145 18.424 34.2899 18.078L39.3737 13.3402C40.1669 12.6019 40.2133 11.3615 39.475 10.5684C39.0868 10.1549 38.5637 9.944 38.0406 9.944C37.5638 9.944 37.0829 10.117 36.7074 10.4671L32.9019 14.0068C32.8977 14.011 23.363 5.04163 21.6965 3.33297Z" fill="#A02CFA"></path>
+                                    <svg class="me-3" width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="51" height="51" rx="25.5" fill="#0B2A97"></rect>
+                                        <g clip-path="url()">
+                                            <path d="M23.8586 19.226L18.8712 24.5542C18.5076 25.0845 18.6439 25.8068 19.1717 26.1679L24.1945 29.6098L24.1945 32.9558C24.1945 33.5921 24.6995 34.125 25.3359 34.1376C25.9874 34.1477 26.5177 33.6249 26.5177 32.976L26.5177 29.0012C26.5177 28.6174 26.3283 28.2588 26.0126 28.0442L22.7904 25.8346L25.5025 22.9583L26.8914 26.1225C27.0758 26.5442 27.4949 26.8169 27.9546 26.8169L32.1844 26.8169C32.8207 26.8169 33.3536 26.3119 33.3662 25.6755C33.3763 25.024 32.8536 24.4937 32.2046 24.4937L28.7172 24.4937C28.2576 23.4482 27.7677 22.4129 27.3409 21.3522C27.1237 20.8169 27.0025 20.5846 26.6036 20.2159C26.5227 20.1401 25.9596 19.625 25.4571 19.1654C24.995 18.7462 24.2828 18.7739 23.8586 19.226Z" fill="white"></path>
+                                            <path d="M28.6162 19.8068C30.0861 19.8068 31.2778 18.6151 31.2778 17.1452C31.2778 15.6752 30.0861 14.4836 28.6162 14.4836C27.1462 14.4836 25.9545 15.6752 25.9545 17.1452C25.9545 18.6151 27.1462 19.8068 28.6162 19.8068Z" fill="white"></path>
+                                            <path d="M17.899 37.5164C20.6046 37.5164 22.798 35.323 22.798 32.6174C22.798 29.9117 20.6046 27.7184 17.899 27.7184C15.1934 27.7184 13 29.9117 13 32.6174C13 35.323 15.1934 37.5164 17.899 37.5164Z" fill="white"></path>
+                                            <path d="M32.101 37.5164C34.8066 37.5164 37 35.323 37 32.6174C37 29.9118 34.8066 27.7184 32.101 27.7184C29.3954 27.7184 27.202 29.9118 27.202 32.6174C27.202 35.323 29.3954 37.5164 32.101 37.5164Z" fill="white"></path>
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip8">
+                                                <rect width="24" height="24" fill="white" transform="translate(13 14)"></rect>
+                                            </clipPath>
+                                        </defs>
                                     </svg>
                                 </span>
                                 <div class="media-body">
@@ -95,11 +104,22 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                     <div class="col-xl-7 col-xxl-12 mt-3">
                         <!-- <a href="https://gymove.dexignzone.com/codeigniter/demo/workout_plan" class="btn btn-outline-primary btn-md mb-2">May 28th, 2020<i class="las la-calendar ms-3 scale5"></i></a> -->
                         <form action="" method="">
-                            <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" className="from-control mb-2  me-3" autocomplete="off" required>
+                            <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" className="from-control mb-2" autocomplete="off" required style="
+                                height: 37px;
+                                border-radius: 10px;
+                                border: 1px solid #1E3FB4;
+                                padding-left: 1%;
+                            ">
                             <svg class="ms-2 me-2  personal-seperator" width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <rect width="14" height="3" rx="1.5" fill="#2B2B2B"></rect>
                             </svg>
-                            <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" className="from-control mb-2  me-3" autocomplete="off" required />
+                            <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" className="from-control mb-2" autocomplete="off" required style="
+                                height: 37px;
+                                border-radius: 10px;
+                                border: 1px solid #1E3FB4;
+                                padding-left: 1%;
+                                margin-right:1%
+                            " />
                             <!-- <a href="https://gymove.dexignzone.com/codeigniter/demo/workout_plan" class="btn btn-outline-primary me-3 btn-md  mb-2">June 28th, 2020<i class="las la-calendar ms-3 scale5"></i></a> -->
                             <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
                         </form>
