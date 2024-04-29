@@ -88,7 +88,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                             <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json" background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
                             <div>
                                 <h4 class="fs-20 text-black">Generate Your Report Summary Now </h4>
-                                <!-- <p class="fs-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</p> -->
+                                <p class="fs-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
                             </div>
                         </div>
                     </div>
@@ -174,17 +174,17 @@ include_once('../_includes/footer.php');
 <script>
     $('#start_date').datepicker({
         format: "dd-MM-yyyy",
-        startView: 2,
-        minViewMode: 1,
-        maxViewMode: 2,
+        // startView: 2,
+        // minViewMode: 1,
+        // maxViewMode: 2,
         autoclose: true,
         todayHighlight: true,
     });
     $('#end_date').datepicker({
         format: "dd-MM-yyyy",
-        startView: 2,
-        minViewMode: 1,
-        maxViewMode: 2,
+        // startView: 2,
+        // minViewMode: 1,
+        // maxViewMode: 2,
         autoclose: true,
         todayHighlight: true,
     });
