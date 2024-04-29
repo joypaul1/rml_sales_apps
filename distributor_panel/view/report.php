@@ -1,12 +1,8 @@
 <?php
-$dynamic_link_css[] = "https://gymove.dexignzone.com/codeigniter/demo/public/assets/vendor/select2/css/select2.min.css";
-$dynamic_link_css[] = "https://gymove.dexignzone.com/codeigniter/demo/public/assets/vendor/bootstrap-select/css/bootstrap-select.min.css";
-$dynamic_link_js[] = "https://gymove.dexignzone.com/codeigniter/demo/public/assets/vendor/select2/js/select2.full.min.js";
-$dynamic_link_js[] = "https://gymove.dexignzone.com/codeigniter/demo/public/assets/js/plugins-init/select2-init.js";
 include_once('../../_helper/2step_com_conn.php');
-$product_band = "Mahindra";
-if ($emp_sesssion_band == "EICHER")
+if ($emp_sesssion_band == "EICHER") {
     $product_band = "Eicher";
+}
 ?>
 
 <!--start page wrapper -->
@@ -14,7 +10,7 @@ if ($emp_sesssion_band == "EICHER")
 <div class="content-body default-height">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-6 col-xxl-12">
+        <div class="col-xl-6 col-xxl-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
