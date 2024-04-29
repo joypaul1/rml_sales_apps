@@ -96,32 +96,63 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
 
                             <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json" background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
                             <div>
-                                <h4 class="fs-20 text-black">Generate Your Report Summary Now </h4>
-                                <p class="fs-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</p>
+                                <h4 class="fs-20 text-black">Generate Your Lead Report Summary Now. </h4>
+                                <p class="fs-14 mb-0">Enter The Vaild Date. Start Date will be Greater or Equal To End Date. </p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-7 col-xxl-12 mt-3">
-                        <!-- <a href="https://gymove.dexignzone.com/codeigniter/demo/workout_plan" class="btn btn-outline-primary btn-md mb-2">May 28th, 2020<i class="las la-calendar ms-3 scale5"></i></a> -->
-                        <form action="" method="">
-                            <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" className="from-control mb-2" autocomplete="off" required style="
-                                height: 37px;
-                                border-radius: 10px;
-                                border: 1px solid #1E3FB4;
-                                padding-left: 1%;
-                            ">
-                            <svg class="ms-2 me-2  personal-seperator" width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="14" height="3" rx="1.5" fill="#2B2B2B"></rect>
-                            </svg>
-                            <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" className="from-control mb-2" autocomplete="off" required style="
-                                height: 37px;
-                                border-radius: 10px;
-                                border: 1px solid #1E3FB4;
-                                padding-left: 1%;
-                                margin-right:1%
-                            " />
-                            <!-- <a href="https://gymove.dexignzone.com/codeigniter/demo/workout_plan" class="btn btn-outline-primary me-3 btn-md  mb-2">June 28th, 2020<i class="las la-calendar ms-3 scale5"></i></a> -->
-                            <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
+                    <div class="col-xl-7 col-xxl-12 mt-3 basic-form">
+                        <style>
+                            #start_date:focus,
+                            #start_date:hover,
+                            #end_date:focus,
+                            #end_date:hover {
+                                color: #fff !important;
+                                background-color: #1E3FB4;
+                            }
+                        </style>
+                        <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
+                        <input hidden name="product_type" value="">
+                            <div class="row">
+                                <div class="col">
+                                    <select required name="product_brand" id="product_brand" class="form-control col-md-2">
+                                        <?php
+                                        renderOption('<--Select Brand -->', '');
+                                        if ($emp_session_band == "MM") {
+                                            renderOption('Mahindra', 'Mahindra');
+                                            renderOption('Eicher', 'Eicher');
+                                            renderOption('Dongfeng', 'DONGFENG');
+                                        } elseif ($emp_session_band == "EICHER") {
+                                            renderOption('Eicher', 'Eicher');
+                                            renderOption('Mahindra', 'Mahindra');
+                                            renderOption('Dongfeng', 'DONGFENG');
+                                        }
+
+                                        function renderOption($label, $value)
+                                        {
+                                            $selected = isset($_POST['product_brand']) && $_POST['product_brand'] == $value ? 'selected="selected"' : '';
+                                            echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="col">
+                                    <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" class="from-control col-auto mb-2" value="<?= date('01-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;">
+                                </div>
+
+                                <!-- <div class="col">
+                                    <svg class="ms-2 me-2  personal-seperator" width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="14" height="3" rx="1.5" fill="#2B2B2B"></rect>
+                                    </svg>
+                                </div> -->
+                                <div class="col">
+                                    <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" class="from-control col-auto mb-2" value="<?= date('t-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;" />
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
+                                </div>
+
+                            </div>
                         </form>
 
                     </div>

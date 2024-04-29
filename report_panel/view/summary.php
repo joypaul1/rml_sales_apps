@@ -1,5 +1,6 @@
 <?php
 include_once('../../_helper/2step_com_conn.php');
+
 ?>
 
 <!--start page wrapper -->
@@ -11,7 +12,7 @@ include_once('../../_helper/2step_com_conn.php');
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <i class="flaticon-381-diploma"></i> Lead REPORT
+                            <i class="flaticon-381-diploma"></i> LEAD REPORT
                         </div>
                     </div>
                     <div class="card-body">
@@ -44,13 +45,14 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <label for="title">Entry From: <?php echo $emp_session_band; ?></label>
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? $_POST['start_date'] : ''; ?>' />
+                                        <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
+
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="title">Entry To:</label>
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='end_date' value='<?php echo isset($_POST['end_date']) ? $_POST['end_date'] : ''; ?>' />
+                                        <input required="" class="form-control" type='date' name='end_date' value='<?php echo isset($_POST['end_date']) ? date('Y-m-d', strtotime($_POST['end_date'])) : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
