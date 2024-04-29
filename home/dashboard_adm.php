@@ -136,9 +136,11 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
+                                    <label for="title">Entry From: EICHER</label>
                                     <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" class="from-control col-auto mb-2" value="<?= date('01-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;">
                                 </div>
                                 <div class="col-sm-3">
+                                    <label for="title">Entry From: EICHER</label>
                                     <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" class="from-control col-auto mb-2" value="<?= date('t-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;" />
                                 </div>
                                 <div class="col-sm-3">
