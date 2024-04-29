@@ -113,7 +113,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                         <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
                             <div class="row justify-content-center align-items-center">
                                 <input hidden name="product_type" value="">
-                                <div class="col-3">
+                                <div class="col-sm-3">
                                     <select required name="product_brand" id="product_brand" class="form-control col-md-2">
                                         <?php
                                         renderOption('<--Select Brand -->', '');
@@ -135,13 +135,13 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                         ?>
                                     </select>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-sm-3">
                                     <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" class="from-control col-auto mb-2" value="<?= date('01-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;">
                                 </div>
-                                <div class="col-3">
+                                <div class="col-sm-3">
                                     <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" class="from-control col-auto mb-2" value="<?= date('t-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;" />
                                 </div>
-                                <div class="col-3">
+                                <div class="col-sm-3">
                                     <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
                                 </div>
 
