@@ -110,9 +110,9 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 background-color: #1E3FB4;
                             }
                         </style>
-                        <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
-                            <input hidden name="product_type" value="">
-                            <div class="row justify-content-center align-items-center">
+                        <div class="row justify-content-center align-items-center">
+                            <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
+                                <input hidden name="product_type" value="">
                                 <div class="col-3">
                                     <select required name="product_brand" id="product_brand" class="form-control col-md-2">
                                         <?php
@@ -145,8 +145,8 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
                                 </div>
 
-                            </div>
-                        </form>
+                            </form>
+                        </div>
 
                     </div>
                 </div>
