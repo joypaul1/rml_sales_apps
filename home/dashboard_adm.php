@@ -109,29 +109,9 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                             background-color: #1E3FB4;
                         }
                     </style>
-                    <div class="card-body">
+
+                    <div class="col-xl-7 col-xxl-12 me-auto">
                         <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
-                            <div class="row ">
-                                <input hidden name="product_type" value="">
-                                <div class="col-sm-3">
-                                    <select required name="product_brand" id="product_brand" class="form-control col-md-2">
-
-                                    </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" class="from-control mb-2" value="<?= date('01-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;">
-                                </div>
-                                <div class="col-sm-3">
-                                    <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" class="from-control  mb-2" value="<?= date('t-F-Y') ?>" autocomplete="off" required style="height: 37px;border-radius: 10px;border: 1px solid #1E3FB4;text-align: center;color: #1E3FB4;" />
-                                </div>
-                                <div class="col-sm-3">
-                                    <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
-                                </div>
-
-                        </form>
-                    </div>
-                    <div class="card-bodys">
-                        <form action="" method="post">
                             <div class="row justify-content-between">
                                 <div class="col-sm-3">
                                     <div class="form-group">
@@ -159,13 +139,13 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required id="start_date" name="start_date" class="form-control" value="<?= date('01-F-Y') ?>" autocomplete="off"style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
+                                        <input required id="start_date" name="start_date" class="form-control text-center" value="<?= date('01-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
 
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required class="form-control" id='end_date' name='end_date' value="<?= date('t-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;"/>
+                                        <input required class="form-control text-center" id='end_date' name='end_date' value="<?= date('t-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -174,8 +154,6 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     </div>
                                 </div>
                             </div>
-
-
                         </form>
                     </div>
 
