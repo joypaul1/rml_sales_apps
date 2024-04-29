@@ -110,8 +110,8 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 background-color: #1E3FB4;
                             }
                         </style>
-                        <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="row justify-content-center align-items-center">
-                            <div >
+                        <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
+                            <div class="row justify-content-center align-items-center">
                                 <input hidden name="product_type" value="">
                                 <div class="col-3">
                                     <select required name="product_brand" id="product_brand" class="form-control col-md-2">
