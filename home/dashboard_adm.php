@@ -91,7 +91,6 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                 <div class="row align-items-center">
                     <div class="col-xl-5 col-xxl-12 me-auto">
                         <div class="d-sm-flex d-block align-items-center">
-                            <!-- <img src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/illustration.png" alt="" class="mw-100 me-3"> -->
                             <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
                             <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json" background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
@@ -112,7 +111,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                             }
                         </style>
                         <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
-                        <input hidden name="product_type" value="">
+                            <input hidden name="product_type" value="">
                             <div class="row">
                                 <div class="col">
                                     <select required name="product_brand" id="product_brand" class="form-control col-md-2">
