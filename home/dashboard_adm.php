@@ -185,7 +185,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     </clipPath>
                                 </defs>
                             </svg>
-                            Last 30 Days
+                            All Data
                             <span class="bg-secondary"></span>
                         </a>
                     </li>
