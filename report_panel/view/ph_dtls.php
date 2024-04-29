@@ -20,7 +20,7 @@ if ($product_band == "Eicher") {
 <!--********* Content body start ************-->
 <div class="content-body default-height">
     <div class="container-fluid">
-        <div class="row mt-3 mt-2">
+        <div class="row">
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col-sm-12">
