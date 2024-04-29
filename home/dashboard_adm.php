@@ -130,9 +130,9 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
 
                         </form>
                     </div>
-                    <div class="card-body">
+                    <div class="card-bodys">
                         <form action="" method="post">
-                            <div class="row">
+                            <div class="row justify-content-between">
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <select required name="product_brand" id="product_brand" class="form-control">
@@ -159,13 +159,13 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required="" id="start_date" name="start_date" class="form-control" value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
+                                        <input required id="start_date" name="start_date" class="form-control" value="<?= date('01-F-Y') ?>" autocomplete="off"style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
 
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required="" class="form-control" id='end_date' name='end_date' value='<?php echo isset($_POST['end_date']) ? date('Y-m-d', strtotime($_POST['end_date'])) : ''; ?>' />
+                                        <input required class="form-control" id='end_date' name='end_date' value="<?= date('t-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
