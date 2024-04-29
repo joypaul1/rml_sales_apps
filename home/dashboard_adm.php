@@ -55,11 +55,19 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     </svg>
                                 </span>
                                 <div class="media-body">
-                                    <p class="fs-14">Criteria OF Inquiry : <strong><u><?= $data['MODE_TYPE'] ?></u></strong></p>
-                                    <span class="title text-black font-w600"><?= $data['TOTAL_NUMBER'] ?></span>
+                                    <p class="fs-14">Criteria OF Inquiry :
+                                        <strong>
+                                            <u class="text-primary">
+                                                <?= $data['MODE_TYPE'] ?>
+                                            </u>
+                                        </strong>
+                                        <br>Last 30 Days
+                                    </p>
+
+                                    <span class="title text-black font-w600 text-primary"><?= $data['TOTAL_NUMBER'] ?></span>
                                 </div>
                             </div>
-                            <center> <small class="">[Criteria wise Last 30 Days]</small></center>
+
                         </div>
                         <div class="effect <?= $bgColor2 ?>" style="top: -4px; left: -1.00003px;"></div>
                     </div>
@@ -70,10 +78,43 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
     </div>
     <div class="col-xl-12">
         <div class="card">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-xl-5 col-xxl-12 me-auto">
+                        <div class="d-sm-flex d-block align-items-center">
+                            <!-- <img src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/illustration.png" alt="" class="mw-100 me-3"> -->
+                            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+                            <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json" background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
+                            <div>
+                                <h4 class="fs-20 text-black">Generate Your Report Summary Now </h4>
+                                <!-- <p class="fs-14 mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore</p> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-xxl-12 mt-3">
+                        <!-- <a href="https://gymove.dexignzone.com/codeigniter/demo/workout_plan" class="btn btn-outline-primary btn-md mb-2">May 28th, 2020<i class="las la-calendar ms-3 scale5"></i></a> -->
+                        <form action="" method="">
+                            <input type="text" id="start_date" name="start_date" placeholder="EX : 1-DEC-2024" className="from-control mb-2  me-3" autocomplete="off" required>
+                            <svg class="ms-2 me-2  personal-seperator" width="14" height="3" viewBox="0 0 14 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="14" height="3" rx="1.5" fill="#2B2B2B"></rect>
+                            </svg>
+                            <input type="text" id="end_date" name="end_date" placeholder="EX : 31-DEC-2024" className="from-control mb-2  me-3" autocomplete="off" required />
+                            <!-- <a href="https://gymove.dexignzone.com/codeigniter/demo/workout_plan" class="btn btn-outline-primary me-3 btn-md  mb-2">June 28th, 2020<i class="las la-calendar ms-3 scale5"></i></a> -->
+                            <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-12">
+        <div class="card">
             <div class="card-header d-sm-flex d-block pb-0 border-0">
                 <div class="me-auto pe-3">
-                    <h4 class="text-black fs-20">Stats</h4>
-                    <p class="fs-13 mb-0">Lorem ipsum dolor sit amet, consectetur</p>
+                    <h4 class="text-black fs-20">Lead Summary</h4>
+                    <p class="fs-13 mb-0">According to your select Data</p>
                 </div>
                 <div class="card-action card-tabs style-1 mt-2 mb-sm-0 mb-3 mt-sm-0">
                     <ul class="nav nav-tabs" role="tablist">
@@ -91,7 +132,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                         </clipPath>
                                     </defs>
                                 </svg>
-                                Running
+                                Last 30 Days
                                 <span class="bg-secondary"></span>
                             </a>
                         </li>
@@ -103,7 +144,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     <path d="M4.89899 23.5164C7.60463 23.5164 9.79798 21.3231 9.79798 18.6174C9.79798 15.9118 7.60463 13.7184 4.89899 13.7184C2.19335 13.7184 0 15.9118 0 18.6174C0 21.3231 2.19335 23.5164 4.89899 23.5164Z" fill="#FF3282" />
                                     <path d="M19.101 23.5164C21.8066 23.5164 24 21.3231 24 18.6174C24 15.9118 21.8066 13.7184 19.101 13.7184C16.3954 13.7184 14.202 15.9118 14.202 18.6174C14.202 21.3231 16.3954 23.5164 19.101 23.5164Z" fill="#FF3282" />
                                 </svg>
-                                Cycling
+                                All Data
                                 <span class="bg-danger"></span>
                             </a>
                         </li>
@@ -131,9 +172,26 @@ include_once('../_includes/footer_info.php');
 include_once('../_includes/footer.php');
 ?>
 <script>
+    $('#start_date').datepicker({
+        format: "dd-MM-yyyy",
+        startView: 2,
+        minViewMode: 1,
+        maxViewMode: 2,
+        autoclose: true,
+        todayHighlight: true,
+    });
+    $('#end_date').datepicker({
+        format: "dd-MM-yyyy",
+        startView: 2,
+        minViewMode: 1,
+        maxViewMode: 2,
+        autoclose: true,
+        todayHighlight: true,
+    });
     var apaxChartData = <?php echo json_encode($apaxChartData) ?>;
-    console.log(apaxChartData, 'apaxChartData');
+
     (function($) {
+
         /* "use strict" */
         var dzChartlist = function() {
             // let draw = Chart.controllers.line.__super__.draw; //draw shadow
@@ -236,7 +294,7 @@ include_once('../_includes/footer.php');
                         opacity: 1,
                         colors: ['#70349D'],
                     },
-                   
+
                     responsive: [{
                         breakpoint: 575,
                         options: {

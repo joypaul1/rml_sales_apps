@@ -13,9 +13,9 @@ $USER_ROLE = $_SESSION['SALES_USER_INFO']['user_role_id'];
     <!-- <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
     <!-- </a> -->
     <a href="<?php echo  $basePath  ?>/home/dashboard.php"class="brand-logo" aria-label="Gymove">
-        <img class="logo-abbr" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo.png" alt="">
-        <img class="logo-compact" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo-text.png" alt="">
-        <img class="brand-title" src="https://gymove.dexignzone.com/codeigniter/demo/public/assets/images/logo-text.png" alt="">
+        <img class="logo-abbr" src="<?php echo  $basePath  ?>/assets/images/logo.png" alt="">
+        <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-text.png" alt="">
+        <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-text.png" alt="">
     </a>
     <div class="nav-control">
         <div class="hamburger">
