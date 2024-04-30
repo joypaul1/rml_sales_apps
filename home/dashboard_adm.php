@@ -156,7 +156,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 </div>
                                 <div class="col-sm-3 text-start">
                                     <div class="form-group">
-                                        <bottom class="btn btn-primary btn-md" style="padding: 0.7rem 2rem;">Generate Report<i class="las la-angle-right scale5"></i></bottom>
+                                        <button type="submit" class="btn btn-primary btn-md" style="padding: 0.7rem 2rem;">Generate Report<i class="las la-angle-right scale5"></i></button>
                                     </div>
                                 </div>
                             </div>
