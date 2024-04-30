@@ -10,7 +10,7 @@ if ($emp_sesssion_band == "EICHER") {
 <div class="content-body default-height">
     <div class="container-fluid">
         <div class="row">
-        <div class="col-xl-6 col-xxl-12">
+            <div class="col-xl-6 col-xxl-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
@@ -23,8 +23,8 @@ if ($emp_sesssion_band == "EICHER") {
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label for="title">Select Application:</label>
-                                    <select name="application_id" id="application_id" class="form-control">
-                                        <option selected value="">--</option>
+                                    <select name="application_id" id="application_id" class="form-control text-center" data-live-search="true">
+                                        <option selected value=""><-- --></option>
                                         <?php
 
                                         $strSQL  = oci_parse($objConnect, "SELECT ID,TITLE
@@ -41,8 +41,8 @@ if ($emp_sesssion_band == "EICHER") {
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="title">Select District:</label>
-                                    <select name="district_name" id="district_name" class="form-control">
-                                        <option selected value="">--</option>
+                                    <select name="district_name" id="district_name" class="form-control text-center" data-live-search="true">
+                                        <option selected value=""><----></option>
                                         <?php
 
                                         $strSQL  = oci_parse($objConnect, "SELECT ID,DISTRICT_NAME
@@ -59,8 +59,8 @@ if ($emp_sesssion_band == "EICHER") {
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="title">Select Company:</label>
-                                    <select name="company_id" id="company_id" class="form-control">
-                                        <option selected value="">--</option>
+                                    <select name="company_id" id="company_id" class="form-control text-center" data-live-search="true">
+                                        <option selected value=""><----></option>
                                         <?php
 
                                         $strSQL  = oci_parse($objConnect, "SELECT ID,COMPANY_NAME
@@ -79,7 +79,7 @@ if ($emp_sesssion_band == "EICHER") {
                                     <div class="form-group">
                                         <label for="title">Distributor Type:</label>
                                         <div id="department_id">
-                                            <select name="distributor_type" id="distributor_type" class="form-control">
+                                            <select name="distributor_type" id="distributor_type" class="form-control text-center">
                                                 <option selected value="">--</option>
                                                 <option value="Exclusive" <?php echo (isset($_POST['distributor_type']) && $_POST['distributor_type'] == 'Exclusive') ? 'selected="selected"' : ''; ?>>Exclusive</option>
                                                 <option value="Non Exclusive" <?php echo (isset($_POST['distributor_type']) && $_POST['distributor_type'] == 'Non Exclusive') ? 'selected="selected"' : ''; ?>>Non Exclusive</option>

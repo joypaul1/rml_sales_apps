@@ -48,7 +48,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                         <div class="card-body2">
                             <div class="media align-items-center">
                                 <span class="activity-icon <?= $bgColor ?> me-md-4 me-3">
-                                    <svg  width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <rect width="51" height="51" rx="25.5" fill="#0B2A97"></rect>
                                         <g clip-path="url()">
                                             <path d="M23.8586 19.226L18.8712 24.5542C18.5076 25.0845 18.6439 25.8068 19.1717 26.1679L24.1945 29.6098L24.1945 32.9558C24.1945 33.5921 24.6995 34.125 25.3359 34.1376C25.9874 34.1477 26.5177 33.6249 26.5177 32.976L26.5177 29.0012C26.5177 28.6174 26.3283 28.2588 26.0126 28.0442L22.7904 25.8346L25.5025 22.9583L26.8914 26.1225C27.0758 26.5442 27.4949 26.8169 27.9546 26.8169L32.1844 26.8169C32.8207 26.8169 33.3536 26.3119 33.3662 25.6755C33.3763 25.024 32.8536 24.4937 32.2046 24.4937L28.7172 24.4937C28.2576 23.4482 27.7677 22.4129 27.3409 21.3522C27.1237 20.8169 27.0025 20.5846 26.6036 20.2159C26.5227 20.1401 25.9596 19.625 25.4571 19.1654C24.995 18.7462 24.2828 18.7739 23.8586 19.226Z" fill="white"></path>
@@ -108,15 +108,20 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                             color: #fff !important;
                             background-color: #1E3FB4;
                         }
+
+                        .custSelect {
+                            border: 1px solid #1E3FB4 !important;
+                            color: #1E3FB4 !important;
+                        }
                     </style>
 
                     <div class="col-xl-7 col-xxl-12 me-auto">
                         <form action="<?= $basePath ?>/report_panel/view/summary.php" method="POST" class="">
-                        <input hidden name="product_type"  value="">
-                            <div class="row justify-content-between">
+                            <input hidden name="product_type" value="">
+                            <div class="row text-center align-items-stretch">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <select required name="product_brand" id="product_brand" class="form-control">
+                                        <select required name="product_brand" id="product_brand" class="form-control selectpicker custSelect" data-live-search="true">
                                             <?php
                                             renderOption('<--Select Brand -->', '');
                                             if ($emp_session_band == "MM") {
@@ -132,26 +137,26 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                             function renderOption($label, $value)
                                             {
                                                 $selected = isset($_POST['product_brand']) && $_POST['product_brand'] == $value ? 'selected="selected"' : '';
-                                                echo '<option value="' . $value . '" ' . $selected . '>' . $label . '</option>';
+                                                echo '<option  value="' . $value . '" ' . $selected . '>' . $label . '</option>';
                                             }
                                             ?>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="input-group">
+                                    <div class="form-group">
                                         <input required id="start_date" name="start_date" class="form-control text-center" value="<?= date('01-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
 
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="input-group">
+                                    <div class="form-group">
                                         <input required class="form-control text-center" id='end_date' name='end_date' value="<?= date('t-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="text-end">
-                                        <button type="submit" class="btn btn-primary btn-md mb-2">Generate Report<i class="las la-angle-right ms-3 scale5"></i></button>
+                                <div class="col-sm-3 text-start">
+                                    <div class="form-group">
+                                        <bottom class="btn btn-primary btn-md" style="padding: 0.7rem 2rem;">Generate Report<i class="las la-angle-right scale5"></i></bottom>
                                     </div>
                                 </div>
                             </div>
