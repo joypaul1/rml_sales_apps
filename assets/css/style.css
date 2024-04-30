@@ -16681,7 +16681,7 @@ svg.pulse-svg .third-circle {
    top: 0;
    padding-top: 120px;
    z-index: 4;
-   background-color: #eadbc859;
+   background-color: #fff;
    box-shadow: 0px 0px 10px rgba(120, 130, 140, 0.13);
    transition: all .2s ease
 }
