@@ -1,6 +1,6 @@
 <?php
 include_once('../../_helper/2step_com_conn.php');
-// 
+
 $product_band = "Mahindra";
 if ($emp_session_band == "EICHER")
     $product_band = "Eicher";

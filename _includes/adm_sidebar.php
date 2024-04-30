@@ -11,7 +11,7 @@
     }
     ?>
     <!--********* Sidebar start **************-->
-    <div class="deznav" >
+    <div class="deznav">
         <div class="deznav-scroll">
             <ul class="metismenu" id="menu">
                 <li class="<?php echo isActive('/home/dashboard.php') ?>">
@@ -44,11 +44,21 @@
                         <i class="flaticon-381-bookmark"></i>
                         <span class="nav-text">Configure Panel</span>
                     </a>
-                    <ul aria-expanded="false" class="mm-collapse"> 
+                    <ul aria-expanded="false" class="mm-collapse">
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/product_list.php">Product List </a></li>
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/add_zone.php">Zone List </a></li>
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/add_application.php">Application List </a></li>
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/add_company.php">Company List </a></li>
+                    </ul>
+                </li>
+                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <i class="flaticon-381-network"></i>
+                        <span class="nav-text">Apps User Panel </span>
+                    </a>
+                    <ul aria-expanded="false" class="mm-collapse">
+                        <li><a href="<?php echo $basePath ?>/user_panel/view/dse_list.php">DSE Report</a></li>
+                        
+                        <li><a href="<?php echo $basePath ?>/user_panel/view/portal_user.php">Portal User Report </a></li>
                     </ul>
                 </li>
             </ul>
