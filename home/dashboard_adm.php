@@ -146,7 +146,6 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <input required id="start_date" name="start_date" class="form-control text-center" value="<?= date('01-F-Y') ?>" autocomplete="off" style="border-radius: 10px;border: 1px solid #1E3FB4;color: #1E3FB4;" />
-
                                     </div>
                                 </div>
                                 <div class="col-sm-3">

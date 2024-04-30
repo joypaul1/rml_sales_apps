@@ -6,13 +6,13 @@ $USER_ROLE = $_SESSION['SALES_USER_INFO']['user_role_id'];
 ?>
 
 <!--******** Nav header start **************-->
-<div class="nav-header" >
+<div class="nav-header">
     <!-- <a href="<?php echo  $basePath  ?>/home/dashboard.php" class="brand-logo" aria-label="Gymove"> -->
     <!-- <img class="logo-abbr"      src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt="">  -->
     <!-- <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
     <!-- <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-img.png" alt=""> -->
     <!-- </a> -->
-    <a href="<?php echo  $basePath  ?>/home/dashboard.php"class="brand-logo" aria-label="Gymove">
+    <a href="<?php echo  $basePath  ?>/home/dashboard.php" class="brand-logo" aria-label="Gymove">
         <img class="logo-abbr" src="<?php echo  $basePath  ?>/assets/images/logo.png" alt="">
         <img class="logo-compact" src="<?php echo  $basePath  ?>/assets/images/logo-text.png" alt="">
         <img class="brand-title" src="<?php echo  $basePath  ?>/assets/images/logo-text.png" alt="">
@@ -47,6 +47,11 @@ $USER_ROLE = $_SESSION['SALES_USER_INFO']['user_role_id'];
                             </div>
                         </form>
                     </li> -->
+                    <li class="nav-item dropdown notification_dropdown">
+                        <a class="nav-link bell" id="dlAppsApk" href="javascript:void(0);" aria-label="theme-mode">
+                            <i id="icon-light" class="fas fa-cloud-arrow-down"></i>
+                        </a>
+                    </li>
                     <li class="nav-item dropdown notification_dropdown">
                         <a class="nav-link bell dz-theme-mode" href="javascript:void(0);" aria-label="theme-mode">
                             <i id="icon-light" class="fas fa-sun"></i>
@@ -241,13 +246,13 @@ $USER_ROLE = $_SESSION['SALES_USER_INFO']['user_role_id'];
 <!--********* Header end  ******-->
 
 <script>
-    // document.getElementById("dlAppsApk").addEventListener("click", function() {
-    //     var fileUrl = "<?php echo $basePath . '/cl_7.apk' ?>";
-    //     var link = document.createElement('a');
-    //     link.href = fileUrl;
-    //     link.download = 'collection_apps'; // Specify the filename
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    // });
+    document.getElementById("dlAppsApk").addEventListener("click", function() {
+        var fileUrl = "<?php echo $basePath . '/cl_7.apk' ?>";
+        var link = document.createElement('a');
+        link.href = fileUrl;
+        link.download = 'sale_apps'; // Specify the filename
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    });
 </script>
