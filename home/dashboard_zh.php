@@ -117,11 +117,11 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                         <select required name="product_brand" id="product_brand" class="form-control">
                                             <?php
                                             renderOption('<--Select Brand -->', '');
-                                            if ($emp_session_band == "MM") {
+                                            if ($emp_session_brand == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            } elseif ($emp_session_band == "EICHER") {
+                                            } elseif ($emp_session_brand == "EICHER") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');

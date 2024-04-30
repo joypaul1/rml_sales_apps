@@ -23,11 +23,11 @@ include_once('../../_helper/2step_com_conn.php');
                                         <label for="title">Select Brand:</label>
                                         <select required name="product_brand" id="product_brand" class="form-control">
                                             <?php
-                                            if ($emp_session_band == "MM") {
+                                            if ($emp_session_brand == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            } elseif ($emp_session_band == "EICHER") {
+                                            } elseif ($emp_session_brand == "EICHER") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');

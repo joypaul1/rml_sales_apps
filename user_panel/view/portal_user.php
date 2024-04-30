@@ -2,7 +2,7 @@
 include_once('../../_helper/2step_com_conn.php');
 // 
 // $product_band = "Mahindra";
-// if ($emp_session_band == "EICHER")
+// if ($emp_session_brand == "EICHER")
 //     $product_band = "Eicher";
 ?>
 
@@ -72,7 +72,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                     a.status
                                                     FROM tbl_users a,tbl_user_role b
                                                     where a.user_role_id=b.id
-                                                    and a.brand='$emp_session_band'
+                                                    and a.brand='$emp_session_brand'
                                                     and a.emp_id='$user_id'";
                                         $rs = mysqli_query($conn, $selectsql);
                                         $number = 0;
@@ -112,7 +112,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                     FROM tbl_users a,tbl_user_role b
                                                     where a.user_role_id=b.id
                                                     and a.status=1
-                                                    and a.brand='$emp_session_band'
+                                                    and a.brand='$emp_session_brand'
                                                     order by user_role";
                                         $rs = mysqli_query($conn, $selectsql);
                                         $number = 0;
