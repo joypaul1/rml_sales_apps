@@ -15,6 +15,10 @@ include_once('../../_helper/2step_com_conn.php');
                             <i class="flaticon-381-diploma"></i>
                             Apps User List
                         </div>
+                        <div class="card-title">
+                            <a href="user_add.php" class="btn btn-sm btn-primary">Create User <i class="flaticon-381-add-2"></i></a>
+                        </div>
+
                     </div>
                     <div class="card-body">
                         <form action="" method="post">
