@@ -2,13 +2,21 @@
 include_once('../_helper/com_conn.php');
 
 
-$monthSQL = "
-        SELECT MODE_TYPE,
-            count(MODE_TYPE) TOTAL_NUMBER 
-        from SAL_LEADS_GEN
-where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
-group by MODE_TYPE
-ORDER BY TOTAL_NUMBER DESC";
+$monthSQL = "SELECT MODE_TYPE,
+                    TOTAL_NUMBER,
+                    'Last 30 Day''s'  DISPALY_MESSAGE
+                    FROM
+                    (
+                    SELECT MODE_TYPE ,count(MODE_TYPE) TOTAL_NUMBER from SAL_LEADS_GEN
+                    where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+                    group by MODE_TYPE
+                    UNION ALL
+                    SELECT STATUS MODE_TYPE,count(STATUS) TOTAL_NUMBER 
+                    from SAL_LEADS_GEN
+                    where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+                    and STATUS is not null
+                    group by STATUS
+                    )";
 $monthlySQL = @oci_parse($objConnect, $monthSQL);
 @oci_execute($monthlySQL);
 
@@ -33,81 +41,26 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
 
 <!--start page wrapper -->
 <div class="row">
-    <div class="col-xl-6 col-xxl-12">
-        <div class="row">
-            <?php
-            $counter = 0; //
-            while ($data = oci_fetch_assoc($monthlySQL)) {
-
-                $bgColors   = array("bgl-success", "bgl-secondary", "bgl-info", "bgl-warning", "bgl-danger");
-                $bgColoros2 = array("bg-success",  "bg-secondary", "bg-info",  "bg-warning",  "bg-danger");
-                $bgColor = $bgColors[$counter % count($bgColors)];
-                $bgColor2 = $bgColoros2[$counter % count($bgColoros2)];
-                $counter++;
-
-            ?>
-                <div class="col-sm-4">
-                    <div class="card avtivity-card">
-                        <div class="card-body2">
-                            <div class="media align-items-center">
-                                <span class="activity-icon <?= $bgColor ?> me-md-4 me-3">
-                                    <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="51" height="51" rx="25.5" fill="#0B2A97"></rect>
-                                        <g clip-path="url()">
-                                            <path d="M23.8586 19.226L18.8712 24.5542C18.5076 25.0845 18.6439 25.8068 19.1717 26.1679L24.1945 29.6098L24.1945 32.9558C24.1945 33.5921 24.6995 34.125 25.3359 34.1376C25.9874 34.1477 26.5177 33.6249 26.5177 32.976L26.5177 29.0012C26.5177 28.6174 26.3283 28.2588 26.0126 28.0442L22.7904 25.8346L25.5025 22.9583L26.8914 26.1225C27.0758 26.5442 27.4949 26.8169 27.9546 26.8169L32.1844 26.8169C32.8207 26.8169 33.3536 26.3119 33.3662 25.6755C33.3763 25.024 32.8536 24.4937 32.2046 24.4937L28.7172 24.4937C28.2576 23.4482 27.7677 22.4129 27.3409 21.3522C27.1237 20.8169 27.0025 20.5846 26.6036 20.2159C26.5227 20.1401 25.9596 19.625 25.4571 19.1654C24.995 18.7462 24.2828 18.7739 23.8586 19.226Z" fill="white"></path>
-                                            <path d="M28.6162 19.8068C30.0861 19.8068 31.2778 18.6151 31.2778 17.1452C31.2778 15.6752 30.0861 14.4836 28.6162 14.4836C27.1462 14.4836 25.9545 15.6752 25.9545 17.1452C25.9545 18.6151 27.1462 19.8068 28.6162 19.8068Z" fill="white"></path>
-                                            <path d="M17.899 37.5164C20.6046 37.5164 22.798 35.323 22.798 32.6174C22.798 29.9117 20.6046 27.7184 17.899 27.7184C15.1934 27.7184 13 29.9117 13 32.6174C13 35.323 15.1934 37.5164 17.899 37.5164Z" fill="white"></path>
-                                            <path d="M32.101 37.5164C34.8066 37.5164 37 35.323 37 32.6174C37 29.9118 34.8066 27.7184 32.101 27.7184C29.3954 27.7184 27.202 29.9118 27.202 32.6174C27.202 35.323 29.3954 37.5164 32.101 37.5164Z" fill="white"></path>
-                                        </g>
-                                        <defs>
-                                            <clipPath id="clip8">
-                                                <rect width="24" height="24" fill="white" transform="translate(13 14)"></rect>
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </span>
-                                <div class="media-body">
-                                    <p class="fs-14">Criteria OF Inquiry :
-                                        <strong>
-                                            <u class="text-primary">
-                                                <?= $data['MODE_TYPE'] ?>
-                                            </u>
-                                        </strong>
-                                        <br>Last 30 Days
-                                    </p>
-
-                                    <span class="title text-black font-w600 text-primary"><?= $data['TOTAL_NUMBER'] ?></span>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="effect <?= $bgColor2 ?>" style="top: -4px; left: -1.00003px;"></div>
-                    </div>
-                </div>
-            <?php } ?>
-
-        </div>
-    </div>
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
                 <div class="row align-items-center">
-                    <div class="col-xl-5 col-xxl-12 me-auto">
-                        <div class="d-sm-flex d-block align-items-center">
-                            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
 
-                            <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json" background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
-                            <div>
-                                <h4 class="fs-20 text-black">Generate Your Lead Report Summary Now. </h4>
-                                <p class="fs-14 mb-0">Enter The Vaild Date. Start Date will be Greater or Equal To End Date. </p>
-                            </div>
+                    <div class="d-sm-flex d-block align-items-center">
+                        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
+                        <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json" background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
+                        <div>
+                            <h4 class="fs-20 text-black">Just Click to generate Lead Report..... </h4>
+                            <p class="fs-14 mb-0">Enter The Vaild Date. Start Date will be Greater or Equal To End Date. </p>
                         </div>
                     </div>
+
                     <style>
-                        #start_date:focus,
-                        #start_date:hover,
-                        #end_date:focus,
-                        #end_date:hover {
+                        #start_date,
+                        #start_date,
+                        #end_date,
+                        #end_date {
                             color: #fff !important;
                             background-color: #1E3FB4;
                         }
@@ -126,12 +79,12 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                     <div class="form-group">
                                         <select required name="product_brand" id="product_brand" class="form-control selectpicker custSelect" data-live-search="true">
                                             <?php
-                                            renderOption('<--Select Brand -->', '');
-                                            if ($emp_session_band == "MM") {
+                                            // renderOption('<--Select Brand -->', '');
+                                            if ($emp_session_brand == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            } elseif ($emp_session_band == "EICHER") {
+                                            } elseif ($emp_session_brand == "EICHER") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');
@@ -169,6 +122,63 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
             </div>
         </div>
     </div>
+
+
+
+
+    <div class="col-xl-6 col-xxl-12">
+        <div class="row">
+            <?php
+            $counter = 0; //
+            while ($data = oci_fetch_assoc($monthlySQL)) {
+
+                $bgColors   = array("bgl-success", "bgl-secondary", "bgl-info", "bgl-warning", "bgl-danger");
+                $bgColoros2 = array("bg-success",  "bg-secondary", "bg-info",  "bg-warning",  "bg-danger");
+                $bgColor = $bgColors[$counter % count($bgColors)];
+                $bgColor2 = $bgColoros2[$counter % count($bgColoros2)];
+                $counter++;
+
+            ?>
+                <div class="col-sm-3">
+                    <div class="card avtivity-card">
+                        <div class="card-body2">
+                            <div class="media align-items-center">
+                                <span class="activity-icon <?= $bgColor ?> me-md-4 me-3">
+                                    <svg width="30" height="30" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="51" height="51" rx="25.5" fill="#0B2A97"></rect>
+                                        <g clip-path="url()">
+                                            <path d="M23.8586 19.226L18.8712 24.5542C18.5076 25.0845 18.6439 25.8068 19.1717 26.1679L24.1945 29.6098L24.1945 32.9558C24.1945 33.5921 24.6995 34.125 25.3359 34.1376C25.9874 34.1477 26.5177 33.6249 26.5177 32.976L26.5177 29.0012C26.5177 28.6174 26.3283 28.2588 26.0126 28.0442L22.7904 25.8346L25.5025 22.9583L26.8914 26.1225C27.0758 26.5442 27.4949 26.8169 27.9546 26.8169L32.1844 26.8169C32.8207 26.8169 33.3536 26.3119 33.3662 25.6755C33.3763 25.024 32.8536 24.4937 32.2046 24.4937L28.7172 24.4937C28.2576 23.4482 27.7677 22.4129 27.3409 21.3522C27.1237 20.8169 27.0025 20.5846 26.6036 20.2159C26.5227 20.1401 25.9596 19.625 25.4571 19.1654C24.995 18.7462 24.2828 18.7739 23.8586 19.226Z" fill="white"></path>
+                                            <path d="M28.6162 19.8068C30.0861 19.8068 31.2778 18.6151 31.2778 17.1452C31.2778 15.6752 30.0861 14.4836 28.6162 14.4836C27.1462 14.4836 25.9545 15.6752 25.9545 17.1452C25.9545 18.6151 27.1462 19.8068 28.6162 19.8068Z" fill="white"></path>
+                                            <path d="M17.899 37.5164C20.6046 37.5164 22.798 35.323 22.798 32.6174C22.798 29.9117 20.6046 27.7184 17.899 27.7184C15.1934 27.7184 13 29.9117 13 32.6174C13 35.323 15.1934 37.5164 17.899 37.5164Z" fill="white"></path>
+                                            <path d="M32.101 37.5164C34.8066 37.5164 37 35.323 37 32.6174C37 29.9118 34.8066 27.7184 32.101 27.7184C29.3954 27.7184 27.202 29.9118 27.202 32.6174C27.202 35.323 29.3954 37.5164 32.101 37.5164Z" fill="white"></path>
+                                        </g>
+                                    </svg>
+                                </span>
+                                <div class="media-body">
+                                    <p class="fs-14">Criteria OF Inquiry :
+                                        <strong>
+                                            <u class="text-primary">
+                                                <?= $data['MODE_TYPE'] ?>
+                                            </u>
+                                        </strong>
+                                        <br>
+                                        <?= $data['DISPALY_MESSAGE'] ?>
+
+                                    </p>
+
+                                    <span class="title text-black font-w600 text-primary"><?= $data['TOTAL_NUMBER'] ?></span>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="effect <?= $bgColor2 ?>" style="top: -4px; left: -1.00003px;"></div>
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div>
+    </div>
+
 </div>
 <div class="col-xl-12">
     <div class="card">
