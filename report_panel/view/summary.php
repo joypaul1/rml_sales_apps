@@ -23,11 +23,11 @@ include_once('../../_helper/2step_com_conn.php');
                                         <label for="title">Select Brand:</label>
                                         <select required name="product_brand" id="product_brand" class="form-control">
                                             <?php
-                                            if ($emp_session_brand == "MM") {
+                                            if ($emp_session_band == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            } elseif ($emp_session_brand == "EICHER") {
+                                            } elseif ($emp_session_band == "EICHER") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');
@@ -94,7 +94,7 @@ include_once('../../_helper/2step_com_conn.php');
                                 <table class="small table-bordered">
                                     <thead class="table-success">
                                         <tr>
-                                            <th class="bg-success text-white" colspan="20">
+                                            <th class="bg-primary text-white" colspan="20">
                                                 <center>PH Wise Inquiry Summary</center>
                                             </th>
                                         </tr>
@@ -107,13 +107,13 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <center>PW</center>
                                             </th>
                                             <th scope="col">
-                                                <center>H</center>
+                                                <center>Q0</center>
                                             </th>
                                             <th scope="col">
-                                                <center>W</center>
+                                                <center>Q1</center>
                                             </th>
                                             <th scope="col">
-                                                <center>COLD</center>
+                                                <center>Q2</center>
                                             </th>
                                             <th scope="col">
                                                 <center>NI</center>
@@ -142,9 +142,9 @@ include_once('../../_helper/2step_com_conn.php');
                                             "SELECT INTERESTED_MODEL,
 								PH_ID RML_ID,
 								RML_COLL_ID_TO_NAME(PH_ID)  EMP_NAME,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Hot',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Warm',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Cold',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
+								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
+								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
+								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
 								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
 								SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','WIN',INTERESTED_MODEL) AS  WIN,
 								SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','LOST',INTERESTED_MODEL) AS  LOST,
@@ -164,7 +164,7 @@ include_once('../../_helper/2step_com_conn.php');
 										 GROUP BY  INTERESTED_MODEL,PH_ID
 										 ORDER BY RML_ID"
                                         );
-
+                                    
                                         oci_execute($strSQL);
                                         $number = 0;
                                         $v_RML_ID = 0;
@@ -287,7 +287,7 @@ include_once('../../_helper/2step_com_conn.php');
                                 <table class="small table-bordered table-responsive">
                                     <thead class="table-success">
                                         <tr>
-                                            <th class="bg-success text-white" colspan="20">
+                                            <th class="bg-primary text-white" colspan="20">
                                                 <center>Inquiry Summary Till Date</center>
                                             </th>
                                         </tr>
@@ -296,13 +296,13 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <center>PW</center>
                                             </th>
                                             <th scope="col">
-                                                <center>H</center>
+                                                <center>Q0</center>
                                             </th>
                                             <th scope="col">
-                                                <center>W</center>
+                                                <center>Q1</center>
                                             </th>
                                             <th scope="col">
-                                                <center>C</center>
+                                                <center>Q2</center>
                                             </th>
                                             <th scope="col">
                                                 <center>NI</center>
@@ -333,9 +333,9 @@ include_once('../../_helper/2step_com_conn.php');
                                             $objConnect,
                                             "SELECT 
 								INTERESTED_MODEL,
-								SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Hot',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Warm',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Cold',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
+								SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
+                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
+                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
                                 SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
                                 SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
                                 SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,

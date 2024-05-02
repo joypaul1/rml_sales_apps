@@ -2,7 +2,10 @@
 include_once('../_helper/com_conn.php');
 
 
-$monthSQL = "SELECT MODE_TYPE,count(MODE_TYPE) TOTAL_NUMBER from SAL_LEADS_GEN
+$monthSQL = "
+        SELECT MODE_TYPE,
+            count(MODE_TYPE) TOTAL_NUMBER 
+        from SAL_LEADS_GEN
 where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
 group by MODE_TYPE
 ORDER BY TOTAL_NUMBER DESC";
@@ -124,11 +127,11 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                                         <select required name="product_brand" id="product_brand" class="form-control selectpicker custSelect" data-live-search="true">
                                             <?php
                                             renderOption('<--Select Brand -->', '');
-                                            if ($emp_session_brand == "MM") {
+                                            if ($emp_session_band == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            } elseif ($emp_session_brand == "EICHER") {
+                                            } elseif ($emp_session_band == "EICHER") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');
