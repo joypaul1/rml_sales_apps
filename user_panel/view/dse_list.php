@@ -128,7 +128,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                         if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
                                                         ?>
                                                             <a href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>">
-                                                               <button class="btn btn-primary edit-user">Access Page</button>
+                                                                <button class="btn btn-primary edit-user">Access Page</button>
                                                                 ?>
                                                             </a>
                                                         <?php
@@ -144,9 +144,9 @@ include_once('../../_helper/2step_com_conn.php');
                                                     <td><?= $row['LEASE_USER']; ?></td>
 
                                                     <td align="center">
-                                                        <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button class="btn btn-primary edit-user">Information Update</button>
+                                                        <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button class="btn btn-primary edit-user">Info.  Edit <i class="flaticon-381-edit"></i></button>
                                                         </a>
-                                                        <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><?= '<button class="btn btn-primary user_district">District Assign</button>' ?>
+                                                        <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button class="btn btn-info user_district">D. Ass. <i class="flaticon-381-add"></i></button>
                                                         </a>
                                                     </td>
                                                     <td><?= $row['SAL_MM_ZH_ID']; ?></td>
@@ -228,10 +228,10 @@ include_once('../../_helper/2step_com_conn.php');
                                                         <td><?= $row['AREA_ZONE']; ?></td>
                                                         <td><?= $row['LEASE_USER']; ?></td>
 
-                                                        <td align="center">
-                                                            <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button class="btn btn-primary edit-user">Information Update</button>
+                                                        <td class="d-flex gap-2">
+                                                            <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button class="btn btn-primary edit-user">Info. Edit <i class="flaticon-381-edit"></i></button>
                                                             </a>
-                                                            <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button class="btn btn-primary user_district">District Assign</button>
+                                                            <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button class="btn btn-info user_district">Dis. Ass. <i class="flaticon-381-add"></i></button>
                                                             </a>
                                                         </td>
                                                         <td><?= $row['SAL_MM_ZH_ID'] ?></td>

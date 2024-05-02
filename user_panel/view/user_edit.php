@@ -89,7 +89,7 @@ $row = oci_fetch_assoc($strSQL);
                                     <polyline points="9 11 12 14 22 4"></polyline>
                                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                                 </svg>
-                                <strong>Success!</strong> Information  Updated Successfully.
+                                <strong>Success!</strong> Information Updated Successfully.
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                 </button>
                             </div>
@@ -198,7 +198,7 @@ $row = oci_fetch_assoc($strSQL);
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="title">Area Zone:</label>
-                                        <select required="" name="form_zone_name" class="form-control">
+                                        <select required="" name="form_zone_name" class="form-control" data-live-search="true">
                                             <option selected value="">Select Zone</option>
                                             <?php
                                             $strSQLZone  = oci_parse($objConnect, "select ID,LABEL AS ZONE_NAME from SALL_ZONE_TREE
@@ -224,7 +224,7 @@ $row = oci_fetch_assoc($strSQL);
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="title">Select User Role:</label>
-                                        <select required="" name="form_user_role" class="form-control">
+                                        <select required="" name="form_user_role" class="form-control" data-live-search="true">
                                             <option selected value="">User Role</option>
                                             <?php
                                             $strSQLZone  = oci_parse($objConnect, "select UNIQUE(LEASE_USER) USER_ROLE from RML_COLL_APPS_USER

@@ -57,7 +57,7 @@
                     </a>
                     <ul aria-expanded="false" class="mm-collapse">
                         <li><a href="<?php echo $basePath ?>/user_panel/view/dse_list.php">DSE Report</a></li>
-                        
+                        <li><a href="<?php echo $basePath ?>/user_panel/view/user.php">Apps User List </a></li>
                         <li><a href="<?php echo $basePath ?>/user_panel/view/portal_user.php">Portal User Report </a></li>
                     </ul>
                 </li>

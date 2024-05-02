@@ -21,7 +21,7 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="title">Select Brand:</label>
-                                        <select required name="product_brand" id="product_brand" class="form-control">
+                                        <select required name="product_brand" id="product_brand" class="form-control" data-live-search="true">
                                             <?php
                                             if ($emp_session_band == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');

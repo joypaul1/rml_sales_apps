@@ -8,7 +8,7 @@ include_once('../../_helper/2step_com_conn.php');
 <div class="content-body default-height">
     <div class="container-fluid">
         <div class="row">
-        <div class="col-xl-6 col-xxl-12">
+            <div class="col-xl-6 col-xxl-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
@@ -20,7 +20,7 @@ include_once('../../_helper/2step_com_conn.php');
                         <form action="" method="post">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <select required="" name="emp_id" style="width:100%;">
+                                    <select required="" name="emp_id" data-live-search="true" style="width:100%;">
                                         <option selected value="">Select Executive</option>
                                         <option value="ALL">ALL</option>
                                         <?php
