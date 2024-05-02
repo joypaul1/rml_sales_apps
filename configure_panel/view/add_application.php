@@ -65,14 +65,14 @@ include_once('../../_helper/2step_com_conn.php');
                         if (@oci_execute($strSQL)) {
                     ?>
 
-                            <div class="container-fluid">
-                                <div class="md-form mt-5">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item">
-                                            Application is created successfully.
-                                        </li>
-                                    </ol>
-                                </div>
+                            <div class="alert alert-success alert-dismissible fade show">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                    <polyline points="9 11 12 14 22 4"></polyline>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                                <strong>Success!</strong> Application is created successfully..
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                </button>
                             </div>
                             <?php
                         } else {
@@ -80,14 +80,15 @@ include_once('../../_helper/2step_com_conn.php');
                             $error = $lastError ? "" . $lastError["message"] . "" : "";
                             if (strpos($error, '(DEVELOPERS.TITLE_NAME)') !== false) {
                             ?>
-                                <div class="container-fluid">
-                                    <div class="md-form mt-5">
-                                        <ol class="breadcrumb">
-                                            <li class="breadcrumb-item">
-                                                This Application is already created.You can not create duplicate Application .
-                                            </li>
-                                        </ol>
-                                    </div>
+                                <div class="alert alert-danger alert-dismissible fade show">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                        <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
+                                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                                    </svg>
+                                    <strong>Error!</strong>This Application is already created.You can not create duplicate Application.
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                    </button>
                                 </div>
                     <?php
                             }

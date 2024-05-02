@@ -89,7 +89,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <td align=" center">
                                                     <?php if ($row['emp_id'] != 'RML-00955' && $row['emp_id'] != 'IT') {
                                                     ?>
-                                                        <a target="_blank" href="user_portal_edit.php?emp_id=<?php echo $row['id'] ?>"><?php echo '<button class="btn btn-primary">update</button>' ?>
+                                                        <a target="_blank" href="portal_user_edit.php?emp_id=<?php echo $row['id'] ?>"><button class="btn btn-primary">Edit <i class="flaticon-381-edit"></i></button>
                                                         </a>
                                                     <?php
                                                     }
@@ -130,7 +130,8 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <td align="center">
                                                     <?php if ($row['emp_id'] != 'RML-00955' && $row['emp_id'] != 'IT') {
                                                     ?>
-                                                        <a target="_blank" href="user_portal_edit.php?emp_id=<?php echo $row['id'] ?>"><?php echo '<button class="btn btn-primary">update</button>' ?>
+                                                        <a target="_blank" href="portal_user_edit.php?emp_id=<?php echo $row['id'] ?>"><button class="btn tbn-sm btn-primary">Edit <i class="flaticon-381-edit"></i></button>
+                                                        </a>
                                                         </a>
                                                     <?php
                                                     }
@@ -146,7 +147,7 @@ include_once('../../_helper/2step_com_conn.php');
                                 </tbody>
                             </table>
                             <div class='text-end'>
-                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
+                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel <i class="flaticon-381-download"></i></a>
                             </div>
                         </div>
 

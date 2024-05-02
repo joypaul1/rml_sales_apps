@@ -13,7 +13,7 @@ include_once('../../_helper/2step_com_conn.php');
                     <div class="card-header">
                         <div class="card-title">
                             <i class="flaticon-381-diploma"></i>
-                            Portal User List
+                            DSE User List
                         </div>
                     </div>
                     <div class="card-body">
@@ -22,7 +22,7 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <div class="input-group">
                                         <!-- <label for="title">Emp ID:</label> -->
-                                        <input required="" placeholder="Emp ID Here.." class="form-control" type='text' name='sall_emp_id' value='<?php echo isset($_POST['sall_emp_id']) ? $_POST['sall_emp_id'] : ''; ?>' />
+                                        <input required="" placeholder="Emp ID Here.." class="form-control" type='text' name='sall_emp_id' value='<?= isset($_POST['sall_emp_id']) ? $_POST['sall_emp_id'] : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -38,134 +38,131 @@ include_once('../../_helper/2step_com_conn.php');
 
 
                     <div class="card card-body ">
-                        <div class="row col-12 table-responsive">
-                            <table class="table  table-bordered table-sm" id="table" cellspacing="0" width="100%">
-                                <thead class="table-success">
-                                    <tr>
-                                        <th scope="col">Sl</th>
-                                        <th scope="col">User Name</th>
-                                        <th scope="col">Sales Apps<br> Login ID</th>
-                                        <th scope="col">Access<br> Hr User</th>
-                                        <th scope="col">Collection Apps<br> Login ID</th>
-                                        <th scope="col">Access<br> Hr User</th>
-                                        <th scope="col">Zone</th>
-                                        <th scope="col">Role</th>
-                                        <th scope="col">
-                                            <center>Action</center>
-                                        </th>
-                                        <th scope="col">Boss ID</th>
+                        <div class="row ">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-lg" id="table" cellspacing="0" width="100%">
+                                    <thead class="table-success text-center">
+                                        <tr>
+                                            <th scope="col">Sl</th>
+                                            <th scope="col">User Name</th>
+                                            <th scope="col">Sales Apps<br> Login ID</th>
+                                            <th scope="col">Access<br> Hr User</th>
+                                            <th scope="col">Collection Apps<br> Login ID</th>
+                                            <th scope="col">Access<br> Hr User</th>
+                                            <th scope="col">Zone</th>
+                                            <th scope="col">Role</th>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Boss ID</th>
 
-                                    </tr>
-                                </thead>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
+                                    <tbody>
 
-                                    <?php
+                                        <?php
 
-                                    if (isset($_POST['sall_emp_id'])) {
+                                        if (isset($_POST['sall_emp_id'])) {
 
-                                        $sall_emp_id = $_REQUEST['sall_emp_id'];
-                                        $strSQL  = oci_parse($objConnect, "SELECT ID,
-							                                        EMP_NAME,
-						                                            RML_ID,
-																	AREA_ZONE,
-																	LEASE_USER,SAL_MM_ZH_ID,
-																	 ( SELECT(SELECT RML_ID
-																			FROM RML_HR_APPS_USER
-																				WHERE ID = RML_HR_APPS_USER_ID
-																			)
-																	  FROM HR_EMP_APPS_ACCESS
-																	  WHERE APPS_NAME = 'RML_SAL'
-																	  AND USE_ID = RML_ID
-																	) HR_USER,
-                                                                    CASE APPS_USER_CREATE_CHACK(TO_CHAR(TO_NUMBER(RML_ID)),'RML_COLL')
-																			WHEN 'YES' THEN TO_CHAR(TO_NUMBER(RML_ID))
-																			WHEN 'NO'  THEN 'NO USER'
-																	    END
-																	COLLECTION_USER_ID,
-                                                                    ( SELECT(SELECT RML_ID
-																				FROM RML_HR_APPS_USER
-																				WHERE ID = RML_HR_APPS_USER_ID
-																			)
-																	  FROM HR_EMP_APPS_ACCESS
-																	  WHERE APPS_NAME = 'RML_COLL'
-																	  AND USE_ID = TO_CHAR(TO_NUMBER(RML_ID))
-																	) HR_USER_COLL
-																FROM RML_COLL_APPS_USER
-																	where ACCESS_APP='RML_SAL'
-																	and USER_FOR='$emp_session_brand'
-																	AND RML_ID='$sall_emp_id'
-																	");
+                                            $sall_emp_id = $_REQUEST['sall_emp_id'];
+                                            $strSQL  = oci_parse(
+                                                $objConnect,
+                                                "SELECT ID,
+                                                EMP_NAME,
+                                                RML_ID,
+                                                AREA_ZONE,
+                                                LEASE_USER,SAL_MM_ZH_ID,
+                                                ( SELECT(SELECT RML_ID
+                                                        FROM RML_HR_APPS_USER
+                                                            WHERE ID = RML_HR_APPS_USER_ID
+                                                        )
+                                                FROM HR_EMP_APPS_ACCESS
+                                                WHERE APPS_NAME = 'RML_SAL'
+                                                AND USE_ID = RML_ID
+                                                ) HR_USER,
+                                                CASE APPS_USER_CREATE_CHACK(TO_CHAR(TO_NUMBER(RML_ID)),'RML_COLL')
+                                                        WHEN 'YES' THEN TO_CHAR(TO_NUMBER(RML_ID))
+                                                        WHEN 'NO'  THEN 'NO USER'
+                                                END
+                                                COLLECTION_USER_ID,
+                                                ( SELECT(SELECT RML_ID
+                                                            FROM RML_HR_APPS_USER
+                                                            WHERE ID = RML_HR_APPS_USER_ID
+                                                        )
+                                                FROM HR_EMP_APPS_ACCESS
+                                                WHERE APPS_NAME = 'RML_COLL'
+                                                AND USE_ID = TO_CHAR(TO_NUMBER(RML_ID))
+                                                ) HR_USER_COLL
+                                            FROM RML_COLL_APPS_USER
+                                                where ACCESS_APP='RML_SAL'
+                                                and USER_FOR='$emp_session_brand'
+                                                AND RML_ID='$sall_emp_id'"
+                                            );
+                                            oci_execute(@$strSQL);
+                                            $number = 0;
+
+                                            while ($row = oci_fetch_assoc($strSQL)) {
+                                                $number++;
+                                        ?>
+                                                <tr>
+                                                    <td><?= $number; ?></td>
+                                                    <td><?= $row['EMP_NAME']; ?></td>
+                                                    <td><?= $row['RML_ID'];  ?></td>
+
+                                                    <td>
+                                                        <?php
+                                                        if ($row['HR_USER'] == '') {
+                                                        ?>
+                                                            <a target="_blank" href="access_point.php?user_id=<?= $row['RML_ID'] . '&apps_name=RML_SAL' ?>"><button class="btn btn-primary edit-user">Access Page</button>
+                                                            </a>
+                                                        <?php
+                                                        } else {
+                                                            echo $row['HR_USER'];
+                                                        }
+
+                                                        ?>
+                                                    </td>
+
+                                                    <td><?= $row['COLLECTION_USER_ID']; ?></td>
+                                                    <td>
+                                                        <?php
+                                                        if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
+                                                        ?>
+                                                            <a href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>">
+                                                               <button class="btn btn-primary edit-user">Access Page</button>
+                                                                ?>
+                                                            </a>
+                                                        <?php
+                                                        } else {
+                                                            echo $row['HR_USER_COLL'];
+                                                        }
+
+                                                        ?>
+                                                    </td>
 
 
-                                        oci_execute(@$strSQL);
-                                        $number = 0;
+                                                    <td><?= $row['AREA_ZONE']; ?></td>
+                                                    <td><?= $row['LEASE_USER']; ?></td>
 
-                                        while ($row = oci_fetch_assoc($strSQL)) {
-                                            $number++;
-                                    ?>
-                                            <tr>
-                                                <td><?php echo $number; ?></td>
-                                                <td><?php echo $row['EMP_NAME']; ?></td>
-                                                <td><?php echo $row['RML_ID'];  ?></td>
-
-                                                <td>
-                                                    <?php
-                                                    if ($row['HR_USER'] == '') {
-                                                    ?>
-                                                        <a target="_blank" href="access_point.php?user_id=<?php echo $row['RML_ID'] . '&apps_name=RML_SAL' ?>">
-                                                            <?php echo '<button class="btn btn-primary edit-user">Access Page</button>';
-                                                            ?>
+                                                    <td align="center">
+                                                        <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button class="btn btn-primary edit-user">Information Update</button>
                                                         </a>
-                                                    <?php
-                                                    } else {
-                                                        echo $row['HR_USER'];
-                                                    }
-
-                                                    ?>
-                                                </td>
-
-                                                <td><?php echo $row['COLLECTION_USER_ID']; ?></td>
-                                                <td>
-                                                    <?php
-                                                    if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
-                                                    ?>
-                                                        <a href="access_point.php?user_id=<?php echo $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>"><?php
-                                                                                                                                                            echo '<button class="btn btn-primary edit-user">Access Page</button>';
-                                                                                                                                                            ?>
+                                                        <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><?= '<button class="btn btn-primary user_district">District Assign</button>' ?>
                                                         </a>
-                                                    <?php
-                                                    } else {
-                                                        echo $row['HR_USER_COLL'];
-                                                    }
-
-                                                    ?>
-                                                </td>
-
-
-                                                <td><?php echo $row['AREA_ZONE']; ?></td>
-                                                <td><?php echo $row['LEASE_USER']; ?></td>
-
-                                                <td align="center">
-                                                    <a target="_blank" href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><?php echo '<button class="btn btn-primary edit-user">Information Update</button>' ?>
-                                                    </a>
-                                                    <a target="_blank" href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><?php echo '<button class="btn btn-primary user_district">District Assign</button>' ?>
-                                                    </a>
-                                                </td>
-                                                <td><?php echo $row['SAL_MM_ZH_ID']; ?></td>
-                                            </tr>
-                                            <?php
-                                        }
-                                    } else {
-                                        $allDataSQL  = oci_parse(
-                                            $objConnect,
-                                            "SELECT ID,
-                                            EMP_NAME,
-                                            RML_ID,
-                                            AREA_ZONE,
-                                            LEASE_USER,SAL_MM_ZH_ID,
-                                            (SELECT(SELECT RML_ID FROM RML_HR_APPS_USER
-                                            WHERE ID = RML_HR_APPS_USER_ID)
+                                                    </td>
+                                                    <td><?= $row['SAL_MM_ZH_ID']; ?></td>
+                                                </tr>
+                                                <?php
+                                            }
+                                        } else {
+                                            $allDataSQL  = oci_parse(
+                                                $objConnect,
+                                                "SELECT ID,
+                                                EMP_NAME,
+                                                RML_ID,
+                                                AREA_ZONE,
+                                                LEASE_USER,SAL_MM_ZH_ID,
+                                                (SELECT(SELECT RML_ID FROM RML_HR_APPS_USER
+                                                WHERE ID = RML_HR_APPS_USER_ID)
                                                 FROM HR_EMP_APPS_ACCESS
                                                 WHERE APPS_NAME = 'RML_SAL'
                                                 AND USE_ID = RML_ID
@@ -186,71 +183,72 @@ include_once('../../_helper/2step_com_conn.php');
                                                 and USER_FOR='$emp_session_brand'
                                                 and LEASE_USER='SE'
                                                 order by AREA_ZONE"
-                                        );
+                                            );
 
-                                        $number = 0;
-                                        if (oci_execute($allDataSQL)) {
-                                            while ($row = oci_fetch_assoc($allDataSQL)) {
-                                                $number++;
-                                            ?>
-                                                <tr>
-                                                    <td><?php echo $number; ?></td>
-                                                    <td><?php echo $row['EMP_NAME']; ?></td>
-                                                    <td><?php echo $row['RML_ID'];  ?></td>
+                                            $number = 0;
+                                            if (oci_execute($allDataSQL)) {
+                                                while ($row = oci_fetch_assoc($allDataSQL)) {
+                                                    $number++;
+                                                ?>
+                                                    <tr>
+                                                        <td><?= $number; ?></td>
+                                                        <td><?= $row['EMP_NAME']; ?></td>
+                                                        <td><?= $row['RML_ID'];  ?></td>
 
-                                                    <td>
-                                                        <?php
-                                                        if ($row['HR_USER'] == '') {
-                                                        ?>
-                                                            <a target="_blank" href="access_point.php?user_id=<?php echo $row['RML_ID'] . '&apps_name=RML_SAL' ?>"><?php echo '<button class="btn btn-primary edit-user">Access Page</button>';
-                                                                                                                                                                    ?>
+                                                        <td>
+                                                            <?php
+                                                            if ($row['HR_USER'] == '') {
+                                                            ?>
+                                                                <a target="_blank" href="access_point.php?user_id=<?= $row['RML_ID'] . '&apps_name=RML_SAL' ?>"><button class="btn btn-primary edit-user">Access Page</button>
+                                                                </a>
+                                                            <?php
+                                                            } else {
+                                                                echo $row['HR_USER'];
+                                                            }
+
+                                                            ?>
+                                                        </td>
+
+                                                        <td><?= $row['COLLECTION_USER_ID']; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
+                                                            ?>
+                                                                <a href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>"><button class="btn btn-primary edit-user">Access Page</button>
+                                                                </a>
+                                                            <?php
+                                                            } else {
+                                                                echo $row['HR_USER_COLL'];
+                                                            }
+
+                                                            ?>
+                                                        </td>
+
+
+                                                        <td><?= $row['AREA_ZONE']; ?></td>
+                                                        <td><?= $row['LEASE_USER']; ?></td>
+
+                                                        <td align="center">
+                                                            <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button class="btn btn-primary edit-user">Information Update</button>
                                                             </a>
-                                                        <?php
-                                                        } else {
-                                                            echo $row['HR_USER'];
-                                                        }
-
-                                                        ?>
-                                                    </td>
-
-                                                    <td><?php echo $row['COLLECTION_USER_ID']; ?></td>
-                                                    <td>
-                                                        <?php
-                                                        if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
-                                                        ?>
-                                                            <a href="access_point.php?user_id=<?php echo $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>"><?php echo '<button class="btn btn-primary edit-user">Access Page</button>';
-                                                                                                                                                                ?>
+                                                            <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button class="btn btn-primary user_district">District Assign</button>
                                                             </a>
-                                                        <?php
-                                                        } else {
-                                                            echo $row['HR_USER_COLL'];
-                                                        }
-
-                                                        ?>
-                                                    </td>
-
-
-                                                    <td><?php echo $row['AREA_ZONE']; ?></td>
-                                                    <td><?php echo $row['LEASE_USER']; ?></td>
-
-                                                    <td align="center">
-                                                        <a target="_blank" href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><?php echo '<button class="btn btn-primary edit-user">Information Update</button>' ?>
-                                                        </a>
-                                                        <a target="_blank" href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><?php echo '<button class="btn btn-primary user_district">District Assign</button>' ?>
-                                                        </a>
-                                                    </td>
-                                                    <td><?php echo $row['SAL_MM_ZH_ID'] ?></td>
-                                                </tr>
-                                    <?php
+                                                        </td>
+                                                        <td><?= $row['SAL_MM_ZH_ID'] ?></td>
+                                                    </tr>
+                                        <?php
+                                                }
                                             }
                                         }
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                        ?>
+                                    </tbody>
+                                </table>
+
+                            </div>
                             <div class='text-end'>
                                 <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
                             </div>
+
                         </div>
 
                     </div>
