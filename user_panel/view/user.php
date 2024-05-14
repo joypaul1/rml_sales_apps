@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -25,7 +25,8 @@ include_once('../../_helper/2step_com_conn.php');
                             <div class="row justify-content-center">
                                 <div class="col-sm-3">
                                     <div class="form-group">
-                                        <input class="form-control" placeholder="Emp ID:" type='text' name='sall_emp_id' value='<?php echo isset($_POST['sall_emp_id']) ? $_POST['sall_emp_id'] : ''; ?>' />
+                                        <input class="form-control" placeholder="Emp ID:" type='text' name='sall_emp_id'
+                                            value='<?php echo isset($_POST['sall_emp_id']) ? $_POST['sall_emp_id'] : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -33,12 +34,13 @@ include_once('../../_helper/2step_com_conn.php');
                                         <select name="form_user_role" class="form-control">
                                             <option selected value="">User Role</option>
                                             <?php
-                                            $strSQLZone  = oci_parse($objConnect, "SELECT UNIQUE(LEASE_USER) USER_ROLE from RML_COLL_APPS_USER  where IS_ACTIVE=1 AND ACCESS_APP='RML_SAL'");
+                                            $strSQLZone = oci_parse($objConnect, "SELECT UNIQUE(LEASE_USER) USER_ROLE from RML_COLL_APPS_USER  where IS_ACTIVE=1 AND ACCESS_APP='RML_SAL'");
                                             oci_execute($strSQLZone);
                                             while ($rowZ = oci_fetch_assoc($strSQLZone)) {
-                                            ?>
-                                                <option value="<?php echo $rowZ['USER_ROLE']; ?>" <?php echo (isset($_POST['form_user_role']) && $_POST['form_user_role'] == $rowZ['USER_ROLE']) ? 'selected="selected"' : ''; ?>><?php echo $rowZ['USER_ROLE']; ?></option>
-                                            <?php
+                                                ?>
+                                                <option value="<?php echo $rowZ['USER_ROLE']; ?>" <?php echo (isset($_POST['form_user_role']) && $_POST['form_user_role'] == $rowZ['USER_ROLE']) ? 'selected="selected"' : ''; ?>>
+                                                    <?php echo $rowZ['USER_ROLE']; ?></option>
+                                                <?php
                                             }
                                             ?>
                                         </select>
@@ -77,10 +79,10 @@ include_once('../../_helper/2step_com_conn.php');
 
                                         if (isset($_POST['form_user_role'])) {
 
-                                            $sall_emp_id = $_REQUEST['sall_emp_id'];
+                                            $sall_emp_id    = $_REQUEST['sall_emp_id'];
                                             $form_user_role = $_REQUEST['form_user_role'];
 
-                                            $strSQL  = oci_parse(
+                                            $strSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT ID,
 															EMP_NAME,
@@ -99,7 +101,7 @@ include_once('../../_helper/2step_com_conn.php');
 
                                             while ($row = oci_fetch_assoc($strSQL)) {
                                                 $number++;
-                                        ?>
+                                                ?>
                                                 <tr>
                                                     <td><?php echo $number; ?></td>
                                                     <td><?php echo $row['EMP_NAME'] . '[' . $row['RML_ID'] . ']'; ?></td>
@@ -107,19 +109,23 @@ include_once('../../_helper/2step_com_conn.php');
                                                     <td><?php echo $row['LEASE_USER']; ?></td>
 
                                                     <td align="center">
-                                                        <a target="_blank" href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button class="user_edit">Information Update</button>
+                                                        <a target="_blank" href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
+                                                                class="user_edit">Information Update</button>
                                                         </a>
-                                                        <a target="_blank" href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button class="user_district">District Assign</button>
+                                                        <a target="_blank" href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
+                                                                class="user_district">District Assign</button>
                                                         </a>
-                                                        <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>"><button class="user_setup">Produc Information</button>
+                                                        <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>"><button
+                                                                class="user_setup">Produc Information</button>
                                                         </a>
                                                     </td>
                                                     <td><?php echo $row['SAL_MM_ZH_ID']; ?></td>
                                                 </tr>
                                                 <?php
                                             }
-                                        } else {
-                                            $allDataSQL  = oci_parse(
+                                        }
+                                        else {
+                                            $allDataSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT ID,
                                                 EMP_NAME,
@@ -137,7 +143,7 @@ include_once('../../_helper/2step_com_conn.php');
                                             if (oci_execute($allDataSQL)) {
                                                 while ($row = oci_fetch_assoc($allDataSQL)) {
                                                     $number++;
-                                                ?>
+                                                    ?>
                                                     <tr>
                                                         <td><?php echo $number; ?></td>
                                                         <td><?php echo $row['EMP_NAME'] . '[' . $row['RML_ID'] . ']'; ?></td>
@@ -145,9 +151,11 @@ include_once('../../_helper/2step_com_conn.php');
                                                         <td><?php echo $row['LEASE_USER']; ?></td>
 
                                                         <td align="center">
-                                                            <a target="_blank" class='mb-2' href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button class="btn btn-sm btn-warning">Information Update <i class="flaticon-381-edit"></i></button>
+                                                            <a target="_blank" class='mb-2' href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
+                                                                    class="btn btn-sm btn-warning">Information Update <i class="flaticon-381-edit"></i></button>
                                                             </a>
-                                                            <a target="_blank" class='mb-2' href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button class="btn btn-sm btn-primary">District Assign <i class="flaticon-381-edit"></i></button>
+                                                            <a target="_blank" class='mb-2' href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
+                                                                    class="btn btn-sm btn-primary">District Assign <i class="flaticon-381-edit"></i></button>
                                                             </a>
                                                             <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
                                                                 <button class="btn btn-sm btn-info">Produc Information <i class="flaticon-381-edit"></i></button>
@@ -156,7 +164,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                         </td>
                                                         <td><?php echo $row['SAL_MM_ZH_ID']; ?></td>
                                                     </tr>
-                                        <?php
+                                                    <?php
                                                 }
                                             }
                                         }
@@ -182,8 +190,8 @@ include_once('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

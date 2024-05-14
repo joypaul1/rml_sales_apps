@@ -4,8 +4,8 @@ include_once ('../_helper/com_conn.php');
 
 
 $monthSQL   = "SELECT MODE_TYPE,count(MODE_TYPE) TOTAL_NUMBER from SAL_LEADS_GEN
-where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
-group by MODE_TYPE
+WHERE trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+GROUP by MODE_TYPE
 ORDER BY TOTAL_NUMBER DESC";
 $monthlySQL = @oci_parse($objConnect, $monthSQL);
 @oci_execute($monthlySQL);
@@ -13,10 +13,10 @@ $monthlySQL = @oci_parse($objConnect, $monthSQL);
 // apaxChartData
 $apaxChartData = [];
 $salesSQL      = "SELECT PRODUCT_TYPE,count(PRODUCT_TYPE)  TOTAL_NUMBER
-from SAL_LEADS_GEN
-where PRODUCT_TYPE NOT IN'MFTBC'
+FROM SAL_LEADS_GEN
+WHERE PRODUCT_TYPE NOT IN'MFTBC'
 GROUP BY  PRODUCT_TYPE
-order by TOTAL_NUMBER DESC";
+ORDER by TOTAL_NUMBER DESC";
 $salesSQL      = @oci_parse($objConnect, $salesSQL);
 @oci_execute($salesSQL);
 
@@ -26,7 +26,6 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
         'TOTAL_NUMBER' => $data['TOTAL_NUMBER']
     );
 }
-
 ?>
 
 <!--start page wrapper -->

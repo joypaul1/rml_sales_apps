@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 ?>
 
 <!--start page wrapper -->
@@ -22,7 +22,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         <option selected value="">Select User</option>
                                         <?php
 
-                                        $strSQL  = oci_parse($objConnect, "select EMP_NAME,RML_ID as USER_ID 
+                                        $strSQL = oci_parse($objConnect, "select EMP_NAME,RML_ID as USER_ID 
 																		   from RML_COLL_APPS_USER 
 																	   where IS_ACTIVE=1
 																	   and ACCESS_APP='RML_SAL'
@@ -30,10 +30,11 @@ include_once('../../_helper/2step_com_conn.php');
 																	 order by EMP_NAME");
                                         oci_execute($strSQL);
                                         while ($row = oci_fetch_assoc($strSQL)) {
-                                        ?>
-                                            <option value="<?php echo $row['USER_ID']; ?>" <?php echo (isset($_POST['user_selected_id']) && $_POST['user_selected_id'] == $row['USER_ID']) ? 'selected="selected"' : ''; ?>><?php echo $row['EMP_NAME'] . '(' . $row['USER_ID'] . ')'; ?></option>
+                                            ?>
+                                            <option value="<?php echo $row['USER_ID']; ?>" <?php echo (isset($_POST['user_selected_id']) && $_POST['user_selected_id'] == $row['USER_ID']) ? 'selected="selected"' : ''; ?>>
+                                                <?php echo $row['EMP_NAME'] . '(' . $row['USER_ID'] . ')'; ?></option>
 
-                                        <?php
+                                            <?php
                                         }
                                         ?>
                                     </select>
@@ -44,7 +45,6 @@ include_once('../../_helper/2step_com_conn.php');
                                     </button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
 
@@ -70,7 +70,7 @@ include_once('../../_helper/2step_com_conn.php');
 
                                     if (isset($_POST['user_selected_id'])) {
 
-                                        $strSQL  = oci_parse($objConnect, "SELECT ID,
+                                        $strSQL = oci_parse($objConnect, "SELECT ID,
                                                                     (select EMP_NAME || ' ('||RML_ID || ')' from RML_COLL_APPS_USER where RML_ID=CONCERN_ID )EMP_NAME,
 						                                            DISTRICT_NAME,
 																	CREATED_BY,
@@ -85,7 +85,7 @@ include_once('../../_helper/2step_com_conn.php');
 
                                         while ($row = oci_fetch_assoc($strSQL)) {
                                             $number++;
-                                    ?>
+                                            ?>
                                             <tr>
                                                 <td><?php echo $number; ?></td>
                                                 <td><?php echo $row['EMP_NAME']; ?></td>
@@ -94,17 +94,18 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <td><?php echo $row['CREATED_DATE']; ?></td>
                                                 <td><?php
 
-                                                    if ($row['IS_ACTIVE'] == '1')
-                                                        echo 'Active';
-                                                    else
-                                                        echo 'In-Active';
-                                                    ?></td>
+                                                if ($row['IS_ACTIVE'] == '1')
+                                                    echo 'Active';
+                                                else
+                                                    echo 'In-Active';
+                                                ?></td>
                                             </tr>
                                             <?php
                                         }
-                                    } else {
+                                    }
+                                    else {
 
-                                        $allDataSQL  = oci_parse($objConnect, "SELECT ID,
+                                        $allDataSQL = oci_parse($objConnect, "SELECT ID,
 						                                            DISTRICT_NAME,
 																	CREATED_BY,
 																	CREATED_DATE,
@@ -116,7 +117,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         if (@oci_execute(@$allDataSQL)) {
                                             while ($row = oci_fetch_assoc($allDataSQL)) {
                                                 $number++;
-                                            ?>
+                                                ?>
                                                 <tr>
                                                     <td><?php echo $number; ?></td>
                                                     <td><?php echo $row['EMP_NAME']; ?></td>
@@ -125,13 +126,13 @@ include_once('../../_helper/2step_com_conn.php');
                                                     <td><?php echo $row['CREATED_DATE']; ?></td>
                                                     <td><?php
 
-                                                        if ($row['IS_ACTIVE'] == '1')
-                                                            echo 'Active';
-                                                        else
-                                                            echo 'In-Active';
-                                                        ?></td>
+                                                    if ($row['IS_ACTIVE'] == '1')
+                                                        echo 'Active';
+                                                    else
+                                                        echo 'In-Active';
+                                                    ?></td>
                                                 </tr>
-                                    <?php
+                                                <?php
                                             }
                                         }
                                     }
@@ -151,6 +152,6 @@ include_once('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>

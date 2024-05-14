@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 ?>
 
 <!--start page wrapper -->
@@ -42,7 +42,6 @@ include_once('../../_helper/2step_com_conn.php');
                                     <!-- <div class="form-group">
                                         <label for="title">Zone Status:</label>
 
-                                        
                                     </div> -->
                                 </div>
                             </div>
@@ -57,7 +56,7 @@ include_once('../../_helper/2step_com_conn.php');
 
                     if (isset($_POST['zone_status'])) {
 
-                        $strSQL  = oci_parse($objConnect, "INSERT INTO SALL_ZONE_TREE (
+                        $strSQL = oci_parse($objConnect, "INSERT INTO SALL_ZONE_TREE (
 																		 LABEL, 
 																		 LINK,
                                                                          PARENT,
@@ -77,7 +76,7 @@ include_once('../../_helper/2step_com_conn.php');
 																	   '$zone_status')");
 
                         if (@oci_execute($strSQL)) {
-                    ?>
+                            ?>
 
                             <div class="container-fluid">
                                 <div class="md-form mt-5">
@@ -89,12 +88,13 @@ include_once('../../_helper/2step_com_conn.php');
                                 </div>
                             </div>
                             <?php
-                        } else {
+                        }
+                        else {
                             $lastError = error_get_last();
-                            $error = $lastError ? "" . $lastError["message"] . "" : "";
+                            $error     = $lastError ? "" . $lastError["message"] . "" : "";
                             // echo $error;
                             if (strpos($error, '(CONSTRAINT_FOLDER_NAME)') !== false) {
-                            ?>
+                                ?>
                                 <div class="container-fluid">
                                     <div class="md-form mt-5">
                                         <ol class="breadcrumb">
@@ -104,7 +104,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         </ol>
                                     </div>
                                 </div>
-                    <?php
+                                <?php
                             }
                         }
                     }
@@ -129,7 +129,7 @@ include_once('../../_helper/2step_com_conn.php');
                                     @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
                                     @$attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
 
-                                    $strSQL  = oci_parse($objConnect, "select ID,LABEL AS ZONE_NAME,CREATED_BY,CREATED_DATE,IS_ACTIVE from SALL_ZONE_TREE
+                                    $strSQL = oci_parse($objConnect, "select ID,LABEL AS ZONE_NAME,CREATED_BY,CREATED_DATE,IS_ACTIVE from SALL_ZONE_TREE
                                                                 where PARENT=0 order by LABEL");
 
 
@@ -140,22 +140,22 @@ include_once('../../_helper/2step_com_conn.php');
 
                                     while ($row = oci_fetch_assoc($strSQL)) {
                                         $number++;
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td><?php echo $number; ?></td>
                                             <td><?php echo $row['ZONE_NAME']; ?></td>
                                             <td><?php echo $row['CREATED_BY']; ?></td>
                                             <td><?php echo $row['CREATED_DATE']; ?></td>
                                             <td><?php
-                                                if ($row['IS_ACTIVE'] == 1)
-                                                    echo 'Active';
-                                                else
-                                                    echo 'In-Active';
+                                            if ($row['IS_ACTIVE'] == 1)
+                                                echo 'Active';
+                                            else
+                                                echo 'In-Active';
 
-                                                ?></td>
+                                            ?></td>
 
                                         </tr>
-                                    <?php
+                                        <?php
 
                                     }
                                     ?>
@@ -174,6 +174,6 @@ include_once('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>

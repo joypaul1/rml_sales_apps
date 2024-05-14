@@ -51,7 +51,7 @@ while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative
                         <dotlottie-player class="mw-100 me-3" src="https://lottie.host/75e271b6-edd2-4320-a4a7-fe9cc37cf2d6/93tAh5RG6J.json"
                             background="transparent" speed="1" style="width: 83px; height: 83px;" loop autoplay></dotlottie-player>
                         <div>
-                            <h4 class="fs-20 text-black">Just Click to generate Lead Report..... </h4>
+                            <h4 class="fs-20 text-black">Just Click to generate Lead Report. </h4>
                             <p class="fs-14 mb-0">Enter The Vaild Date. Start Date will be Greater or Equal To End Date. </p>
                         </div>
                     </div>

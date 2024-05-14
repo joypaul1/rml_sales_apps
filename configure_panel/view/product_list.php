@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 ?>
 
@@ -39,7 +39,7 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
                                     @$attn_status = $_REQUEST['attn_status'];
                                     @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
                                     @$attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
-                                    $strSQL  = oci_parse($objConnect, "SELECT
+                                    $strSQL = oci_parse($objConnect, "SELECT
 												ID,
 												PRODUCT_NAME,
 												MODEL_NAME,
@@ -53,7 +53,7 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 
                                     while ($row = oci_fetch_assoc($strSQL)) {
                                         $number++;
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td><?php echo $number; ?></td>
                                             <td><?php echo $row['PRODUCT_NAME']; ?></td>
@@ -62,15 +62,15 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
                                             <td><?php echo $row['CREATED_BY']; ?></td>
                                             <td><?php echo $row['CREATED_DATE']; ?></td>
                                             <td><?php
-                                                if ($row['STATUS'] == 1)
-                                                    echo 'Active';
-                                                else
-                                                    echo 'In-Active';
+                                            if ($row['STATUS'] == 1)
+                                                echo 'Active';
+                                            else
+                                                echo 'In-Active';
 
-                                                ?></td>
+                                            ?></td>
 
                                         </tr>
-                                    <?php
+                                        <?php
 
                                     }
                                     ?>
@@ -93,8 +93,8 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

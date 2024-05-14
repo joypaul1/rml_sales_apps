@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 ?>
 
 <!--start page wrapper -->
@@ -51,7 +51,7 @@ include_once('../../_helper/2step_com_conn.php');
 
                     if (isset($_POST['department_status'])) {
 
-                        $strSQL  = oci_parse($objConnect, "INSERT INTO SAL_APPLICATION (
+                        $strSQL = oci_parse($objConnect, "INSERT INTO SAL_APPLICATION (
 																		TITLE,
 																		CREATED_BY,
 																		CREATED_DATE,
@@ -63,10 +63,11 @@ include_once('../../_helper/2step_com_conn.php');
 																	   '$department_status')");
 
                         if (@oci_execute($strSQL)) {
-                    ?>
+                            ?>
 
                             <div class="alert alert-success alert-dismissible fade show">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round" class="me-2">
                                     <polyline points="9 11 12 14 22 4"></polyline>
                                     <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
                                 </svg>
@@ -75,13 +76,15 @@ include_once('../../_helper/2step_com_conn.php');
                                 </button>
                             </div>
                             <?php
-                        } else {
+                        }
+                        else {
                             $lastError = error_get_last();
-                            $error = $lastError ? "" . $lastError["message"] . "" : "";
+                            $error     = $lastError ? "" . $lastError["message"] . "" : "";
                             if (strpos($error, '(DEVELOPERS.TITLE_NAME)') !== false) {
-                            ?>
+                                ?>
                                 <div class="alert alert-danger alert-dismissible fade show">
-                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"
+                                        stroke-linejoin="round" class="me-2">
                                         <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon>
                                         <line x1="15" y1="9" x2="9" y2="15"></line>
                                         <line x1="9" y1="9" x2="15" y2="15"></line>
@@ -90,7 +93,7 @@ include_once('../../_helper/2step_com_conn.php');
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
                                     </button>
                                 </div>
-                    <?php
+                                <?php
                             }
                         }
                     }
@@ -115,35 +118,35 @@ include_once('../../_helper/2step_com_conn.php');
                                     @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
                                     @$attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
 
-                                    $strSQL  = oci_parse($objConnect, "select ID,
+                                    $strSQL = oci_parse($objConnect, "SELECT ID,
                                                             TITLE,
                                                             CREATED_BY,
                                                             CREATED_DATE,
-                                                            IS_ACTIVE 
-                                                    from SAL_APPLICATION
-                                                    order by TITLE");
+                                                            IS_ACTIVE
+                                                            from SAL_APPLICATION
+                                                            order by TITLE");
 
                                     oci_execute($strSQL);
                                     $number = 0;
 
                                     while ($row = oci_fetch_assoc($strSQL)) {
                                         $number++;
-                                    ?>
+                                        ?>
                                         <tr>
                                             <td><?php echo $number; ?></td>
                                             <td><?php echo $row['TITLE']; ?></td>
                                             <td><?php echo $row['CREATED_DATE']; ?></td>
                                             <td><?php echo $row['CREATED_BY']; ?></td>
                                             <td><?php
-                                                if ($row['IS_ACTIVE'] == 1)
-                                                    echo 'Active';
-                                                else
-                                                    echo 'In-Active';
+                                            if ($row['IS_ACTIVE'] == 1)
+                                                echo 'Active';
+                                            else
+                                                echo 'In-Active';
 
-                                                ?></td>
+                                            ?></td>
 
                                         </tr>
-                                    <?php
+                                        <?php
 
                                     }
                                     ?>
@@ -162,6 +165,6 @@ include_once('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>

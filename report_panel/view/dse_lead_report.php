@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -25,29 +25,31 @@ include_once('../../_helper/2step_com_conn.php');
                                         <option value="ALL">ALL</option>
                                         <?php
 
-                                        $strSQL  = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER         
+                                        $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER         
 													  where ACCESS_APP= 'RML_SAL'    
 													  and IS_ACTIVE=1     
 													  and LEASE_USER='SE'   
 													  order by  EMP_NAME ");
                                         oci_execute($strSQL);
                                         while ($row = oci_fetch_assoc($strSQL)) {
-                                        ?>
+                                            ?>
 
                                             <option value="<?php echo $row['RML_ID']; ?>"><?php echo $row['EMP_NAME']; ?></option>
-                                        <?php
+                                            <?php
                                         }
                                         ?>
                                     </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? $_POST['start_date'] : ''; ?>' />
+                                        <input required="" class="form-control" type='date' name='start_date'
+                                            value='<?php echo isset($_POST['start_date']) ? $_POST['start_date'] : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='end_date' value='<?php echo isset($_POST['end_date']) ? $_POST['end_date'] : ''; ?>' />
+                                        <input required="" class="form-control" type='date' name='end_date'
+                                            value='<?php echo isset($_POST['end_date']) ? $_POST['end_date'] : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -157,15 +159,12 @@ include_once('../../_helper/2step_com_conn.php');
                                     <?php
                                     if (isset($_POST['emp_id'])) {
 
-                                        $emp_id = $_REQUEST['emp_id'];
-                                        $lead_mode = $_REQUEST['lead_mode'];
+                                        $emp_id          = $_REQUEST['emp_id'];
+                                        $lead_mode       = $_REQUEST['lead_mode'];
                                         $attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
-                                        $attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
-
-
-
+                                        $attn_end_date   = date("d/m/Y", strtotime($_REQUEST['end_date']));
                                         if ($emp_id == "ALL") {
-                                            $strSQL  = oci_parse(
+                                            $strSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT 
                                                 aa.ENTRY_BY,
@@ -199,8 +198,9 @@ include_once('../../_helper/2step_com_conn.php');
                                         and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
                                         and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
                                             );
-                                        } else {
-                                            $strSQL  = oci_parse(
+                                        }
+                                        else {
+                                            $strSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT
                                                     aa.ENTRY_BY,
@@ -237,12 +237,11 @@ include_once('../../_helper/2step_com_conn.php');
                                         ini_set('max_execution_time', 0);
                                         set_time_limit(1800);
                                         ini_set('memory_limit', '-1');
-
                                         oci_execute($strSQL);
                                         $number = 0;
                                         while ($row = oci_fetch_assoc($strSQL)) {
                                             $number++;
-                                    ?>
+                                            ?>
                                             <tr>
                                                 <td><?php echo $number; ?></td>
                                                 <td><?php echo $row['EMP_NAME']; ?></td>
@@ -263,23 +262,21 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <td><?php echo $row['APPLICATION_TYPE']; ?></td>
                                                 <td><?php echo $row['REASON_OF_LOST']; ?></td>
                                                 <td><?php echo $row['USES_SEGMENT']; ?></td>
-
-
                                                 <td><?php echo $row['STATUS']; ?></td>
                                                 <td><?php
-                                                    echo $row['VISIT_DATE'];
-                                                    ?>
+                                                echo $row['VISIT_DATE'];
+                                                ?>
                                                 </td>
                                                 <td><?php echo $row['PSBL_PURCHASES_DATE']; ?></td>
                                                 <td><?php if ($row['LEAD_NEW_OLD'] > 1)
-                                                        echo 'Re-Visit [' . $row['LEAD_NEW_OLD'] . ']';
-                                                    else
-                                                        echo 'New';
-                                                    ?></td>
+                                                    echo 'Re-Visit [' . $row['LEAD_NEW_OLD'] . ']';
+                                                else
+                                                    echo 'New';
+                                                ?></td>
                                                 <td><?php echo $row['INTERESTED_BRAND']; ?></td>
 
                                             </tr>
-                                    <?php
+                                            <?php
 
                                         }
                                     }
@@ -304,8 +301,8 @@ include_once('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

@@ -152,7 +152,6 @@ if ($emp_session_brand == "EICHER")
                                             from SAL_LEADS_GEN
                                             where trunc(ENTRY_DATE) between to_date('$v_start_date','dd/mm/yyyy') and to_date('$v_end_date','dd/mm/yyyy')
                                             AND STATUS='$status'
-
                                             and ('$se_id' is null OR ENTRY_BY='$se_id')
                                             ");
                                             // --AND INTERESTED_BRAND ='$product_band'
@@ -171,7 +170,6 @@ if ($emp_session_brand == "EICHER")
                                                 <td><?php echo $row['CUST_NAME']; ?></td>
                                                 <td><?php echo $row['CUST_MOBL_1']; ?></td>
                                                 <td align="center"><?php echo $row['CUST_ADR_1']; ?></td>
-
                                                 <td><?php echo $row['SOURCE_OF_ENQ']; ?></td>
                                                 <td><?php echo $row['MODE_TYPE']; ?></td>
                                                 <td><?php echo $row['CUSTOMER_AGREED_AMOUNT']; ?></td>
@@ -180,10 +178,8 @@ if ($emp_session_brand == "EICHER")
                                                 <td><?php echo $row['ID']; ?></td>
                                                 <td><?php echo $row['STATUS']; ?></td>
                                                 <td><?php echo $row['WIN_DATE']; ?></td>
-
                                             </tr>
                                     <?php
-
                                         }
                                     }
 

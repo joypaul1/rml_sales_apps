@@ -148,29 +148,29 @@ include_once ('../../_helper/2step_com_conn.php');
                                         $strSQL = oci_parse(
                                             $objConnect,
                                             "SELECT INTERESTED_MODEL,
-								PH_ID RML_ID,
-								RML_COLL_ID_TO_NAME(PH_ID)  EMP_NAME,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
-								SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
-								SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','WIN',INTERESTED_MODEL) AS  WIN,
-								SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','LOST',INTERESTED_MODEL) AS  LOST,
-								SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
-								SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS	
-									 FROM
-									 (SELECT  A.INTERESTED_MODEL,
-												(SELECT MAX(SS.PH_ID) FROM SAL_ZH_SETUP SS WHERE SS.ZH_ID=SAL_MM_ZH_ID AND SS.BRAND_NAME='$v_user_tag')PH_ID
-									  FROM SAL_LEADS_GEN A, RML_COLL_APPS_USER B
-										   WHERE A.ENTRY_BY = B.RML_ID 
-										   AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
-										   AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-										   --AND B.USER_FOR='$v_user_tag'
-										   AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy') AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
-										 GROUP BY INTERESTED_MODEL,SAL_MM_ZH_ID
-										 )
-										 GROUP BY  INTERESTED_MODEL,PH_ID
-										 ORDER BY RML_ID"
+                                            PH_ID RML_ID,
+                                            RML_COLL_ID_TO_NAME(PH_ID)  EMP_NAME,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
+                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','WIN',INTERESTED_MODEL) AS  WIN,
+                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','LOST',INTERESTED_MODEL) AS  LOST,
+                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS
+                                            FROM
+                                            (SELECT  A.INTERESTED_MODEL,
+                                                (SELECT MAX(SS.PH_ID) FROM SAL_ZH_SETUP SS WHERE SS.ZH_ID=SAL_MM_ZH_ID AND SS.BRAND_NAME='$v_user_tag')PH_ID
+                                                FROM SAL_LEADS_GEN A, RML_COLL_APPS_USER B
+                                                WHERE A.ENTRY_BY = B.RML_ID 
+                                                AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
+                                                AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
+                                                --AND B.USER_FOR='$v_user_tag'
+                                                AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy') AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
+                                                GROUP BY INTERESTED_MODEL,SAL_MM_ZH_ID
+                                                )
+                                                GROUP BY  INTERESTED_MODEL,PH_ID
+                                                ORDER BY RML_ID"
                                         );
 
                                         oci_execute($strSQL);
@@ -341,26 +341,26 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <?php
                                         $strSQLZone = oci_parse(
                                             $objConnect,
-                                            "SELECT 
-								INTERESTED_MODEL,
-								SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
-                                SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
-                                SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
-                                SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
-								SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
-								SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
-								 COUNT (INTERESTED_MODEL) MODEL_COUNT
-							FROM SAL_LEADS_GEN a, RML_COLL_APPS_USER b
-						   WHERE     A.ENTRY_BY = b.RML_ID
-								 AND B.USER_FOR='$v_user_tag'
-								 AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
-								 AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-								 AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
-															AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
-						GROUP BY INTERESTED_MODEL"
+                                            "SELECT
+                                            INTERESTED_MODEL,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
+                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
+                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
+                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
+                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
+                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
+                                            COUNT (INTERESTED_MODEL) MODEL_COUNT
+                                            FROM SAL_LEADS_GEN a, RML_COLL_APPS_USER b
+                                            WHERE   A.ENTRY_BY = b.RML_ID
+                                                    AND B.USER_FOR='$v_user_tag'
+                                                    AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
+                                                    AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
+                                                    AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
+                                                    AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
+                                            GROUP BY INTERESTED_MODEL"
                                         );
 
 
