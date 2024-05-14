@@ -1,5 +1,5 @@
 <?php
-include_once('../../_helper/2step_com_conn.php');
+include_once ('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -27,7 +27,13 @@ include_once('../../_helper/2step_com_conn.php');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            } elseif ($emp_session_brand == "EICHER") {
+                                            }
+                                            elseif ($emp_session_brand == "EICHER") {
+                                                renderOption('Eicher', 'Eicher');
+                                                renderOption('Mahindra', 'Mahindra');
+                                                renderOption('Dongfeng', 'DONGFENG');
+                                            }
+                                            elseif ($emp_session_brand == "ALL") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');
@@ -45,14 +51,16 @@ include_once('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <label for="title">Entry From:</label>
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='start_date' value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
+                                        <input required="" class="form-control" type='date' name='start_date'
+                                            value='<?php echo isset($_POST['start_date']) ? date('Y-m-d', strtotime($_POST['start_date'])) : ''; ?>' />
 
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="title">Entry To:</label>
                                     <div class="input-group">
-                                        <input required="" class="form-control" type='date' name='end_date' value='<?php echo isset($_POST['end_date']) ? date('Y-m-d', strtotime($_POST['end_date'])) : ''; ?>' />
+                                        <input required="" class="form-control" type='date' name='end_date'
+                                            value='<?php echo isset($_POST['end_date']) ? date('Y-m-d', strtotime($_POST['end_date'])) : ''; ?>' />
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -75,7 +83,7 @@ include_once('../../_helper/2step_com_conn.php');
                     <?php
                     if (isset($_POST['start_date'])) {
                         $V_INTERESTED_BRAND = $_REQUEST['product_brand'];
-                        $v_user_tag = '';
+                        $v_user_tag         = '';
                         if ($V_INTERESTED_BRAND == "Eicher")
                             $v_user_tag = "EICHER";
                         else if ($V_INTERESTED_BRAND == "Mahindra")
@@ -84,9 +92,9 @@ include_once('../../_helper/2step_com_conn.php');
                             $v_user_tag = "DONGFENG";
 
                         $v_product_type = $_REQUEST['product_type'];
-                        $v_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
-                        $v_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
-                    ?>
+                        $v_start_date   = date("d/m/Y", strtotime($_REQUEST['start_date']));
+                        $v_end_date     = date("d/m/Y", strtotime($_REQUEST['end_date']));
+                        ?>
 
 
                         <div class="card card-body ">
@@ -137,7 +145,7 @@ include_once('../../_helper/2step_com_conn.php');
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $strSQL  = oci_parse(
+                                        $strSQL = oci_parse(
                                             $objConnect,
                                             "SELECT INTERESTED_MODEL,
 								PH_ID RML_ID,
@@ -164,23 +172,23 @@ include_once('../../_helper/2step_com_conn.php');
 										 GROUP BY  INTERESTED_MODEL,PH_ID
 										 ORDER BY RML_ID"
                                         );
-                                    
+
                                         oci_execute($strSQL);
-                                        $number = 0;
+                                        $number   = 0;
                                         $v_RML_ID = 0;
 
-                                        $V_HOT = 0;
-                                        $V_WORM = 0;
-                                        $V_COLD = 0;
-                                        $V_NI = 0;
-                                        $V_WIN = 0;
-                                        $V_LOST = 0;
+                                        $V_HOT             = 0;
+                                        $V_WORM            = 0;
+                                        $V_COLD            = 0;
+                                        $V_NI              = 0;
+                                        $V_WIN             = 0;
+                                        $V_LOST            = 0;
                                         $V_TODAY_FOLLOW_UP = 0;
-                                        $V_FOLLOW_UP_MISS = 0;
+                                        $V_FOLLOW_UP_MISS  = 0;
 
 
                                         $IS_MATCH = 0;
-                                        $IS_M = 0;
+                                        $IS_M     = 0;
 
 
                                         while ($row = oci_fetch_assoc($strSQL)) {
@@ -193,9 +201,9 @@ include_once('../../_helper/2step_com_conn.php');
 
                                             if ($IS_M >= 1 && $IS_MATCH != $row['RML_ID']) {
                                                 $IS_MATCH = $row['RML_ID'];
-                                                $IS_M = 0;
+                                                $IS_M     = 0;
 
-                                        ?>
+                                                ?>
                                                 <tr class="p-3 mb-2 bg-success text-white">
                                                     <td align="center"></td>
                                                     <td align="center">Total=</td>
@@ -209,33 +217,35 @@ include_once('../../_helper/2step_com_conn.php');
                                                     <td align="center"><?php echo $V_TODAY_FOLLOW_UP; ?></td>
                                                     <td align="center"><?php echo $V_FOLLOW_UP_MISS; ?></td>
                                                 </tr>
-                                            <?php
-                                                $V_HOT = 0;
-                                                $V_WORM = 0;
-                                                $V_COLD = 0;
-                                                $V_NI = 0;
-                                                $V_WIN = 0;
-                                                $V_LOST = 0;
+                                                <?php
+                                                $V_HOT             = 0;
+                                                $V_WORM            = 0;
+                                                $V_COLD            = 0;
+                                                $V_NI              = 0;
+                                                $V_WIN             = 0;
+                                                $V_LOST            = 0;
                                                 $V_TODAY_FOLLOW_UP = 0;
-                                                $V_FOLLOW_UP_MISS = 0;
+                                                $V_FOLLOW_UP_MISS  = 0;
                                             }
                                             ?>
                                             <tr>
                                                 <?php
                                                 if ($row['RML_ID'] == $v_RML_ID) {
-                                                ?>
+                                                    ?>
                                                     <td class="noborder"></td>
 
-                                                <?php
-                                                } else {
-                                                ?>
+                                                    <?php
+                                                }
+                                                else {
+                                                    ?>
                                                     <td align="center">
-                                                        <a target="_blank" href="ph_dtls.php?want_id=<?php echo $row['RML_ID'] . '&start_date=' . $v_start_date . '&end_date=' . $v_end_date . '&brand=' . $V_INTERESTED_BRAND . '&product_type=' . $v_product_type  ?>">
+                                                        <a target="_blank"
+                                                            href="ph_dtls.php?want_id=<?php echo $row['RML_ID'] . '&start_date=' . $v_start_date . '&end_date=' . $v_end_date . '&brand=' . $V_INTERESTED_BRAND . '&product_type=' . $v_product_type ?>">
                                                             <?php echo $row['EMP_NAME'] . '-' . $row['RML_ID'];
                                                             $v_RML_ID = $row['RML_ID']; ?>
                                                         </a>
                                                     </td>
-                                                <?php
+                                                    <?php
                                                 }
                                                 ?>
 
@@ -245,25 +255,25 @@ include_once('../../_helper/2step_com_conn.php');
                                                     <?php echo $row['INTERESTED_MODEL']; ?>
                                                 </td>
                                                 <td align="center"><?php echo $row['HOT'];
-                                                                    $V_HOT = $V_HOT + $row['HOT']; ?></td>
+                                                $V_HOT = $V_HOT + $row['HOT']; ?></td>
                                                 <td align="center"><?php echo $row['WORM'];
-                                                                    $V_WORM = $V_WORM + $row['WORM']; ?></td>
+                                                $V_WORM = $V_WORM + $row['WORM']; ?></td>
                                                 <td align="center"><?php echo $row['COLD'];
-                                                                    $V_COLD = $V_COLD + $row['COLD']; ?></td>
+                                                $V_COLD = $V_COLD + $row['COLD']; ?></td>
                                                 <td align="center"><?php echo $row['NI'];
-                                                                    $V_NI = $V_NI + $row['NI']; ?></td>
+                                                $V_NI = $V_NI + $row['NI']; ?></td>
                                                 <td align="center"><?php echo $row['WIN'];
-                                                                    $V_WIN = $V_WIN + $row['WIN']; ?></td>
+                                                $V_WIN = $V_WIN + $row['WIN']; ?></td>
                                                 <td align="center"><?php echo $row['LOST'];
-                                                                    $V_LOST = $V_LOST + $row['LOST']; ?></td>
+                                                $V_LOST = $V_LOST + $row['LOST']; ?></td>
                                                 <td align="center"><?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?></td>
                                                 <td align="center"><?php echo $row['TODAY_FOLLOW_UP'];
-                                                                    $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
+                                                $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
                                                 <td align="center"><?php echo $row['FOLLOW_UP_MISS'];
-                                                                    $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
+                                                $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
 
                                             </tr>
-                                        <?php
+                                            <?php
                                         }
                                         ?>
                                         <tr class="p-3 mb-2 bg-success text-white">
@@ -329,7 +339,7 @@ include_once('../../_helper/2step_com_conn.php');
 
 
                                         <?php
-                                        $strSQLZone  = oci_parse(
+                                        $strSQLZone = oci_parse(
                                             $objConnect,
                                             "SELECT 
 								INTERESTED_MODEL,
@@ -357,39 +367,39 @@ include_once('../../_helper/2step_com_conn.php');
                                         oci_execute($strSQLZone);
                                         $number = 0;
 
-                                        $V_HOT = 0;
-                                        $V_WORM = 0;
-                                        $V_COLD = 0;
-                                        $V_NI = 0;
-                                        $V_WIN = 0;
-                                        $V_LOST = 0;
+                                        $V_HOT             = 0;
+                                        $V_WORM            = 0;
+                                        $V_COLD            = 0;
+                                        $V_NI              = 0;
+                                        $V_WIN             = 0;
+                                        $V_LOST            = 0;
                                         $V_TODAY_FOLLOW_UP = 0;
-                                        $V_FOLLOW_UP_MISS = 0;
+                                        $V_FOLLOW_UP_MISS  = 0;
 
                                         while ($row = oci_fetch_assoc($strSQLZone)) {
                                             $number++;
-                                        ?>
+                                            ?>
                                             <tr>
                                                 <td align="center"><?php echo $row['INTERESTED_MODEL']; ?></td>
                                                 <td align="center"><?php echo $row['HOT'];
-                                                                    $V_HOT = $V_HOT + $row['HOT']; ?></td>
+                                                $V_HOT = $V_HOT + $row['HOT']; ?></td>
                                                 <td align="center"><?php echo $row['WORM'];
-                                                                    $V_WORM = $V_WORM + $row['WORM']; ?></td>
+                                                $V_WORM = $V_WORM + $row['WORM']; ?></td>
                                                 <td align="center"><?php echo $row['COLD'];
-                                                                    $V_COLD = $V_COLD + $row['COLD']; ?></td>
+                                                $V_COLD = $V_COLD + $row['COLD']; ?></td>
                                                 <td align="center"><?php echo $row['NI'];
-                                                                    $V_NI = $V_NI + $row['NI']; ?></td>
+                                                $V_NI = $V_NI + $row['NI']; ?></td>
                                                 <td align="center"><?php echo $row['WIN'];
-                                                                    $V_WIN = $V_WIN + $row['WIN']; ?></td>
+                                                $V_WIN = $V_WIN + $row['WIN']; ?></td>
                                                 <td align="center"><?php echo $row['LOST'];
-                                                                    $V_LOST = $V_LOST + $row['LOST']; ?></td>
+                                                $V_LOST = $V_LOST + $row['LOST']; ?></td>
                                                 <td align="center"><?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?></td>
                                                 <td align="center"><?php echo $row['TODAY_FOLLOW_UP'];
-                                                                    $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
+                                                $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
                                                 <td align="center"><?php echo $row['FOLLOW_UP_MISS'];
-                                                                    $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
+                                                $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
                                             </tr>
-                                        <?php
+                                            <?php
                                         }
 
                                         ?>
@@ -410,7 +420,7 @@ include_once('../../_helper/2step_com_conn.php');
 
                             </div>
                         </div>
-                    <?php
+                        <?php
                     }
                     ?>
 
@@ -422,15 +432,15 @@ include_once('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once('../../_includes/footer_info.php');
-include_once('../../_includes/footer.php');
+include_once ('../../_includes/footer_info.php');
+include_once ('../../_includes/footer.php');
 ?>
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const productBrandSelector = '#product_brand';
         const productTypeSelector = '#product_type';
 
-        $(productBrandSelector).on('change', function() {
+        $(productBrandSelector).on('change', function () {
             updateProductTypeOptions();
         });
 
@@ -453,12 +463,12 @@ include_once('../../_includes/footer.php');
                     addProductTypeOption(productTypeSelect, 'Bus', 'Bus');
                     addProductTypeOption(productTypeSelect, 'Truck', 'Truck');
                     break;
-                    // Add cases for other brands if needed
+                // Add cases for other brands if needed
                 case 'DONGFENG':
                     addProductTypeOption(productTypeSelect, '', 'ALL');
                     addProductTypeOption(productTypeSelect, 'Captain', 'Captain');
                     break;
-                    // Add cases for other brands if needed
+                // Add cases for other brands if needed
                 default:
                     // Handle unknown brand
                     break;

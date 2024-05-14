@@ -168,72 +168,69 @@ include_once('../../_helper/2step_com_conn.php');
                                             $strSQL  = oci_parse(
                                                 $objConnect,
                                                 "SELECT 
-							            aa.ENTRY_BY,
-										aa.ZONE_NAME,
-										bb.EMP_NAME,
-										bb.AREA_ZONE,
-										CUST_NAME,APPLICATION_TYPE,
-										INTERESTED_MODEL,
-										CUST_MOBL_1,
-										SALES_POTENTIAL,
-										CUST_ADR_1,
-										VISIT_DATE,
-										INTEREST_METHOD,
-										CUST_TYPE,
-										SOURCE_OF_ENQ,
-										CONTACT_MODE,
-										MODE_TYPE,
-										USES_SEGMENT,
-										ENTRY_DATE,
-										FOLLOW_UP_METHOD,
-										PSBL_PURCHASES_DATE,
-										aa.UPAZELA_NAME,
-										STATUS,
-										APPLICATION_TYPE,
-										REASON_OF_LOST,
-										SAL_MM_ZH_ID AS ZH,
-										(select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
-										aa.INTERESTED_BRAND
-								FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
-								where aa.ENTRY_BY=bb.RML_ID
-								--and INTERESTED_BRAND='$product_band'
-								 and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
-								and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')
-															"
+                                                aa.ENTRY_BY,
+                                                aa.ZONE_NAME,
+                                                bb.EMP_NAME,
+                                                bb.AREA_ZONE,
+                                                CUST_NAME,APPLICATION_TYPE,
+                                                INTERESTED_MODEL,
+                                                CUST_MOBL_1,
+                                                SALES_POTENTIAL,
+                                                CUST_ADR_1,
+                                                VISIT_DATE,
+                                                INTEREST_METHOD,
+                                                CUST_TYPE,
+                                                SOURCE_OF_ENQ,
+                                                CONTACT_MODE,
+                                                MODE_TYPE,
+                                                USES_SEGMENT,
+                                                ENTRY_DATE,
+                                                FOLLOW_UP_METHOD,
+                                                PSBL_PURCHASES_DATE,
+                                                aa.UPAZELA_NAME,
+                                                STATUS,
+                                                APPLICATION_TYPE,
+                                                REASON_OF_LOST,
+                                                SAL_MM_ZH_ID AS ZH,
+                                                (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
+                                                aa.INTERESTED_BRAND
+                                        FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
+                                        where aa.ENTRY_BY=bb.RML_ID
+                                        and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
+                                        and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
                                             );
                                         } else {
                                             $strSQL  = oci_parse(
                                                 $objConnect,
-                                                "SELECT aa.ENTRY_BY,
-									        aa.ZONE_NAME,
-						                    bb.EMP_NAME,
-											CUST_NAME,
-											bb.AREA_ZONE,
-											APPLICATION_TYPE,
-											REASON_OF_LOST,
-											INTERESTED_MODEL,
-											PSBL_PURCHASES_DATE,
-											CUST_MOBL_1,
-											SAL_MM_ZH_ID AS ZH,
-											SALES_POTENTIAL,
-											CUST_ADR_1,
-											VISIT_DATE,
-											INTEREST_METHOD,
-											CUST_TYPE,ENTRY_DATE,
-											SOURCE_OF_ENQ,
-											aa.UPAZELA_NAME,
-											CONTACT_MODE,MODE_TYPE,USES_SEGMENT,
-											FOLLOW_UP_METHOD,
-											STATUS,
-											(select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
-											aa.INTERESTED_BRAND
-									FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
-									WHERE aa.ENTRY_BY=bb.RML_ID
-									--and aa.INTERESTED_BRAND='$product_band'
-									AND aa.ENTRY_BY='$emp_id'
-									AND ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
-									AND trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')
-									"
+                                                "SELECT
+                                                    aa.ENTRY_BY,
+                                                    aa.ZONE_NAME,
+                                                    bb.EMP_NAME,
+                                                    CUST_NAME,
+                                                    bb.AREA_ZONE,
+                                                    APPLICATION_TYPE,
+                                                    REASON_OF_LOST,
+                                                    INTERESTED_MODEL,
+                                                    PSBL_PURCHASES_DATE,
+                                                    CUST_MOBL_1,
+                                                    SAL_MM_ZH_ID AS ZH,
+                                                    SALES_POTENTIAL,
+                                                    CUST_ADR_1,
+                                                    VISIT_DATE,
+                                                    INTEREST_METHOD,
+                                                    CUST_TYPE,ENTRY_DATE,
+                                                    SOURCE_OF_ENQ,
+                                                    aa.UPAZELA_NAME,
+                                                    CONTACT_MODE,MODE_TYPE,USES_SEGMENT,
+                                                    FOLLOW_UP_METHOD,
+                                                    STATUS,
+                                                    (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
+                                                    aa.INTERESTED_BRAND
+                                                FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
+                                                WHERE aa.ENTRY_BY=bb.RML_ID
+                                                AND aa.ENTRY_BY='$emp_id'
+                                                AND ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
+                                                AND trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
                                             );
                                         }
 
@@ -262,7 +259,6 @@ include_once('../../_helper/2step_com_conn.php');
                                                 <td><?php echo $row['INTEREST_METHOD']; ?></td>
                                                 <td><?php echo $row['CONTACT_MODE']; ?></td>
                                                 <td><?php echo $row['SOURCE_OF_ENQ']; ?></td>
-
                                                 <td><?php echo $row['MODE_TYPE']; ?></td>
                                                 <td><?php echo $row['APPLICATION_TYPE']; ?></td>
                                                 <td><?php echo $row['REASON_OF_LOST']; ?></td>

@@ -131,30 +131,31 @@ if ($emp_session_brand == "EICHER")
                                         $v_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
                                         $v_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
                                         $strSQL  = oci_parse($objConnect, "SELECT ID,
-                                             ENTRY_BY,
-                                             CUST_NAME,
-                                             CUST_ADR_1,
-                                             CUST_MOBL_1,
-                                             ENTRY_DATE,
-                                             CONTACT_MODE,
-                                             PRODUCT_TYPE,
-                                             INTERESTED_MODEL,
-                                             INTERESTED_BRAND,
-                                             SALES_POTENTIAL,
-                                             INTEREST_METHOD,
-                                             SOURCE_OF_ENQ,
-                                             MODE_TYPE,
-                                             CUSTOMER_AGREED_AMOUNT,
-                                             CUSTOMER_AGREED_SALES_DATE,
-                                             STATUS,
-                                             WIN_DATE,
-                                             APPLICATION_TYPE
+                                            ENTRY_BY,
+                                            CUST_NAME,
+                                            CUST_ADR_1,
+                                            CUST_MOBL_1,
+                                            ENTRY_DATE,
+                                            CONTACT_MODE,
+                                            PRODUCT_TYPE,
+                                            INTERESTED_MODEL,
+                                            INTERESTED_BRAND,
+                                            SALES_POTENTIAL,
+                                            INTEREST_METHOD,
+                                            SOURCE_OF_ENQ,
+                                            MODE_TYPE,
+                                            CUSTOMER_AGREED_AMOUNT,
+                                            CUSTOMER_AGREED_SALES_DATE,
+                                            STATUS,
+                                            WIN_DATE,
+                                            APPLICATION_TYPE
                                             from SAL_LEADS_GEN
                                             where trunc(ENTRY_DATE) between to_date('$v_start_date','dd/mm/yyyy') and to_date('$v_end_date','dd/mm/yyyy')
                                             AND STATUS='$status'
-                                            AND INTERESTED_BRAND='$product_band'
+
                                             and ('$se_id' is null OR ENTRY_BY='$se_id')
                                             ");
+                                            // --AND INTERESTED_BRAND ='$product_band'
 
                                         oci_execute($strSQL);
                                         $number = 0;
