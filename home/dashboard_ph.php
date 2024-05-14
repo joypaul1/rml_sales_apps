@@ -12,17 +12,17 @@ $monthlySQL = @oci_parse($objConnect, $monthSQL);
 
 // apaxChartData
 $apaxChartData = [];
-$salesSQL      = "SELECT INTERESTED_BRAND,count(INTERESTED_BRAND)  TOTAL_NUMBER
+$salesSQL      = "SELECT PRODUCT_TYPE,count(PRODUCT_TYPE)  TOTAL_NUMBER
 from SAL_LEADS_GEN
-where INTERESTED_BRAND NOT IN'MFTBC'
-GROUP BY  INTERESTED_BRAND
-order by INTERESTED_BRAND DESC";
+where PRODUCT_TYPE NOT IN'MFTBC'
+GROUP BY  PRODUCT_TYPE
+order by TOTAL_NUMBER DESC";
 $salesSQL      = @oci_parse($objConnect, $salesSQL);
 @oci_execute($salesSQL);
 
 while ($data = oci_fetch_assoc($salesSQL)) { // Fetch each row as an associative array
     $apaxChartData[] = array(
-        'PRODUCT_TYPE' => $data['INTERESTED_BRAND'],
+        'PRODUCT_TYPE' => $data['PRODUCT_TYPE'],
         'TOTAL_NUMBER' => $data['TOTAL_NUMBER']
     );
 }
