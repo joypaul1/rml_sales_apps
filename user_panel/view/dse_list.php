@@ -95,9 +95,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 ) HR_USER_COLL
                                             FROM RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
-                                                and USER_FOR='$emp_session_brand'
                                                 AND RML_ID='$sall_emp_id'"
                                             );
+                                            // and USER_FOR='$emp_session_brand'
                                             oci_execute(@$strSQL);
                                             $number = 0;
 
@@ -188,10 +188,11 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 FROM RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
                                                 and IS_ACTIVE=1
-                                                and USER_FOR='$emp_session_brand'
+                                               
                                                 and LEASE_USER='SE'
                                                 order by AREA_ZONE"
                                             );
+                                            // and USER_FOR='$emp_session_brand'
 
                                             $number = 0;
                                             if (oci_execute($allDataSQL)) {

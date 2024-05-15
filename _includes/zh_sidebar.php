@@ -30,7 +30,7 @@
                         <li><a href="<?php echo $basePath ?>/report_panel/view/dse_lead_report.php">DSE Lead Report </a></li>
                     </ul>
                 </li>
-                <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                 <!--<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-television"></i>
                         <span class="nav-text">Distributor Panel</span>
                     </a>
@@ -49,7 +49,7 @@
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/add_application.php">Application List </a></li>
                         <li><a href="<?php echo $basePath ?>/configure_panel/view/add_company.php">Company List </a></li>
                     </ul>
-                </li>
+                </li>-->
             </ul>
 
         </div>
