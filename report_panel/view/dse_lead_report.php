@@ -55,9 +55,10 @@ include_once ('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <select name="lead_mode" class="form-control">
                                         <option selected value="">Select Mode</option>
-                                        <option value="Hot">Hot</option>
-                                        <option value="Warm">Warm</option>
-                                        <option value="Cold">Cold</option>
+                                        <option value="Q0">Q0</option>
+                                        <option value="Q1">Q1</option>
+                                        <option value="Q2">Q2</option>
+                                        <option value="Q3">Q3</option>
                                     </select>
 
                                 </div>
@@ -83,25 +84,25 @@ include_once ('../../_helper/2step_com_conn.php');
                                             <center>Sl</center>
                                         </th>
                                         <th>
-                                            <center>SE Name</center>
+                                            <center>DSE Name</center>
                                         </th>
                                         <th>
                                             <center>Zonal Head</center>
                                         </th>
                                         <th>
-                                            <center>C.Name</center>
+                                            <center>Customer Name</center>
                                         </th>
                                         <th>
                                             <center>Model</center>
                                         </th>
                                         <th>
-                                            <center>C.Mobile</center>
+                                            <center>Customer Mobile</center>
                                         </th>
                                         <th>
                                             <center>Quantity</center>
                                         </th>
                                         <th>
-                                            <center>C.Address</center>
+                                            <center>Customer Address</center>
                                         </th>
                                         <th>
                                             <center>District</center>
@@ -166,7 +167,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                         if ($emp_id == "ALL") {
                                             $strSQL = oci_parse(
                                                 $objConnect,
-                                                "SELECT 
+                                                "SELECT
                                                 aa.ENTRY_BY,
                                                 aa.ZONE_NAME,
                                                 bb.EMP_NAME,

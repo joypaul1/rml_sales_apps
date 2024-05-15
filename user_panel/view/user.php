@@ -34,12 +34,13 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <select name="form_user_role" class="form-control">
                                             <option selected value="">User Role</option>
                                             <?php
-                                            $strSQLZone = oci_parse($objConnect, "SELECT UNIQUE(LEASE_USER) USER_ROLE from RML_COLL_APPS_USER  where IS_ACTIVE=1 AND ACCESS_APP='RML_SAL'");
-                                            oci_execute($strSQLZone);
-                                            while ($rowZ = oci_fetch_assoc($strSQLZone)) {
+                                            $strSQLZone = @oci_parse($objConnect, "SELECT UNIQUE(LEASE_USER) USER_ROLE from RML_COLL_APPS_USER  where IS_ACTIVE=1 AND ACCESS_APP='RML_SAL'");
+                                            @oci_execute($strSQLZone);
+                                            while ($rowZ = @oci_fetch_assoc($strSQLZone)) {
                                                 ?>
                                                 <option value="<?php echo $rowZ['USER_ROLE']; ?>" <?php echo (isset($_POST['form_user_role']) && $_POST['form_user_role'] == $rowZ['USER_ROLE']) ? 'selected="selected"' : ''; ?>>
-                                                    <?php echo $rowZ['USER_ROLE']; ?></option>
+                                                    <?php echo $rowZ['USER_ROLE']; ?>
+                                                </option>
                                                 <?php
                                             }
                                             ?>
@@ -76,9 +77,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                     <tbody>
 
                                         <?php
-
                                         if (isset($_POST['form_user_role'])) {
-
                                             $sall_emp_id    = $_REQUEST['sall_emp_id'];
                                             $form_user_role = $_REQUEST['form_user_role'];
 
@@ -91,15 +90,15 @@ include_once ('../../_helper/2step_com_conn.php');
 															LEASE_USER,SAL_MM_ZH_ID
 															from RML_COLL_APPS_USER
 															where ACCESS_APP='RML_SAL'
-															and USER_FOR='$emp_session_brand'
 															and IS_ACTIVE=1
 															AND ('$sall_emp_id' is null OR RML_ID='$sall_emp_id')
 															and ('$form_user_role' is null or LEASE_USER='$form_user_role')"
                                             );
-                                            oci_execute(@$strSQL);
+                                            // and USER_FOR='$emp_session_brand'
+                                            @oci_execute(@$strSQL);
                                             $number = 0;
 
-                                            while ($row = oci_fetch_assoc($strSQL)) {
+                                            while ($row = @oci_fetch_assoc($strSQL)) {
                                                 $number++;
                                                 ?>
                                                 <tr>
@@ -108,15 +107,16 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     <td><?php echo $row['AREA_ZONE']; ?></td>
                                                     <td><?php echo $row['LEASE_USER']; ?></td>
 
-                                                    <td align="center">
-                                                        <a target="_blank" href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
-                                                                class="user_edit">Information Update</button>
+                                                    <td class="d-flex gap-3">
+                                                        <a target="_blank" class='mb-2' href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
+                                                                class="btn btn-sm btn-warning">Info. Update <i class="flaticon-381-edit"></i></button>
                                                         </a>
-                                                        <a target="_blank" href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
-                                                                class="user_district">District Assign</button>
+                                                        <a target="_blank" class='mb-2' href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
+                                                                class="btn btn-sm btn-primary">Dis. Ass. <i class="flaticon-381-edit"></i></button>
                                                         </a>
-                                                        <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>"><button
-                                                                class="user_setup">Produc Information</button>
+                                                        <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
+                                                            <button class="btn btn-sm btn-info">Pro. Info. <i class="flaticon-381-edit"></i></button>
+
                                                         </a>
                                                     </td>
                                                     <td><?php echo $row['SAL_MM_ZH_ID']; ?></td>
@@ -125,7 +125,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                             }
                                         }
                                         else {
-                                            $allDataSQL = oci_parse(
+                                            $allDataSQL = @oci_parse(
                                                 $objConnect,
                                                 "SELECT ID,
                                                 EMP_NAME,
@@ -135,13 +135,14 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 from RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
                                                 and IS_ACTIVE=1
-                                                and USER_FOR='$emp_session_brand'
+                                                
                                                 order by AREA_ZONE"
                                             );
-
+                                            // and USER_FOR='$emp_session_brand'
+                                        
                                             $number = 0;
-                                            if (oci_execute($allDataSQL)) {
-                                                while ($row = oci_fetch_assoc($allDataSQL)) {
+                                            if (@oci_execute($allDataSQL)) {
+                                                while ($row = @oci_fetch_assoc($allDataSQL)) {
                                                     $number++;
                                                     ?>
                                                     <tr>
@@ -150,15 +151,15 @@ include_once ('../../_helper/2step_com_conn.php');
                                                         <td><?php echo $row['AREA_ZONE']; ?></td>
                                                         <td><?php echo $row['LEASE_USER']; ?></td>
 
-                                                        <td align="center">
+                                                        <td class="d-flex gap-3">
                                                             <a target="_blank" class='mb-2' href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
-                                                                    class="btn btn-sm btn-warning">Information Update <i class="flaticon-381-edit"></i></button>
+                                                                    class="btn btn-sm btn-warning">Info. Update <i class="flaticon-381-edit"></i></button>
                                                             </a>
                                                             <a target="_blank" class='mb-2' href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
-                                                                    class="btn btn-sm btn-primary">District Assign <i class="flaticon-381-edit"></i></button>
+                                                                    class="btn btn-sm btn-primary">Dis. Ass. <i class="flaticon-381-edit"></i></button>
                                                             </a>
                                                             <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
-                                                                <button class="btn btn-sm btn-info">Produc Information <i class="flaticon-381-edit"></i></button>
+                                                                <button class="btn btn-sm btn-info">Pro. Info. <i class="flaticon-381-edit"></i></button>
 
                                                             </a>
                                                         </td>

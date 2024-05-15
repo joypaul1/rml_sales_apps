@@ -27,7 +27,7 @@
                     </a>
                     <ul aria-expanded="false" class="mm-collapse">
                         <li><a href="<?php echo $basePath ?>/report_panel/view/summary.php">Report Summary</a></li>
-                        <li><a href="<?php echo $basePath ?>/report_panel/view/dse_leave_report.php">DSE Lead Report </a></li>
+                        <li><a href="<?php echo $basePath ?>/report_panel/view/dse_lead_report.php">DSE Lead Report </a></li>
                         <li><a href="<?php echo $basePath ?>/report_panel/view/win_lost_report.php">Win Lost Report </a></li>
                     </ul>
                 </li>
