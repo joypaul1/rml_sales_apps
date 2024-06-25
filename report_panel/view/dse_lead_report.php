@@ -86,6 +86,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <th>
                                             <center>DSE Name</center>
                                         </th>
+										<th>
+                                            <center>DSE ID</center>
+                                        </th>
                                         <th>
                                             <center>Zonal Head</center>
                                         </th>
@@ -97,6 +100,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                         </th>
                                         <th>
                                             <center>Customer Mobile</center>
+                                        </th>
+										 <th>
+                                            <center>Customer Type</center>
                                         </th>
                                         <th>
                                             <center>Quantity</center>
@@ -135,9 +141,6 @@ include_once ('../../_helper/2step_com_conn.php');
                                             <center>Reason of Lost</center>
                                         </th>
                                         <th>
-                                            <center>Uses Segment(Only Eicher)</center>
-                                        </th>
-                                        <th>
                                             <center>Status</center>
                                         </th>
                                         <th>
@@ -151,6 +154,15 @@ include_once ('../../_helper/2step_com_conn.php');
                                         </th>
                                         <th>
                                             <center>Brand</center>
+                                        </th>
+										<th>
+                                            <center>Lat</center>
+                                        </th>
+										<th>
+                                            <center>Lang</center>
+                                        </th>
+										<th>
+                                            <center>Lead ID</center>
                                         </th>
                                     </tr>
                                 </thead>
@@ -167,7 +179,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                         if ($emp_id == "ALL") {
                                             $strSQL = oci_parse(
                                                 $objConnect,
-                                                "SELECT
+                                                "SELECT aa.ID,aa.ENTRY_BY,aa.CUST_TYPE,
                                                 aa.ENTRY_BY,
                                                 aa.ZONE_NAME,
                                                 bb.EMP_NAME,
@@ -184,7 +196,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 CONTACT_MODE,
                                                 MODE_TYPE,
                                                 USES_SEGMENT,
-                                                ENTRY_DATE,
+                                                TO_CHAR(ENTRY_DATE,'dd/mm/yyyy HH24:MI:SS AM') ENTRY_DATE,
                                                 FOLLOW_UP_METHOD,
                                                 PSBL_PURCHASES_DATE,
                                                 aa.UPAZELA_NAME,
@@ -192,8 +204,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 APPLICATION_TYPE,
                                                 REASON_OF_LOST,
                                                 SAL_MM_ZH_ID AS ZH,
+												(select uu.EMP_NAME from RML_COLL_APPS_USER uu where uu.RML_ID=bb.SAL_MM_ZH_ID) ZH_NAME,
                                                 (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
-                                                aa.INTERESTED_BRAND
+                                                aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                         FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
                                         where aa.ENTRY_BY=bb.RML_ID
                                         and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
@@ -203,7 +216,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                         else {
                                             $strSQL = oci_parse(
                                                 $objConnect,
-                                                "SELECT
+                                                "SELECT aa.ID,aa.ENTRY_BY,aa.CUST_TYPE,
                                                     aa.ENTRY_BY,
                                                     aa.ZONE_NAME,
                                                     bb.EMP_NAME,
@@ -215,18 +228,20 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     PSBL_PURCHASES_DATE,
                                                     CUST_MOBL_1,
                                                     SAL_MM_ZH_ID AS ZH,
+													(select uu.EMP_NAME from RML_COLL_APPS_USER uu where uu.RML_ID=bb.SAL_MM_ZH_ID) ZH_NAME,
                                                     SALES_POTENTIAL,
                                                     CUST_ADR_1,
                                                     VISIT_DATE,
                                                     INTEREST_METHOD,
-                                                    CUST_TYPE,ENTRY_DATE,
+                                                    CUST_TYPE,
+													 TO_CHAR(ENTRY_DATE,'dd/mm/yyyy HH24:MI:SS AM') ENTRY_DATE,
                                                     SOURCE_OF_ENQ,
                                                     aa.UPAZELA_NAME,
                                                     CONTACT_MODE,MODE_TYPE,USES_SEGMENT,
                                                     FOLLOW_UP_METHOD,
                                                     STATUS,
                                                     (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
-                                                    aa.INTERESTED_BRAND
+                                                    aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                                 FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
                                                 WHERE aa.ENTRY_BY=bb.RML_ID
                                                 AND aa.ENTRY_BY='$emp_id'
@@ -246,10 +261,14 @@ include_once ('../../_helper/2step_com_conn.php');
                                             <tr>
                                                 <td><?php echo $number; ?></td>
                                                 <td><?php echo $row['EMP_NAME']; ?></td>
-                                                <td><?php echo $row['ZH']; ?></td>
+                                                <td><?php echo $row['ENTRY_BY']; ?></td>
+                                                <td><?php 
+                                                         echo $row['ZH_NAME'].'['.$row['ZH'].']';
+                                                          ?></td>
                                                 <td><?php echo $row['CUST_NAME']; ?></td>
                                                 <td><?php echo $row['INTERESTED_MODEL']; ?></td>
                                                 <td align="center"><?php echo $row['CUST_MOBL_1']; ?></td>
+                                                <td align="center"><?php echo $row['CUST_TYPE']; ?></td>
                                                 <td align="center"><?php echo $row['SALES_POTENTIAL']; ?></td>
                                                 <td><?php echo $row['CUST_ADR_1']; ?></td>
                                                 <td><?php echo $row['ZONE_NAME']; ?></td>
@@ -262,7 +281,6 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <td><?php echo $row['MODE_TYPE']; ?></td>
                                                 <td><?php echo $row['APPLICATION_TYPE']; ?></td>
                                                 <td><?php echo $row['REASON_OF_LOST']; ?></td>
-                                                <td><?php echo $row['USES_SEGMENT']; ?></td>
                                                 <td><?php echo $row['STATUS']; ?></td>
                                                 <td><?php
                                                 echo $row['VISIT_DATE'];
@@ -275,6 +293,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     echo 'New';
                                                 ?></td>
                                                 <td><?php echo $row['INTERESTED_BRAND']; ?></td>
+                                                <td><?php echo $row['LAT']; ?></td>
+                                                <td><?php echo $row['LANG']; ?></td>
+                                                <td><?php echo $row['ID']; ?></td>
 
                                             </tr>
                                             <?php

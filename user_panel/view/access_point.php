@@ -23,6 +23,28 @@ $V_USER_BRAND = $emp_session_brand;
                             Provide Acces on Hr Apps Dashboard
                         </div>
                     </div>
+                    <?php
+
+                    if (isset($_POST['hr_rml_id'])) {
+                        $hr_rml_id = $_REQUEST['hr_rml_id'];
+                        $apps_name = $_REQUEST['apps_name'];
+                        $strSQL    = oci_parse($objConnect, "begin
+															RML_APPS_ACCESS ('$hr_rml_id', '$user_id','$apps_name','$remarks','$emp_session_id');
+															end;");
+
+                        if (@oci_execute($strSQL)) {
+                            echo '<div class="alert alert-success alert-dismissible fade show">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+                                    <polyline points="9 11 12 14 22 4"></polyline>
+                                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                                </svg>
+                                <strong>Success!</strong> Updated successfully.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                                </button>
+                            </div>';
+                        }
+                    }
+                    ?>
                     <div class="card-body">
                         <form action="" method="post">
                             <div class="row justify-content-center">
