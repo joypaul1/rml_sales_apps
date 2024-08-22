@@ -5,6 +5,14 @@ include_once ('../_helper/com_conn.php');
 
 $monthSQL   = "SELECT MODE_TYPE,count(MODE_TYPE) TOTAL_NUMBER from SAL_LEADS_GEN
 WHERE trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+AND ENTRY_BY IN
+    (SELECT RML_ID
+        FROM RML_COLL_APPS_USER
+        WHERE  ACCESS_APP = 'RML_SAL'
+        AND IS_ACTIVE = 1
+        AND LEASE_USER = 'SE'
+        AND USER_TYPE = 'R-U'
+    )
 GROUP by MODE_TYPE
 ORDER BY TOTAL_NUMBER DESC";
 $monthlySQL = @oci_parse($objConnect, $monthSQL);
@@ -15,6 +23,14 @@ $apaxChartData = [];
 $salesSQL      = "SELECT PRODUCT_TYPE,count(PRODUCT_TYPE)  TOTAL_NUMBER
 FROM SAL_LEADS_GEN
 WHERE PRODUCT_TYPE NOT IN'MFTBC'
+AND ENTRY_BY IN
+(SELECT RML_ID
+    FROM RML_COLL_APPS_USER
+    WHERE  ACCESS_APP = 'RML_SAL'
+    AND IS_ACTIVE = 1
+    AND LEASE_USER = 'SE'
+    AND USER_TYPE = 'R-U'
+)
 GROUP BY  PRODUCT_TYPE
 ORDER by TOTAL_NUMBER DESC";
 $salesSQL      = @oci_parse($objConnect, $salesSQL);

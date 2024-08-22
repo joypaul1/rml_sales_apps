@@ -2,7 +2,7 @@
 define("HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-define("DB_NAME", "rangs_sales_rml");
+define("DB_NAME", "rangs_resales_rml");
 $conn = mysqli_connect(HOST, DB_USER, DB_PASS, DB_NAME);
 
 /* check connection */

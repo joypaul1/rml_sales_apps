@@ -162,7 +162,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                             (SELECT  A.INTERESTED_MODEL,
                                                 (SELECT MAX(SS.PH_ID) FROM SAL_ZH_SETUP SS WHERE SS.ZH_ID=SAL_MM_ZH_ID AND SS.BRAND_NAME='$v_user_tag')PH_ID
                                                 FROM SAL_LEADS_GEN A, RML_COLL_APPS_USER B
-                                                WHERE A.ENTRY_BY = B.RML_ID 
+                                                WHERE A.ENTRY_BY = B.RML_ID
+                                                
                                                 AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
                                                 AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
                                                 --AND B.USER_FOR='$v_user_tag'
