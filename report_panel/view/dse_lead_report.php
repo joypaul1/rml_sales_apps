@@ -122,6 +122,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <th>
                                             <center>Entry Date</center>
                                         </th>
+										 <th>
+                                            <center>Entry Time</center>
+                                        </th>
                                         <th>
                                             <center>Method</center>
                                         </th>
@@ -196,7 +199,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 CONTACT_MODE,
                                                 MODE_TYPE,
                                                 USES_SEGMENT,
-                                                TO_CHAR(ENTRY_DATE,'dd/mm/yyyy HH24:MI:SS AM') ENTRY_DATE,
+                                                TO_DATE(ENTRY_DATE,'dd/mm/YYYY') ENTRY_DATE,
+												 TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
                                                 FOLLOW_UP_METHOD,
                                                 PSBL_PURCHASES_DATE,
                                                 aa.UPAZELA_NAME,
@@ -234,7 +238,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     VISIT_DATE,
                                                     INTEREST_METHOD,
                                                     CUST_TYPE,
-													 TO_CHAR(ENTRY_DATE,'dd/mm/yyyy HH24:MI:SS AM') ENTRY_DATE,
+													TO_DATE(ENTRY_DATE,'dd/mm/YYYY') ENTRY_DATE,
+													 TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
                                                     SOURCE_OF_ENQ,
                                                     aa.UPAZELA_NAME,
                                                     CONTACT_MODE,MODE_TYPE,USES_SEGMENT,
@@ -275,6 +280,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <td><?php echo $row['UPAZELA_NAME']; ?></td>
                                                 <td><?php echo $row['AREA_ZONE']; ?></td>
                                                 <td><?php echo $row['ENTRY_DATE']; ?></td>
+                                                <td><?php echo $row['ENTRY_TIME']; ?></td>
                                                 <td><?php echo $row['INTEREST_METHOD']; ?></td>
                                                 <td><?php echo $row['CONTACT_MODE']; ?></td>
                                                 <td><?php echo $row['SOURCE_OF_ENQ']; ?></td>
