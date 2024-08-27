@@ -2,7 +2,7 @@
 <html lang="en" class="color-sidebar sidebarcolor4  headercolor8">
 
 <head>
-    <title>SALES-APPS | RML</title>
+    <title>RESALES-APPS | RML</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
