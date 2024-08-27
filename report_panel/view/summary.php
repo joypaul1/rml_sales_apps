@@ -1,5 +1,5 @@
 <?php
-include_once ('../../_helper/2step_com_conn.php');
+include_once('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -21,19 +21,18 @@ include_once ('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <div class="form-group">
                                         <label for="title">Select Brand:</label>
-                                        <select required name="product_brand" id="product_brand" class="form-control" data-live-search="true">
+                                        <select required name="product_brand" id="product_brand" class="form-control"
+                                            data-live-search="true">
                                             <?php
                                             if ($emp_session_brand == "MM") {
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            }
-                                            elseif ($emp_session_brand == "EICHER") {
+                                            } elseif ($emp_session_brand == "EICHER") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');
-                                            }
-                                            elseif ($emp_session_brand == "ALL") {
+                                            } elseif ($emp_session_brand == "ALL") {
                                                 renderOption('Eicher', 'Eicher');
                                                 renderOption('Mahindra', 'Mahindra');
                                                 renderOption('Dongfeng', 'DONGFENG');
@@ -83,7 +82,7 @@ include_once ('../../_helper/2step_com_conn.php');
                     <?php
                     if (isset($_POST['start_date'])) {
                         $V_INTERESTED_BRAND = $_REQUEST['product_brand'];
-                        $v_user_tag         = '';
+                        $v_user_tag = '';
                         if ($V_INTERESTED_BRAND == "Eicher")
                             $v_user_tag = "EICHER";
                         else if ($V_INTERESTED_BRAND == "Mahindra")
@@ -92,8 +91,8 @@ include_once ('../../_helper/2step_com_conn.php');
                             $v_user_tag = "DONGFENG";
 
                         $v_product_type = $_REQUEST['product_type'];
-                        $v_start_date   = date("d/m/Y", strtotime($_REQUEST['start_date']));
-                        $v_end_date     = date("d/m/Y", strtotime($_REQUEST['end_date']));
+                        $v_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
+                        $v_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
                         ?>
 
 
@@ -145,28 +144,34 @@ include_once ('../../_helper/2step_com_conn.php');
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $strSQL = oci_parse(
+                                        $strSQL = @oci_parse(
                                             $objConnect,
                                             "SELECT INTERESTED_MODEL,
                                             PH_ID RML_ID,
-                                            RML_COLL_ID_TO_NAME(PH_ID)  EMP_NAME,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','WIN',INTERESTED_MODEL) AS  WIN,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','LOST',INTERESTED_MODEL) AS  LOST,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS
+                                            RML_COLL_ID_TO_NAME_RESALE(PH_ID)  EMP_NAME,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
+                                            RESAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','WIN',INTERESTED_MODEL) AS  WIN,
+                                            RESAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','LOST',INTERESTED_MODEL) AS  LOST,
+                                            RESAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                            RESAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS
                                             FROM
                                             (SELECT  A.INTERESTED_MODEL,
                                                 (SELECT MAX(SS.PH_ID) FROM SAL_ZH_SETUP SS WHERE SS.ZH_ID=SAL_MM_ZH_ID AND SS.BRAND_NAME='$v_user_tag')PH_ID
                                                 FROM SAL_LEADS_GEN A, RML_COLL_APPS_USER B
-                                                WHERE A.ENTRY_BY = B.RML_ID
-                                                
+                                                WHERE A.ENTRY_BY IN
+                                                (SELECT RML_ID
+                                                    FROM RML_COLL_APPS_USER
+                                                    WHERE  ACCESS_APP = 'RML_SAL'
+                                                    AND IS_ACTIVE = 1
+                                                    AND LEASE_USER = 'SE'
+                                                    AND USER_TYPE = 'R-U'
+                                                )
+                                                AND A.ENTRY_BY = B.RML_ID
                                                 AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
                                                 AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-                                                --AND B.USER_FOR='$v_user_tag'
                                                 AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy') AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
                                                 GROUP BY INTERESTED_MODEL,SAL_MM_ZH_ID
                                                 )
@@ -174,25 +179,25 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 ORDER BY RML_ID"
                                         );
 
-                                        oci_execute($strSQL);
-                                        $number   = 0;
+                                        @oci_execute($strSQL);
+                                        $number = 0;
                                         $v_RML_ID = 0;
 
-                                        $V_HOT             = 0;
-                                        $V_WORM            = 0;
-                                        $V_COLD            = 0;
-                                        $V_NI              = 0;
-                                        $V_WIN             = 0;
-                                        $V_LOST            = 0;
+                                        $V_HOT = 0;
+                                        $V_WORM = 0;
+                                        $V_COLD = 0;
+                                        $V_NI = 0;
+                                        $V_WIN = 0;
+                                        $V_LOST = 0;
                                         $V_TODAY_FOLLOW_UP = 0;
-                                        $V_FOLLOW_UP_MISS  = 0;
+                                        $V_FOLLOW_UP_MISS = 0;
 
 
                                         $IS_MATCH = 0;
-                                        $IS_M     = 0;
+                                        $IS_M = 0;
 
 
-                                        while ($row = oci_fetch_assoc($strSQL)) {
+                                        while ($row = @oci_fetch_assoc($strSQL)) {
                                             $number++;
                                             if ($IS_M == 0) {
                                                 $IS_MATCH = $row['RML_ID'];
@@ -202,7 +207,7 @@ include_once ('../../_helper/2step_com_conn.php');
 
                                             if ($IS_M >= 1 && $IS_MATCH != $row['RML_ID']) {
                                                 $IS_MATCH = $row['RML_ID'];
-                                                $IS_M     = 0;
+                                                $IS_M = 0;
 
                                                 ?>
                                                 <tr class="p-3 mb-2 bg-success text-white">
@@ -219,14 +224,14 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     <td align="center"><?php echo $V_FOLLOW_UP_MISS; ?></td>
                                                 </tr>
                                                 <?php
-                                                $V_HOT             = 0;
-                                                $V_WORM            = 0;
-                                                $V_COLD            = 0;
-                                                $V_NI              = 0;
-                                                $V_WIN             = 0;
-                                                $V_LOST            = 0;
+                                                $V_HOT = 0;
+                                                $V_WORM = 0;
+                                                $V_COLD = 0;
+                                                $V_NI = 0;
+                                                $V_WIN = 0;
+                                                $V_LOST = 0;
                                                 $V_TODAY_FOLLOW_UP = 0;
-                                                $V_FOLLOW_UP_MISS  = 0;
+                                                $V_FOLLOW_UP_MISS = 0;
                                             }
                                             ?>
                                             <tr>
@@ -236,8 +241,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     <td class="noborder"></td>
 
                                                     <?php
-                                                }
-                                                else {
+                                                } else {
                                                     ?>
                                                     <td align="center">
                                                         <a target="_blank"
@@ -267,9 +271,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 $V_WIN = $V_WIN + $row['WIN']; ?></td>
                                                 <td align="center"><?php echo $row['LOST'];
                                                 $V_LOST = $V_LOST + $row['LOST']; ?></td>
-                                                <td align="center"><?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?></td>
+                                                <td align="center">
+                                                    <?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?>
+                                                </td>
                                                 <td align="center"><?php echo $row['TODAY_FOLLOW_UP'];
-                                                $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
+                                                $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?>
+                                                </td>
                                                 <td align="center"><?php echo $row['FOLLOW_UP_MISS'];
                                                 $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
 
@@ -340,44 +347,76 @@ include_once ('../../_helper/2step_com_conn.php');
 
 
                                         <?php
-                                        $strSQLZone = oci_parse(
-                                            $objConnect,
-                                            "SELECT
+                                        $SQL = "SELECT
                                             INTERESTED_MODEL,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
+                                            RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
+                                            RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
+                                            RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
+                                            RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
+                                            RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                            RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
                                             COUNT (INTERESTED_MODEL) MODEL_COUNT
                                             FROM SAL_LEADS_GEN a, RML_COLL_APPS_USER b
                                             WHERE   A.ENTRY_BY = b.RML_ID
-                                                    AND B.USER_FOR='$v_user_tag'
-                                                    AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
-                                                    AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-                                                    AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
-                                                    AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
-                                            GROUP BY INTERESTED_MODEL"
-                                        );
-
-
-                                        oci_execute($strSQLZone);
+                                            AND A.ENTRY_BY IN (SELECT RML_ID
+                                                FROM RML_COLL_APPS_USER
+                                                WHERE  ACCESS_APP = 'RML_SAL'
+                                                AND IS_ACTIVE = 1
+                                                AND LEASE_USER = 'SE'
+                                                AND USER_TYPE = 'R-U'
+                                            )
+                                            AND B.USER_FOR='$v_user_tag'
+                                            AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
+                                            AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
+                                            AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
+                                            AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
+                                            GROUP BY INTERESTED_MODEL";
+                                            echo  $SQL;
+                                        $strSQLZone = @oci_parse($objConnect,$SQL);
+                                        // echo "SELECT
+                                        //     INTERESTED_MODEL,
+                                        //     RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
+                                        //     RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
+                                        //     RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
+                                        //     RESAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
+                                        //     RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
+                                        //     RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
+                                        //     RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
+                                        //     RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                        //     RESAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
+                                        //     COUNT (INTERESTED_MODEL) MODEL_COUNT
+                                        //     FROM SAL_LEADS_GEN a, RML_COLL_APPS_USER b
+                                        //     WHERE   A.ENTRY_BY = b.RML_ID
+                                        //     AND A.ENTRY_BY IN (SELECT RML_ID
+                                        //         FROM RML_COLL_APPS_USER
+                                        //         WHERE  ACCESS_APP = 'RML_SAL'
+                                        //         AND IS_ACTIVE = 1
+                                        //         AND LEASE_USER = 'SE'
+                                        //         AND USER_TYPE = 'R-U'
+                                        //     )
+                                        //     AND B.USER_FOR='$v_user_tag'
+                                        //     AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
+                                        //     AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
+                                        //     AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
+                                        //     AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
+                                        //     GROUP BY INTERESTED_MODEL";
+                                    
+                                        @oci_execute($strSQLZone);
                                         $number = 0;
 
-                                        $V_HOT             = 0;
-                                        $V_WORM            = 0;
-                                        $V_COLD            = 0;
-                                        $V_NI              = 0;
-                                        $V_WIN             = 0;
-                                        $V_LOST            = 0;
+                                        $V_HOT = 0;
+                                        $V_WORM = 0;
+                                        $V_COLD = 0;
+                                        $V_NI = 0;
+                                        $V_WIN = 0;
+                                        $V_LOST = 0;
                                         $V_TODAY_FOLLOW_UP = 0;
-                                        $V_FOLLOW_UP_MISS  = 0;
+                                        $V_FOLLOW_UP_MISS = 0;
 
-                                        while ($row = oci_fetch_assoc($strSQLZone)) {
+                                        while ($row = @oci_fetch_assoc($strSQLZone)) {
                                             $number++;
                                             ?>
                                             <tr>
@@ -394,9 +433,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 $V_WIN = $V_WIN + $row['WIN']; ?></td>
                                                 <td align="center"><?php echo $row['LOST'];
                                                 $V_LOST = $V_LOST + $row['LOST']; ?></td>
-                                                <td align="center"><?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?></td>
+                                                <td align="center">
+                                                    <?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?>
+                                                </td>
                                                 <td align="center"><?php echo $row['TODAY_FOLLOW_UP'];
-                                                $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
+                                                $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?>
+                                                </td>
                                                 <td align="center"><?php echo $row['FOLLOW_UP_MISS'];
                                                 $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
                                             </tr>
@@ -433,8 +475,8 @@ include_once ('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once ('../../_includes/footer_info.php');
-include_once ('../../_includes/footer.php');
+include_once('../../_includes/footer_info.php');
+include_once('../../_includes/footer.php');
 ?>
 <script>
     document.addEventListener("DOMContentLoaded", function () {

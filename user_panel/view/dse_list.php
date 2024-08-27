@@ -71,11 +71,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 EMP_NAME,
                                                 RML_ID,
                                                 AREA_ZONE,
-                                                LEASE_USER,SAL_MM_ZH_ID,
+                                                LEASE_USER,
+                                                SAL_MM_ZH_ID,
                                                 ( SELECT(SELECT RML_ID
-                                                        FROM RML_HR_APPS_USER
-                                                            WHERE ID = RML_HR_APPS_USER_ID
-                                                        )
+                                                    FROM RML_HR_APPS_USER
+                                                        WHERE ID = RML_HR_APPS_USER_ID
+                                                )
                                                 FROM HR_EMP_APPS_ACCESS
                                                 WHERE APPS_NAME = 'RML_SAL'
                                                 AND USE_ID = RML_ID
@@ -95,6 +96,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 ) HR_USER_COLL
                                             FROM RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
+                                                AND USER_TYPE ='R-U'
                                                 AND RML_ID='$sall_emp_id'"
                                             );
                                             // and USER_FOR='$emp_session_brand'
@@ -188,7 +190,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 FROM RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
                                                 and IS_ACTIVE=1
-                                               
+                                                AND USER_TYPE ='R-U'
                                                 and LEASE_USER='SE'
                                                 order by AREA_ZONE"
                                             );

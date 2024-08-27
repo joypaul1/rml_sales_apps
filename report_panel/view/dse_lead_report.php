@@ -1,5 +1,5 @@
 <?php
-include_once ('../../_helper/2step_com_conn.php');
+include_once('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -25,16 +25,18 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <option value="ALL">ALL</option>
                                         <?php
 
-                                        $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER         
-													  where ACCESS_APP= 'RML_SAL'    
-													  and IS_ACTIVE=1     
-													  and LEASE_USER='SE'   
-													  order by  EMP_NAME ");
+                                        $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER
+													    where ACCESS_APP= 'RML_SAL'
+													    and IS_ACTIVE=1
+													    and LEASE_USER='SE'
+                                                        AND USER_TYPE ='R-U'
+													    order by  EMP_NAME ");
                                         oci_execute($strSQL);
                                         while ($row = oci_fetch_assoc($strSQL)) {
                                             ?>
 
-                                            <option value="<?php echo $row['RML_ID']; ?>"><?php echo $row['EMP_NAME']; ?></option>
+                                            <option value="<?php echo $row['RML_ID']; ?>"><?php echo $row['EMP_NAME']; ?>
+                                            </option>
                                             <?php
                                         }
                                         ?>
@@ -86,7 +88,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <th>
                                             <center>DSE Name</center>
                                         </th>
-										<th>
+                                        <th>
                                             <center>DSE ID</center>
                                         </th>
                                         <th>
@@ -101,7 +103,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <th>
                                             <center>Customer Mobile</center>
                                         </th>
-										 <th>
+                                        <th>
                                             <center>Customer Type</center>
                                         </th>
                                         <th>
@@ -122,7 +124,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <th>
                                             <center>Entry Date</center>
                                         </th>
-										 <th>
+                                        <th>
                                             <center>Entry Time</center>
                                         </th>
                                         <th>
@@ -158,13 +160,13 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <th>
                                             <center>Brand</center>
                                         </th>
-										<th>
+                                        <th>
                                             <center>Lat</center>
                                         </th>
-										<th>
+                                        <th>
                                             <center>Lang</center>
                                         </th>
-										<th>
+                                        <th>
                                             <center>Lead ID</center>
                                         </th>
                                     </tr>
@@ -175,10 +177,10 @@ include_once ('../../_helper/2step_com_conn.php');
                                     <?php
                                     if (isset($_POST['emp_id'])) {
 
-                                        $emp_id          = $_REQUEST['emp_id'];
-                                        $lead_mode       = $_REQUEST['lead_mode'];
+                                        $emp_id = $_REQUEST['emp_id'];
+                                        $lead_mode = $_REQUEST['lead_mode'];
                                         $attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
-                                        $attn_end_date   = date("d/m/Y", strtotime($_REQUEST['end_date']));
+                                        $attn_end_date = date("d/m/Y", strtotime($_REQUEST['end_date']));
                                         if ($emp_id == "ALL") {
                                             $strSQL = oci_parse(
                                                 $objConnect,
@@ -187,7 +189,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 aa.ZONE_NAME,
                                                 bb.EMP_NAME,
                                                 bb.AREA_ZONE,
-                                                CUST_NAME,APPLICATION_TYPE,
+                                                CUST_NAME,
+                                                APPLICATION_TYPE,
                                                 INTERESTED_MODEL,
                                                 CUST_MOBL_1,
                                                 SALES_POTENTIAL,
@@ -200,7 +203,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 MODE_TYPE,
                                                 USES_SEGMENT,
                                                 TO_DATE(ENTRY_DATE,'dd/mm/YYYY') ENTRY_DATE,
-												 TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
+												TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
                                                 FOLLOW_UP_METHOD,
                                                 PSBL_PURCHASES_DATE,
                                                 aa.UPAZELA_NAME,
@@ -211,13 +214,13 @@ include_once ('../../_helper/2step_com_conn.php');
 												(select uu.EMP_NAME from RML_COLL_APPS_USER uu where uu.RML_ID=bb.SAL_MM_ZH_ID) ZH_NAME,
                                                 (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
                                                 aa.INTERESTED_BRAND,aa.LAT,aa.LANG
-                                        FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
-                                        where aa.ENTRY_BY=bb.RML_ID
-                                        and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
-                                        and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
+                                            FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
+                                            where aa.ENTRY_BY=bb.RML_ID
+                                            AND bb.USER_TYPE ='R-U' AND bb.IS_ACTIVE = 1
+                                            and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
+                                            and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
                                             );
-                                        }
-                                        else {
+                                        } else {
                                             $strSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT aa.ID,aa.ENTRY_BY,aa.CUST_TYPE,
@@ -267,9 +270,9 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <td><?php echo $number; ?></td>
                                                 <td><?php echo $row['EMP_NAME']; ?></td>
                                                 <td><?php echo $row['ENTRY_BY']; ?></td>
-                                                <td><?php 
-                                                         echo $row['ZH_NAME'].'['.$row['ZH'].']';
-                                                          ?></td>
+                                                <td><?php
+                                                echo $row['ZH_NAME'] . '[' . $row['ZH'] . ']';
+                                                ?></td>
                                                 <td><?php echo $row['CUST_NAME']; ?></td>
                                                 <td><?php echo $row['INTERESTED_MODEL']; ?></td>
                                                 <td align="center"><?php echo $row['CUST_MOBL_1']; ?></td>
@@ -314,7 +317,8 @@ include_once ('../../_helper/2step_com_conn.php');
 
                             </table>
                             <div class='text-end'>
-                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
+                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)"
+                                    style="margin-left:5px;">Export to Excel</a>
                             </div>
                         </div>
 
@@ -329,8 +333,8 @@ include_once ('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once ('../../_includes/footer_info.php');
-include_once ('../../_includes/footer.php');
+include_once('../../_includes/footer_info.php');
+include_once('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

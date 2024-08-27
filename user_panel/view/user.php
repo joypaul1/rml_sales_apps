@@ -1,5 +1,5 @@
 <?php
-include_once ('../../_helper/2step_com_conn.php');
+include_once('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -16,7 +16,8 @@ include_once ('../../_helper/2step_com_conn.php');
                             Apps User List
                         </div>
                         <div class="card-title">
-                            <a href="user_add.php" class="btn btn-sm btn-primary">Create User <i class="flaticon-381-add-2"></i></a>
+                            <a href="user_add.php" class="btn btn-sm btn-primary">Create User <i
+                                    class="flaticon-381-add-2"></i></a>
                         </div>
 
                     </div>
@@ -78,7 +79,7 @@ include_once ('../../_helper/2step_com_conn.php');
 
                                         <?php
                                         if (isset($_POST['form_user_role'])) {
-                                            $sall_emp_id    = $_REQUEST['sall_emp_id'];
+                                            $sall_emp_id = $_REQUEST['sall_emp_id'];
                                             $form_user_role = $_REQUEST['form_user_role'];
 
                                             $strSQL = oci_parse(
@@ -91,6 +92,7 @@ include_once ('../../_helper/2step_com_conn.php');
 															from RML_COLL_APPS_USER
 															where ACCESS_APP='RML_SAL'
 															and IS_ACTIVE=1
+															and USER_TYPE= 'R-U'
 															AND ('$sall_emp_id' is null OR RML_ID='$sall_emp_id')
 															and ('$form_user_role' is null or LEASE_USER='$form_user_role')"
                                             );
@@ -108,14 +110,20 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     <td><?php echo $row['LEASE_USER']; ?></td>
 
                                                     <td class="d-flex gap-3">
-                                                        <a target="_blank" class='mb-2' href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
-                                                                class="btn btn-sm btn-warning">Info. Update <i class="flaticon-381-edit"></i></button>
+                                                        <a target="_blank" class='mb-2'
+                                                            href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
+                                                                class="btn btn-sm btn-warning">Info. Update <i
+                                                                    class="flaticon-381-edit"></i></button>
                                                         </a>
-                                                        <a target="_blank" class='mb-2' href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
-                                                                class="btn btn-sm btn-primary">Dis. Ass. <i class="flaticon-381-edit"></i></button>
+                                                        <a target="_blank" class='mb-2'
+                                                            href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
+                                                                class="btn btn-sm btn-primary">Dis. Ass. <i
+                                                                    class="flaticon-381-edit"></i></button>
                                                         </a>
-                                                        <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
-                                                            <button class="btn btn-sm btn-info">Pro. Info. <i class="flaticon-381-edit"></i></button>
+                                                        <a target="_blank"
+                                                            href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
+                                                            <button class="btn btn-sm btn-info">Pro. Info. <i
+                                                                    class="flaticon-381-edit"></i></button>
 
                                                         </a>
                                                     </td>
@@ -123,8 +131,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 </tr>
                                                 <?php
                                             }
-                                        }
-                                        else {
+                                        } else {
                                             $allDataSQL = @oci_parse(
                                                 $objConnect,
                                                 "SELECT ID,
@@ -134,6 +141,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 LEASE_USER,SAL_MM_ZH_ID
                                                 from RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
+                                                and USER_TYPE= 'R-U'
                                                 and IS_ACTIVE=1
                                                 
                                                 order by AREA_ZONE"
@@ -152,14 +160,20 @@ include_once ('../../_helper/2step_com_conn.php');
                                                         <td><?php echo $row['LEASE_USER']; ?></td>
 
                                                         <td class="d-flex gap-3">
-                                                            <a target="_blank" class='mb-2' href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
-                                                                    class="btn btn-sm btn-warning">Info. Update <i class="flaticon-381-edit"></i></button>
+                                                            <a target="_blank" class='mb-2'
+                                                                href="user_edit.php?user_id=<?php echo $row['ID'] ?>"><button
+                                                                    class="btn btn-sm btn-warning">Info. Update <i
+                                                                        class="flaticon-381-edit"></i></button>
                                                             </a>
-                                                            <a target="_blank" class='mb-2' href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
-                                                                    class="btn btn-sm btn-primary">Dis. Ass. <i class="flaticon-381-edit"></i></button>
+                                                            <a target="_blank" class='mb-2'
+                                                                href="user_district.php?user_id=<?php echo $row['RML_ID'] ?>"><button
+                                                                    class="btn btn-sm btn-primary">Dis. Ass. <i
+                                                                        class="flaticon-381-edit"></i></button>
                                                             </a>
-                                                            <a target="_blank" href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
-                                                                <button class="btn btn-sm btn-info">Pro. Info. <i class="flaticon-381-edit"></i></button>
+                                                            <a target="_blank"
+                                                                href="user_setup.php?user_id=<?php echo $row['RML_ID'] ?>">
+                                                                <button class="btn btn-sm btn-info">Pro. Info. <i
+                                                                        class="flaticon-381-edit"></i></button>
 
                                                             </a>
                                                         </td>
@@ -175,7 +189,8 @@ include_once ('../../_helper/2step_com_conn.php');
 
                             </div>
                             <div class='text-end'>
-                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
+                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)"
+                                    style="margin-left:5px;">Export to Excel</a>
                             </div>
 
                         </div>
@@ -191,8 +206,8 @@ include_once ('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once ('../../_includes/footer_info.php');
-include_once ('../../_includes/footer.php');
+include_once('../../_includes/footer_info.php');
+include_once('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

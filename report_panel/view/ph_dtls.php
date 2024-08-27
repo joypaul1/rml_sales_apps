@@ -27,7 +27,7 @@ if ($product_band == "Eicher") {
                         <div class="md-form">
                             <div class=" d-flex flex-column flex-md-row">
                                 <table class="small table-bordered">
-                                    <thead >
+                                    <thead>
                                         <tr>
                                             <th>
                                                 <center>ZH Wise Inquiry Summary</center>
@@ -72,34 +72,34 @@ if ($product_band == "Eicher") {
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $strSQL  = oci_parse(
+                                        $strSQL = oci_parse(
                                             $objConnect,
-                                            "SELECT 
-								RML_COLL_ID_TO_NAME(SAL_MM_ZH_ID) EMP_NAME,
-								SAL_MM_ZH_ID RML_ID,
-								INTERESTED_MODEL,
-								SUM(MODEL_COUNT) MODEL_COUNT,
-								SAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Hot',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
-								SAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Warm',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
-								SAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Cold',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
-								SAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
-								SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','WIN',INTERESTED_MODEL) AS  WIN,
-								SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','LOST',INTERESTED_MODEL) AS  LOST,
-								SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
-								SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS					
-										 FROM
-										 (
-										  SELECT
-												 b.SAL_MM_ZH_ID,
-												 INTERESTED_MODEL,
-												 COUNT (INTERESTED_MODEL) MODEL_COUNT
+                                            "SELECT
+                                                RML_COLL_ID_TO_NAME(SAL_MM_ZH_ID) EMP_NAME,
+                                                SAL_MM_ZH_ID RML_ID,
+                                                INTERESTED_MODEL,
+                                                SUM(MODEL_COUNT) MODEL_COUNT,
+                                                RESAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Hot',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
+                                                RESAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Warm',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
+                                                RESAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Cold',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
+                                                RESAL_LEADS_COUNT_FINAL_UPDATED (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
+                                                SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','WIN',INTERESTED_MODEL) AS  WIN,
+                                                SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','LOST',INTERESTED_MODEL) AS  LOST,
+                                                SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                                SAL_LEADS_COUNT_FINAL_2023 (SAL_MM_ZH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'ZH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS					
+										FROM
+										(
+										    SELECT
+                                            b.SAL_MM_ZH_ID,
+                                            INTERESTED_MODEL,
+                                            COUNT (INTERESTED_MODEL) MODEL_COUNT
 											FROM SAL_LEADS_GEN a, RML_COLL_APPS_USER b
-										   WHERE A.ENTRY_BY = b.RML_ID 
-												  AND b.SAL_MM_ZH_ID IN  (SELECT ZH_ID FROM SAL_ZH_SETUP WHERE PH_ID = '$v_want_id' and BRAND_NAME='$v_user_tag')
-												  AND a.INTERESTED_BRAND = '$product_band'
-												  AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-												 AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
-																			AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
+                                        WHERE A.ENTRY_BY = b.RML_ID
+                                                AND b.SAL_MM_ZH_ID IN  (SELECT ZH_ID FROM SAL_ZH_SETUP WHERE PH_ID = '$v_want_id' and BRAND_NAME='$v_user_tag')
+                                                AND a.INTERESTED_BRAND = '$product_band'
+                                                AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
+                                                AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
+												AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
 										GROUP BY INTERESTED_MODEL, b.RML_ID,b.SAL_MM_ZH_ID
 										)
 										GROUP BY SAL_MM_ZH_ID,INTERESTED_MODEL
@@ -138,7 +138,7 @@ if ($product_band == "Eicher") {
                                                 $IS_MATCH = $row['RML_ID'];
                                                 $IS_M = 0;
 
-                                        ?>
+                                                ?>
                                                 <tr class="p-3 mb-2 bg-success text-white">
                                                     <td align="center"></td>
                                                     <td align="center">Total=</td>
@@ -152,7 +152,7 @@ if ($product_band == "Eicher") {
                                                     <td align="center"><?php echo $V_TODAY_FOLLOW_UP; ?></td>
                                                     <td align="center"><?php echo $V_FOLLOW_UP_MISS; ?></td>
                                                 </tr>
-                                            <?php
+                                                <?php
                                                 $V_HOT = 0;
                                                 $V_WORM = 0;
                                                 $V_COLD = 0;
@@ -166,21 +166,22 @@ if ($product_band == "Eicher") {
                                             <tr>
                                                 <?php
                                                 if ($row['RML_ID'] == $v_RML_ID) {
-                                                ?>
+                                                    ?>
                                                     <td class="noborder"></td>
 
-                                                <?php
+                                                    <?php
                                                 } else {
-                                                ?>
+                                                    ?>
                                                     <td align="center">
-                                                        <a target="_blank" href="dashboard_zh_dtls.php?want_id=<?php echo $row['RML_ID'] . '&start_date=' . $v_start_date . '&end_date=' . $v_end_date . '&brand=' . $product_band . '&product_type=' . $v_product_type ?>">
+                                                        <a target="_blank"
+                                                            href="dashboard_zh_dtls.php?want_id=<?php echo $row['RML_ID'] . '&start_date=' . $v_start_date . '&end_date=' . $v_end_date . '&brand=' . $product_band . '&product_type=' . $v_product_type ?>">
                                                             <?php echo $row['EMP_NAME'] . '-' . $row['RML_ID'];
                                                             $v_RML_ID = $row['RML_ID']; ?>
                                                         </a>
                                                     </td>
 
 
-                                                <?php
+                                                    <?php
                                                 }
                                                 ?>
 
@@ -190,25 +191,31 @@ if ($product_band == "Eicher") {
                                                     <?php echo $row['INTERESTED_MODEL']; ?>
                                                 </td>
                                                 <td align="center"><?php echo $row['HOT'];
-                                                                    $V_HOT = $V_HOT + $row['HOT']; ?></td>
+                                                $V_HOT = $V_HOT + $row['HOT']; ?></td>
                                                 <td align="center"><?php echo $row['WORM'];
-                                                                    $V_WORM = $V_WORM + $row['WORM']; ?></td>
+                                                $V_WORM = $V_WORM + $row['WORM']; ?></td>
                                                 <td align="center"><?php echo $row['COLD'];
-                                                                    $V_COLD = $V_COLD + $row['COLD']; ?></td>
+                                                $V_COLD = $V_COLD + $row['COLD']; ?></td>
                                                 <td align="center"><?php echo $row['NI'];
-                                                                    $V_NI = $V_NI + $row['NI']; ?></td>
+                                                $V_NI = $V_NI + $row['NI']; ?></td>
                                                 <td align="center"><?php echo $row['WIN'];
-                                                                    $V_WIN = $V_WIN + $row['WIN']; ?></td>
+                                                $V_WIN = $V_WIN + $row['WIN']; ?></td>
                                                 <td align="center"><?php echo $row['LOST'];
-                                                                    $V_LOST = $V_LOST + $row['LOST']; ?></td>
-                                                <td align="center"><?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?></td>
-                                                <td align="center"><?php echo $row['TODAY_FOLLOW_UP'];
-                                                                    $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
-                                                <td align="center"><?php echo $row['FOLLOW_UP_MISS'];
-                                                                    $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
+                                                $V_LOST = $V_LOST + $row['LOST']; ?></td>
+                                                <td align="center">
+                                                    <?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?>
+                                                </td>
+                                                <td align="center">
+                                                    <?php echo $row['TODAY_FOLLOW_UP'];
+                                                    $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?>
+                                                </td>
+                                                <td align="center">
+                                                    <?php echo $row['FOLLOW_UP_MISS'];
+                                                    $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?>
+                                                </td>
 
                                             </tr>
-                                        <?php
+                                            <?php
                                         }
                                         ?>
                                         <tr class="p-3 mb-2 bg-success text-white">
@@ -285,14 +292,14 @@ if ($product_band == "Eicher") {
 
 
                                         <?php
-                                        $strSQLZone  = oci_parse(
+                                        $strSQLZone = oci_parse(
                                             $objConnect,
                                             "SELECT 
 								INTERESTED_MODEL,
-								SAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Hot',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Warm',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Cold',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
-                                SAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
+								RESAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Hot',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
+                                RESAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Warm',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
+                                RESAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Cold',INTERESTED_MODEL,'$v_user_tag','$v_product_type') COLD,
+                                RESAL_LEADS_COUNT_FINAL_UPDATED('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
                                 SAL_LEADS_COUNT_FINAL_2023('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','WIN',INTERESTED_MODEL) WIN,
                                 SAL_LEADS_COUNT_FINAL_2023('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','LOST',INTERESTED_MODEL) LOST,
                                 SAL_LEADS_COUNT_FINAL_2023('$v_want_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'PH','LOST',INTERESTED_MODEL) LOST,
@@ -324,29 +331,35 @@ if ($product_band == "Eicher") {
 
                                         while ($row = oci_fetch_assoc($strSQLZone)) {
                                             $number++;
-                                        ?>
+                                            ?>
                                             <tr>
                                                 <td align="center"><?php echo $row['INTERESTED_MODEL']; ?></td>
                                                 <td align="center"><?php echo $row['HOT'];
-                                                                    $V_HOT = $V_HOT + $row['HOT']; ?></td>
+                                                $V_HOT = $V_HOT + $row['HOT']; ?></td>
                                                 <td align="center"><?php echo $row['WORM'];
-                                                                    $V_WORM = $V_WORM + $row['WORM']; ?></td>
+                                                $V_WORM = $V_WORM + $row['WORM']; ?></td>
                                                 <td align="center"><?php echo $row['COLD'];
-                                                                    $V_COLD = $V_COLD + $row['COLD']; ?></td>
+                                                $V_COLD = $V_COLD + $row['COLD']; ?></td>
                                                 <td align="center"><?php echo $row['NI'];
-                                                                    $V_NI = $V_NI + $row['NI']; ?></td>
+                                                $V_NI = $V_NI + $row['NI']; ?></td>
                                                 <td align="center"><?php echo $row['WIN'];
-                                                                    $V_WIN = $V_WIN + $row['WIN']; ?></td>
+                                                $V_WIN = $V_WIN + $row['WIN']; ?></td>
                                                 <td align="center"><?php echo $row['LOST'];
-                                                                    $V_LOST = $V_LOST + $row['LOST']; ?></td>
-                                                <td align="center"><?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?></td>
-                                                <td align="center"><?php echo $row['TODAY_FOLLOW_UP'];
-                                                                    $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?></td>
-                                                <td align="center"><?php echo $row['FOLLOW_UP_MISS'];
-                                                                    $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?></td>
+                                                $V_LOST = $V_LOST + $row['LOST']; ?></td>
+                                                <td align="center">
+                                                    <?php echo ($row['HOT'] + $row['WORM'] + $row['COLD'] + $row['NI']); ?>
+                                                </td>
+                                                <td align="center">
+                                                    <?php echo $row['TODAY_FOLLOW_UP'];
+                                                    $V_TODAY_FOLLOW_UP = $V_TODAY_FOLLOW_UP + $row['TODAY_FOLLOW_UP']; ?>
+                                                </td>
+                                                <td align="center">
+                                                    <?php echo $row['FOLLOW_UP_MISS'];
+                                                    $V_FOLLOW_UP_MISS = $V_FOLLOW_UP_MISS + $row['FOLLOW_UP_MISS']; ?>
+                                                </td>
 
                                             </tr>
-                                        <?php
+                                            <?php
 
                                         }
 

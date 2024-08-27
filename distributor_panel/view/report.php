@@ -1,5 +1,5 @@
 <?php
-include_once ('../../_helper/2step_com_conn.php');
+include_once('../../_helper/2step_com_conn.php');
 // if ($emp_sesssion_band == "EICHER") {
 //     $product_band = "Eicher";
 // }
@@ -23,7 +23,8 @@ include_once ('../../_helper/2step_com_conn.php');
                             <div class="row">
                                 <div class="col-sm-3">
                                     <label for="title">Select Application:</label>
-                                    <select name="application_id" id="application_id" class="form-control text-center" data-live-search="true">
+                                    <select name="application_id" id="application_id" class="form-control text-center"
+                                        data-live-search="true">
                                         <option selected value=""><-- --></option>
                                         <?php
 
@@ -40,13 +41,13 @@ include_once ('../../_helper/2step_com_conn.php');
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="title">Select District:</label>
-                                    <select name="district_name" id="district_name" class="form-control text-center" data-live-search="true">
+                                    <select name="district_name" id="district_name" class="form-control text-center"
+                                        data-live-search="true">
                                         <option selected value=""><----></option>
                                         <?php
-
-                                        $strSQL = @oci_parse($objConnect, "SELECT ID,DISTRICT_NAME FROM SALL_DISTRICT   WHERE IS_ACTIVE=1");
-                                        @oci_execute($strSQL);
-                                        while ($row = @oci_execute($strSQL)) {
+                                        $strSQL2 = @oci_parse($objConnect, "SELECT ID, DISTRICT_NAME FROM SALL_DISTRICT WHERE IS_ACTIVE = 1");
+                                        @oci_execute($strSQL2);
+                                        while ($row = @oci_fetch_assoc($strSQL2)) {
                                             ?>
                                             <option value="<?php echo $row['DISTRICT_NAME']; ?>" <?php echo (isset($_POST['district_name']) && $_POST['district_name'] == $row['DISTRICT_NAME']) ? 'selected="selected"' : ''; ?>>
                                                 <?php echo $row['DISTRICT_NAME']; ?>
@@ -58,16 +59,19 @@ include_once ('../../_helper/2step_com_conn.php');
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="title">Select Company:</label>
-                                    <select name="company_id" id="company_id" class="form-control text-center" data-live-search="true">
+                                    <select name="company_id" id="company_id" class="form-control text-center"
+                                        data-live-search="true">
                                         <option selected value=""><----></option>
                                         <?php
-
-                                        $strSQL = @oci_parse($objConnect,
-                                        "SELECT ID,COMPANY_NAME FROM SALL_COMPANY  WHERE IS_ACTIVE=1 ORDER BY COMPANY_NAME");
+                                        $strSQL = @oci_parse(
+                                            $objConnect,
+                                            "SELECT ID, COMPANY_NAME FROM SALL_COMPANY WHERE IS_ACTIVE = 1 ORDER BY COMPANY_NAME"
+                                        );
                                         @oci_execute($strSQL);
-                                        while ($row = @oci_execute($strSQL)) {
+                                        while ($row = @oci_fetch_assoc($strSQL)) {
                                             ?>
-                                            <option value="<?php echo $row['ID']; ?>" <?php echo (isset($_POST['company_id']) && $_POST['company_id'] == $row['ID']) ? 'selected="selected"' : ''; ?>><?php echo $row['COMPANY_NAME']; ?>
+                                            <option value="<?php echo $row['ID']; ?>" <?php echo (isset($_POST['company_id']) && $_POST['company_id'] == $row['ID']) ? 'selected="selected"' : ''; ?>>
+                                                <?php echo $row['COMPANY_NAME']; ?>
                                             </option>
                                             <?php
                                         }
@@ -78,7 +82,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                     <div class="form-group">
                                         <label for="title">Distributor Type:</label>
                                         <div id="department_id">
-                                            <select name="distributor_type" id="distributor_type" class="form-control text-center">
+                                            <select name="distributor_type" id="distributor_type"
+                                                class="form-control text-center">
                                                 <option selected value="">--</option>
                                                 <option value="Exclusive" <?php echo (isset($_POST['distributor_type']) && $_POST['distributor_type'] == 'Exclusive') ? 'selected="selected"' : ''; ?>>Exclusive</option>
                                                 <option value="Non Exclusive" <?php echo (isset($_POST['distributor_type']) && $_POST['distributor_type'] == 'Non Exclusive') ? 'selected="selected"' : ''; ?>>Non Exclusive
@@ -87,6 +92,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                         </div>
                                     </div>
                                 </div>
+
+
 
                             </div>
                             <div class="d-flex justify-content-end">
@@ -147,28 +154,31 @@ include_once ('../../_helper/2step_com_conn.php');
 
                                     if (isset($_POST['application_id'])) {
                                         $distributor_type = $_REQUEST['distributor_type'];
-                                        $company_id       = $_REQUEST['company_id'];
-                                        $application_id   = $_REQUEST['application_id'];
-                                        $district_name    = $_REQUEST['district_name'];
-                                        $strSQL = @oci_parse($objConnect,
-                                        "SELECT ID,
-										(select LABEL from SALL_ZONE_TREE where id=ZONE_ID) ZONE_NAME,
-										(select EMP_NAME from RML_COLL_APPS_USER where RML_ID=CREATED_BY) CREATED_BY,
-										(select AREA_ZONE from RML_COLL_APPS_USER where RML_ID=CREATED_BY) ZONE_NAME,
-										DISTRICT_NAME,
-										(select TITLE from SAL_APPLICATION where id=APPLICATION_ID) APPLICATION_NAME,
-										(select COMPANY_NAME from SALL_COMPANY where id=COMPANY_ID) COMPANY_NAME,
-										DISTRIBUTOR_NAME,
-										PROPRITOR_NAME,
-										PROPRITOR_PHONE,
-										DISTRIBUTOR_TYPE,
-										DISTRIBUTOR_ADDRESS
-                                        FROM SAL_DISTRIBUTOR_LIST
-                                        WHERE IS_ACTIVE=1
-                                        AND ('$distributor_type' is null OR DISTRIBUTOR_TYPE='$distributor_type')
-                                        AND ('$company_id' is null OR COMPANY_ID='$company_id')
-                                        AND ('$application_id' is null OR APPLICATION_ID='$application_id')
-                                        AND ('$district_name' is null OR DISTRICT_NAME='$district_name')");
+                                        $company_id = $_REQUEST['company_id'];
+                                        $application_id = $_REQUEST['application_id'];
+                                        $district_name = $_REQUEST['district_name'];
+                                        $strSQL = @oci_parse(
+                                            $objConnect,
+                                            "SELECT ID,
+                                            (select LABEL from SALL_ZONE_TREE where id=ZONE_ID) ZONE_NAME,
+                                            (select EMP_NAME from RML_COLL_APPS_USER where RML_ID=CREATED_BY) CREATED_BY,
+                                            (select AREA_ZONE from RML_COLL_APPS_USER where RML_ID=CREATED_BY) ZONE_NAME,
+                                            DISTRICT_NAME,
+                                            (select TITLE from SAL_APPLICATION where id=APPLICATION_ID) APPLICATION_NAME,
+                                            (select COMPANY_NAME from SALL_COMPANY where id=COMPANY_ID) COMPANY_NAME,
+                                            DISTRIBUTOR_NAME,
+                                            PROPRITOR_NAME,
+                                            PROPRITOR_PHONE,
+                                            DISTRIBUTOR_TYPE,
+                                            DISTRIBUTOR_ADDRESS
+                                            FROM SAL_DISTRIBUTOR_LIST
+                                            WHERE IS_ACTIVE=1
+                                            AND ('$distributor_type' is null OR DISTRIBUTOR_TYPE='$distributor_type')
+                                            AND ('$company_id' is null OR COMPANY_ID='$company_id')
+                                            AND ('$application_id' is null OR APPLICATION_ID='$application_id')
+                                            AND ('$district_name' is null OR DISTRICT_NAME='$district_name')
+                                            "
+                                        );
 
                                         @oci_execute($strSQL);
                                         $number = 0;
@@ -198,7 +208,8 @@ include_once ('../../_helper/2step_com_conn.php');
 
                             </table>
                             <div class='text-end'>
-                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
+                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)"
+                                    style="margin-left:5px;">Export to Excel</a>
                             </div>
                         </div>
 
@@ -213,8 +224,8 @@ include_once ('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once ('../../_includes/footer_info.php');
-include_once ('../../_includes/footer.php');
+include_once('../../_includes/footer_info.php');
+include_once('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {
