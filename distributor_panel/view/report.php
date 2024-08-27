@@ -157,9 +157,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         $company_id = $_REQUEST['company_id'];
                                         $application_id = $_REQUEST['application_id'];
                                         $district_name = $_REQUEST['district_name'];
-                                        $strSQL = @oci_parse(
-                                            $objConnect,
-                                            "SELECT ID,
+                                        $SQL = "SELECT ID,
                                             (select LABEL from SALL_ZONE_TREE where id=ZONE_ID) ZONE_NAME,
                                             (select EMP_NAME from RML_COLL_APPS_USER where RML_ID=CREATED_BY) CREATED_BY,
                                             (select AREA_ZONE from RML_COLL_APPS_USER where RML_ID=CREATED_BY) ZONE_NAME,
@@ -177,12 +175,16 @@ include_once('../../_helper/2step_com_conn.php');
                                             AND ('$company_id' is null OR COMPANY_ID='$company_id')
                                             AND ('$application_id' is null OR APPLICATION_ID='$application_id')
                                             AND ('$district_name' is null OR DISTRICT_NAME='$district_name')
-                                            "
+                                            ";
+                                            ECHO  $SQL ;
+                                        $strSQL = @oci_parse(
+                                            $objConnect,
+                                            $SQL
                                         );
 
                                         @oci_execute($strSQL);
                                         $number = 0;
-                                        while ($row = @oci_execute($strSQL)) {
+                                        while ($row = @oci_fetch_assoc($strSQL)) {
                                             $number++;
                                             ?>
                                             <tr>

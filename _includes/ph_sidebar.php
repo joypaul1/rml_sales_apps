@@ -26,7 +26,7 @@
                         <span class="nav-text">Lead Report Panel </span>
                     </a>
                     <ul aria-expanded="false" class="mm-collapse">
-                        <li><a href="<?php echo $basePath ?>/report_panel/view/summary.php">Report Summary</a></li>
+                        <!-- <li><a href="<?php echo $basePath ?>/report_panel/view/summary.php">Report Summary</a></li> -->
                         <li><a href="<?php echo $basePath ?>/report_panel/view/dse_lead_report.php">DSE Lead Report </a></li>
                     </ul>
                 </li>
