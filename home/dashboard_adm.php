@@ -13,7 +13,7 @@ $monthSQL   = "SELECT MODE_TYPE,
                         FROM RML_COLL_APPS_USER
                         WHERE  ACCESS_APP = 'RML_SAL'
                         AND IS_ACTIVE = 1
-                        AND LEASE_USER = 'SE'
+                        --AND LEASE_USER = 'SE'
                         AND USER_TYPE = 'R-U'
                     )
                     group by MODE_TYPE
@@ -26,7 +26,7 @@ $monthSQL   = "SELECT MODE_TYPE,
                         FROM RML_COLL_APPS_USER
                         WHERE  ACCESS_APP = 'RML_SAL'
                         AND IS_ACTIVE = 1
-                        AND LEASE_USER = 'SE'
+                        --AND LEASE_USER = 'SE'
                         AND USER_TYPE = 'R-U'
                     )
                     AND STATUS is not null
@@ -45,7 +45,7 @@ AND ENTRY_BY IN
         FROM RML_COLL_APPS_USER
         WHERE  ACCESS_APP = 'RML_SAL'
         AND IS_ACTIVE = 1
-        AND LEASE_USER = 'SE'
+        --AND LEASE_USER = 'SE'
         AND USER_TYPE = 'R-U'
     )
 GROUP BY  PRODUCT_TYPE

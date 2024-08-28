@@ -166,7 +166,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                     FROM RML_COLL_APPS_USER
                                                     WHERE  ACCESS_APP = 'RML_SAL'
                                                     AND IS_ACTIVE = 1
-                                                    AND LEASE_USER = 'SE'
+                                                    --AND LEASE_USER = 'SE'
                                                     AND USER_TYPE = 'R-U'
                                                 )
                                                 AND A.ENTRY_BY = B.RML_ID
@@ -365,7 +365,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                 FROM RML_COLL_APPS_USER
                                                 WHERE  ACCESS_APP = 'RML_SAL'
                                                 AND IS_ACTIVE = 1
-                                                AND LEASE_USER = 'SE'
+                                                --AND LEASE_USER = 'SE'
                                                 AND USER_TYPE = 'R-U'
                                             )
                                             AND B.USER_FOR='$v_user_tag'
@@ -394,7 +394,7 @@ include_once('../../_helper/2step_com_conn.php');
                                         //         FROM RML_COLL_APPS_USER
                                         //         WHERE  ACCESS_APP = 'RML_SAL'
                                         //         AND IS_ACTIVE = 1
-                                        //         AND LEASE_USER = 'SE'
+                                        //         --AND LEASE_USER = 'SE'
                                         //         AND USER_TYPE = 'R-U'
                                         //     )
                                         //     AND B.USER_FOR='$v_user_tag'

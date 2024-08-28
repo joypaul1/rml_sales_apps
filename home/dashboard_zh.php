@@ -10,7 +10,7 @@ $monthSQL   = "SELECT MODE_TYPE, COUNT(MODE_TYPE) TOTAL_NUMBER
 							FROM RML_COLL_APPS_USER
 							WHERE ACCESS_APP = 'RML_SAL'
 							AND IS_ACTIVE = 1
-							AND LEASE_USER = 'SE'
+							--AND LEASE_USER = 'SE'
 							AND SAL_MM_ZH_ID = '$emp_session_id'
 						)
 				GROUP BY MODE_TYPE
@@ -24,7 +24,7 @@ $monthSQL   = "SELECT MODE_TYPE, COUNT(MODE_TYPE) TOTAL_NUMBER
 							FROM RML_COLL_APPS_USER
 							WHERE  ACCESS_APP = 'RML_SAL'
 								AND IS_ACTIVE = 1
-								AND LEASE_USER = 'SE'
+								--AND LEASE_USER = 'SE'
 								AND SAL_MM_ZH_ID = '$emp_session_id'
 						)
 				GROUP BY STATUS 
@@ -44,7 +44,7 @@ $salesSQL      =
 							 FROM RML_COLL_APPS_USER
 							WHERE     ACCESS_APP = 'RML_SAL'
 								  AND IS_ACTIVE = 1
-								  AND LEASE_USER = 'SE'
+								  --AND LEASE_USER = 'SE'
 								  AND SAL_MM_ZH_ID = '$emp_session_id'
 						)
 				GROUP BY UPAZELA_NAME";
