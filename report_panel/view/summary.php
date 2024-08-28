@@ -339,9 +339,7 @@ include_once ('../../_helper/2step_com_conn.php');
 
 
                                         <?php
-                                        $strSQLZone = oci_parse(
-                                            $objConnect,
-                                            "SELECT
+                                        $strSQL =  "SELECT
                                             INTERESTED_MODEL,
                                             SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') HOT,
                                             SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') WORM,
@@ -360,8 +358,10 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
                                                     AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
                                                     AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
-                                            GROUP BY INTERESTED_MODEL"
-                                        );
+                                            GROUP BY INTERESTED_MODEL";
+                                            // ECHO $strSQL;
+                                        $strSQLZone = oci_parse(
+                                            $objConnect,$strSQL);
 
 
                                         oci_execute($strSQLZone);

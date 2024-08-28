@@ -24,11 +24,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <option selected value="">Select Executive</option>
                                         <!-- <option value="ALL">ALL</option> -->
                                         <?php
-                                        $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER         
-													  where ACCESS_APP= 'RML_SAL'    
-													  and IS_ACTIVE=1     
-													  and LEASE_USER='SE'   
-													  order by  EMP_NAME ");
+                                        $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER
+                                                    where ACCESS_APP= 'RML_SAL'
+                                                    and IS_ACTIVE=1
+                                                    and LEASE_USER='SE'
+                                                    AND USER_TYPE IS NULL
+                                                    order by  EMP_NAME");
                                         oci_execute($strSQL);
                                         while ($row = oci_fetch_assoc($strSQL)) {
                                             ?>

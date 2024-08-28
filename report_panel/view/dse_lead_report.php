@@ -27,7 +27,8 @@ include_once ('../../_helper/2step_com_conn.php');
 
                                         $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER         
 													  where ACCESS_APP= 'RML_SAL'    
-													  and IS_ACTIVE=1     
+													  and IS_ACTIVE=1
+                                                      AND USER_TYPE IS NULL
 													  and LEASE_USER='SE'   
 													  order by  EMP_NAME ");
                                         oci_execute($strSQL);
@@ -184,7 +185,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 aa.ZONE_NAME,
                                                 bb.EMP_NAME,
                                                 bb.AREA_ZONE,
-                                                CUST_NAME,APPLICATION_TYPE,
+                                                CUST_NAME,
+                                                APPLICATION_TYPE,
                                                 INTERESTED_MODEL,
                                                 CUST_MOBL_1,
                                                 SALES_POTENTIAL,
@@ -209,6 +211,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                         FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
                                         where aa.ENTRY_BY=bb.RML_ID
+                                        AND bb.USER_TYPE IS NULL
                                         and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
                                         and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
                                             );
@@ -234,7 +237,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     VISIT_DATE,
                                                     INTEREST_METHOD,
                                                     CUST_TYPE,
-													 TO_CHAR(ENTRY_DATE,'dd/mm/yyyy HH24:MI:SS AM') ENTRY_DATE,
+													TO_CHAR(ENTRY_DATE,'dd/mm/yyyy HH24:MI:SS AM') ENTRY_DATE,
                                                     SOURCE_OF_ENQ,
                                                     aa.UPAZELA_NAME,
                                                     CONTACT_MODE,MODE_TYPE,USES_SEGMENT,
@@ -244,6 +247,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                                 FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
                                                 WHERE aa.ENTRY_BY=bb.RML_ID
+                                                AND bb.USER_TYPE IS NULL
                                                 AND aa.ENTRY_BY='$emp_id'
                                                 AND ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
                                                 AND trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
