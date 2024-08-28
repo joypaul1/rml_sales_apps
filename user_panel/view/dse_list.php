@@ -1,5 +1,5 @@
 <?php
-include_once ('../../_helper/2step_com_conn.php');
+include_once('../../_helper/2step_com_conn.php');
 
 ?>
 
@@ -22,7 +22,8 @@ include_once ('../../_helper/2step_com_conn.php');
                                 <div class="col-sm-3">
                                     <div class="input-group">
                                         <!-- <label for="title">Emp ID:</label> -->
-                                        <input required="" placeholder="Emp ID Here.." class="form-control" type='text' name='sall_emp_id'
+                                        <input required="" placeholder="Emp ID Here.." class="form-control" type='text'
+                                            name='sall_emp_id'
                                             value='<?= isset($_POST['sall_emp_id']) ? $_POST['sall_emp_id'] : ''; ?>' />
                                     </div>
                                 </div>
@@ -65,13 +66,14 @@ include_once ('../../_helper/2step_com_conn.php');
                                         if (isset($_POST['sall_emp_id'])) {
 
                                             $sall_emp_id = $_REQUEST['sall_emp_id'];
-                                            $strSQL      = oci_parse(
+                                            $strSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT ID,
                                                 EMP_NAME,
                                                 RML_ID,
                                                 AREA_ZONE,
-                                                LEASE_USER,SAL_MM_ZH_ID,
+                                                LEASE_USER,
+                                                SAL_MM_ZH_ID,
                                                 ( SELECT(SELECT RML_ID
                                                         FROM RML_HR_APPS_USER
                                                             WHERE ID = RML_HR_APPS_USER_ID
@@ -95,6 +97,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 ) HR_USER_COLL
                                             FROM RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
+                                                AND USER_TYPE IS NULL
                                                 AND RML_ID='$sall_emp_id'"
                                             );
                                             // and USER_FOR='$emp_session_brand'
@@ -118,8 +121,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                                     class="btn btn-primary edit-user">Access Page</button>
                                                             </a>
                                                             <?php
-                                                        }
-                                                        else {
+                                                        } else {
                                                             echo $row['HR_USER'];
                                                         }
 
@@ -131,13 +133,13 @@ include_once ('../../_helper/2step_com_conn.php');
                                                         <?php
                                                         if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
                                                             ?>
-                                                            <a href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>">
+                                                            <a
+                                                                href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>">
                                                                 <button class="btn btn-primary edit-user">Access Page</button>
                                                                 ?>
                                                             </a>
                                                             <?php
-                                                        }
-                                                        else {
+                                                        } else {
                                                             echo $row['HR_USER_COLL'];
                                                         }
 
@@ -149,19 +151,22 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     <td><?= $row['LEASE_USER']; ?></td>
 
                                                     <td align="center">
-                                                        <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button
-                                                                class="btn btn-primary edit-user">Info. Edit <i class="flaticon-381-edit"></i></button>
+                                                        <a target="_blank"
+                                                            href="user_edit.php?user_id=<?= $row['ID'] ?>"><button
+                                                                class="btn btn-primary edit-user">Info. Edit <i
+                                                                    class="flaticon-381-edit"></i></button>
                                                         </a>
-                                                        <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button
-                                                                class="btn btn-info user_district">D. Ass. <i class="flaticon-381-add"></i></button>
+                                                        <a target="_blank"
+                                                            href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button
+                                                                class="btn btn-info user_district">D. Ass. <i
+                                                                    class="flaticon-381-add"></i></button>
                                                         </a>
                                                     </td>
                                                     <td><?= $row['SAL_MM_ZH_ID']; ?></td>
                                                 </tr>
                                                 <?php
                                             }
-                                        }
-                                        else {
+                                        } else {
                                             $allDataSQL = oci_parse(
                                                 $objConnect,
                                                 "SELECT ID,
@@ -188,12 +193,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 FROM RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
                                                 and IS_ACTIVE=1
-                                               
+                                               AND USER_TYPE IS NULL
                                                 and LEASE_USER='SE'
                                                 order by AREA_ZONE"
                                             );
                                             // and USER_FOR='$emp_session_brand'
-
+                                        
                                             $number = 0;
                                             if (oci_execute($allDataSQL)) {
                                                 while ($row = oci_fetch_assoc($allDataSQL)) {
@@ -213,8 +218,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                                         class="btn btn-primary edit-user">Access Page</button>
                                                                 </a>
                                                                 <?php
-                                                            }
-                                                            else {
+                                                            } else {
                                                                 echo $row['HR_USER'];
                                                             }
 
@@ -226,12 +230,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                                             <?php
                                                             if ($row['HR_USER_COLL'] == '' && $row['COLLECTION_USER_ID'] != 'NO USER') {
                                                                 ?>
-                                                                <a href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>"><button
+                                                                <a
+                                                                    href="access_point.php?user_id=<?= $row['COLLECTION_USER_ID'] . '&apps_name=RML_COLL' ?>"><button
                                                                         class="btn btn-primary edit-user">Access Page</button>
                                                                 </a>
                                                                 <?php
-                                                            }
-                                                            else {
+                                                            } else {
                                                                 echo $row['HR_USER_COLL'];
                                                             }
 
@@ -243,11 +247,15 @@ include_once ('../../_helper/2step_com_conn.php');
                                                         <td><?= $row['LEASE_USER']; ?></td>
 
                                                         <td class="d-flex gap-2">
-                                                            <a target="_blank" href="user_edit.php?user_id=<?= $row['ID'] ?>"><button
-                                                                    class="btn btn-primary edit-user">Info. Edit <i class="flaticon-381-edit"></i></button>
+                                                            <a target="_blank"
+                                                                href="user_edit.php?user_id=<?= $row['ID'] ?>"><button
+                                                                    class="btn btn-primary edit-user">Info. Edit <i
+                                                                        class="flaticon-381-edit"></i></button>
                                                             </a>
-                                                            <a target="_blank" href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button
-                                                                    class="btn btn-info user_district">Dis. Ass. <i class="flaticon-381-add"></i></button>
+                                                            <a target="_blank"
+                                                                href="user_district.php?user_id=<?= $row['RML_ID'] ?>"><button
+                                                                    class="btn btn-info user_district">Dis. Ass. <i
+                                                                        class="flaticon-381-add"></i></button>
                                                             </a>
                                                         </td>
                                                         <td><?= $row['SAL_MM_ZH_ID'] ?></td>
@@ -262,7 +270,8 @@ include_once ('../../_helper/2step_com_conn.php');
 
                             </div>
                             <div class='text-end'>
-                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
+                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)"
+                                    style="margin-left:5px;">Export to Excel</a>
                             </div>
 
                         </div>
@@ -278,8 +287,8 @@ include_once ('../../_helper/2step_com_conn.php');
 <!--end page wrapper -->
 
 <?php
-include_once ('../../_includes/footer_info.php');
-include_once ('../../_includes/footer.php');
+include_once('../../_includes/footer_info.php');
+include_once('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

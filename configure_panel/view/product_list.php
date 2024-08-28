@@ -1,5 +1,5 @@
 <?php
-include_once ('../../_helper/2step_com_conn.php');
+include_once('../../_helper/2step_com_conn.php');
 $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 ?>
 
@@ -35,6 +35,7 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
                                 <tbody>
 
                                     <?php
+                                    
 
                                     @$attn_status = $_REQUEST['attn_status'];
                                     @$attn_start_date = date("d/m/Y", strtotime($_REQUEST['start_date']));
@@ -78,7 +79,8 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 
                             </table>
                             <div class='text-end'>
-                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)" style="margin-left:5px;">Export to Excel</a>
+                                <a class="btn btn-success" id="downloadLink" onclick="exportF(this)"
+                                    style="margin-left:5px;">Export to Excel</a>
                             </div>
                         </div>
 
@@ -93,8 +95,8 @@ $V_USER_BRAND = $_SESSION['SALES_USER_INFO']['brand'];
 <!--end page wrapper -->
 
 <?php
-include_once ('../../_includes/footer_info.php');
-include_once ('../../_includes/footer.php');
+include_once('../../_includes/footer_info.php');
+include_once('../../_includes/footer.php');
 ?>
 <script>
     function exportF(elem) {

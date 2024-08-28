@@ -91,6 +91,7 @@ include_once ('../../_helper/2step_com_conn.php');
 															from RML_COLL_APPS_USER
 															where ACCESS_APP='RML_SAL'
 															and IS_ACTIVE=1
+                                                            AND USER_TYPE IS NULL
 															AND ('$sall_emp_id' is null OR RML_ID='$sall_emp_id')
 															and ('$form_user_role' is null or LEASE_USER='$form_user_role')"
                                             );
@@ -135,7 +136,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 from RML_COLL_APPS_USER
                                                 where ACCESS_APP='RML_SAL'
                                                 and IS_ACTIVE=1
-                                                
+                                                AND USER_TYPE IS NULL
                                                 order by AREA_ZONE"
                                             );
                                             // and USER_FOR='$emp_session_brand'

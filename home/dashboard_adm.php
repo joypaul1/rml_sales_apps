@@ -8,13 +8,26 @@ $monthSQL   = "SELECT MODE_TYPE,
                     FROM
                     (
                     SELECT MODE_TYPE ,count(MODE_TYPE) TOTAL_NUMBER from SAL_LEADS_GEN
-                    where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+                    WHERE trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+                    AND ENTRY_BY IN(SELECT RML_ID
+                        FROM RML_COLL_APPS_USER
+                        WHERE  ACCESS_APP = 'RML_SAL'
+                        AND IS_ACTIVE = 1
+                        AND USER_TYPE IS NULL
+                    )
                     group by MODE_TYPE
                     UNION ALL
                     SELECT STATUS MODE_TYPE,count(STATUS) TOTAL_NUMBER
                     from SAL_LEADS_GEN
-                    where trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
-                    and STATUS is not null
+                    WHERE trunc(ENTRY_DATE) between SYSDATE-30 and SYSDATE
+                    AND ENTRY_BY IN
+                    (SELECT RML_ID
+                        FROM RML_COLL_APPS_USER
+                        WHERE ACCESS_APP = 'RML_SAL'
+                        AND IS_ACTIVE = 1
+                        AND USER_TYPE IS NULL
+                    )
+                    AND STATUS is not null
                     group by STATUS
                     )";
 $monthlySQL = @oci_parse($objConnect, $monthSQL);
@@ -25,6 +38,13 @@ $apaxChartData = [];
 $salesSQL      = "SELECT PRODUCT_TYPE,count(PRODUCT_TYPE)  TOTAL_NUMBER
 from SAL_LEADS_GEN
 where PRODUCT_TYPE NOT IN 'MFTBC'
+AND ENTRY_BY IN
+    (SELECT RML_ID
+        FROM RML_COLL_APPS_USER
+        WHERE  ACCESS_APP = 'RML_SAL'
+        AND IS_ACTIVE = 1
+        AND USER_TYPE IS NULL
+    )
 GROUP BY  PRODUCT_TYPE
 order by TOTAL_NUMBER DESC";
 $salesSQL      = @oci_parse($objConnect, $salesSQL);

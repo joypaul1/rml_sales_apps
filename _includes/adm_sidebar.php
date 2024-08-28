@@ -29,6 +29,7 @@
                         <li><a href="<?php echo $basePath ?>/report_panel/view/summary.php">Report Summary</a></li>
                         <li><a href="<?php echo $basePath ?>/report_panel/view/dse_lead_report.php">DSE Lead Report </a></li>
                         <li><a href="<?php echo $basePath ?>/report_panel/view/win_lost_report.php">Win Lost Report </a></li>
+                        <li><a href="<?php echo $basePath ?>/report_panel/view/location_mapping.php">Location Mapping </a></li>
                     </ul>
                 </li>
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">

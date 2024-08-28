@@ -22,11 +22,12 @@ include_once ('../../_helper/2step_com_conn.php');
                                         <option selected value="">Select User</option>
                                         <?php
 
-                                        $strSQL = oci_parse($objConnect, "select EMP_NAME,RML_ID as USER_ID 
+                                        $strSQL = oci_parse($objConnect, "SELECT EMP_NAME,RML_ID as USER_ID 
 																		   from RML_COLL_APPS_USER 
 																	   where IS_ACTIVE=1
 																	   and ACCESS_APP='RML_SAL'
 																	   and LEASE_USER='SE'
+																	   and USER_TYPE IS NULL
 																	 order by EMP_NAME");
                                         oci_execute($strSQL);
                                         while ($row = oci_fetch_assoc($strSQL)) {
@@ -70,15 +71,23 @@ include_once ('../../_helper/2step_com_conn.php');
 
                                     if (isset($_POST['user_selected_id'])) {
 
-                                        $strSQL = oci_parse($objConnect, "SELECT ID,
-                                                                    (select EMP_NAME || ' ('||RML_ID || ')' from RML_COLL_APPS_USER where RML_ID=CONCERN_ID )EMP_NAME,
-						                                            DISTRICT_NAME,
-																	CREATED_BY,
-																	CREATED_DATE,
-																	IS_ACTIVE,
-																	CONCERN_ID 
-						                                       from SALL_EMP_DISTRICT
-															   where CONCERN_ID='$user_selected_id'");
+                                        $strSQL = oci_parse($objConnect, "SELECT
+                                                                SMD.ID,
+                                                                COLLUSER.EMP_NAME || ' (' || COLLUSER.RML_ID || ')' AS EMP_NAME,
+                                                                SMD.DISTRICT_NAME,
+                                                                SMD.CREATED_BY,
+                                                                SMD.CREATED_DATE,
+                                                                SMD.IS_ACTIVE,
+                                                                SMD.CONCERN_ID
+                                                            FROM
+                                                                SALL_EMP_DISTRICT SMD
+                                                            INNER JOIN
+                                                                RML_COLL_APPS_USER COLLUSER
+                                                                ON COLLUSER.RML_ID = SMD.CONCERN_ID
+                                                                AND COLLUSER.USER_TYPE IS NULL
+                                                                AND COLLUSER.IS_ACTIVE = 1
+                                                            WHERE
+                                                                SMD.CONCERN_ID = '$user_selected_id'");
 
                                         oci_execute(@$strSQL);
                                         $number = 0;
@@ -105,13 +114,21 @@ include_once ('../../_helper/2step_com_conn.php');
                                     }
                                     else {
 
-                                        $allDataSQL = oci_parse($objConnect, "SELECT ID,
-						                                            DISTRICT_NAME,
-																	CREATED_BY,
-																	CREATED_DATE,
-																	IS_ACTIVE,
-																	(select EMP_NAME || ' ('||RML_ID || ')' from RML_COLL_APPS_USER where RML_ID=CONCERN_ID )EMP_NAME
-						                                       from SALL_EMP_DISTRICT");
+                                        $allDataSQL = oci_parse($objConnect, "SELECT SMD.ID,
+                                                        SMD.DISTRICT_NAME,
+                                                        SMD.CREATED_BY,
+                                                        SMD.CREATED_DATE,
+                                                        SMD.IS_ACTIVE,
+                                                        (SELECT EMP_NAME || ' (' || RML_ID || ')'
+                                                            FROM RML_COLL_APPS_USER
+                                                            WHERE     RML_ID = SMD.CONCERN_ID
+                                                                AND USER_TYPE IS NULL
+                                                                AND IS_ACTIVE = 1)
+                                                            EMP_NAME
+                                                    FROM SALL_EMP_DISTRICT SMD
+                                                    INNER  JOIN RML_COLL_APPS_USER COLLUSER ON COLLUSER.RML_ID = SMD.CONCERN_ID
+                                                    AND COLLUSER.USER_TYPE  IS NULL
+                                                    AND COLLUSER.IS_ACTIVE = 1");
 
                                         $number = 0;
                                         if (@oci_execute(@$allDataSQL)) {
