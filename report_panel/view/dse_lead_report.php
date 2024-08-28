@@ -243,7 +243,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                     INTEREST_METHOD,
                                                     CUST_TYPE,
 													TO_DATE(ENTRY_DATE,'dd/mm/YYYY') ENTRY_DATE,
-													 TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
+													TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
                                                     SOURCE_OF_ENQ,
                                                     aa.UPAZELA_NAME,
                                                     CONTACT_MODE,MODE_TYPE,USES_SEGMENT,
