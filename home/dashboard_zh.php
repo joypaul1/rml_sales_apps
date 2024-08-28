@@ -10,13 +10,13 @@ $monthSQL   = "SELECT MODE_TYPE, COUNT(MODE_TYPE) TOTAL_NUMBER
 							FROM RML_COLL_APPS_USER
 							WHERE ACCESS_APP = 'RML_SAL'
 							AND IS_ACTIVE = 1
-							--AND LEASE_USER = 'SE'
+							AND USER_TYPE = 'R-U'
 							AND SAL_MM_ZH_ID = '$emp_session_id'
 						)
 				GROUP BY MODE_TYPE
 				UNION ALL
 				SELECT STATUS MODE_TYPE, COUNT(STATUS) TOTAL_NUMBER
-			FROM SAL_LEADS_GEN
+			    FROM SAL_LEADS_GEN
 					WHERE  TRUNC (ENTRY_DATE) BETWEEN SYSDATE-30 AND SYSDATE
 					AND STATUS IS NOT NULL
 					AND ENTRY_BY IN
@@ -24,7 +24,7 @@ $monthSQL   = "SELECT MODE_TYPE, COUNT(MODE_TYPE) TOTAL_NUMBER
 							FROM RML_COLL_APPS_USER
 							WHERE  ACCESS_APP = 'RML_SAL'
 								AND IS_ACTIVE = 1
-								--AND LEASE_USER = 'SE'
+								AND USER_TYPE = 'R-U'
 								AND SAL_MM_ZH_ID = '$emp_session_id'
 						)
 				GROUP BY STATUS 
@@ -35,17 +35,17 @@ $monthlySQL = @oci_parse($objConnect, $monthSQL);
 // apaxChartData
 $apaxChartData = [];
 $salesSQL      =
-    " SELECT UPAZELA_NAME, COUNT(UPAZELA_NAME) TOTAL_NUMBER
-			  FROM SAL_LEADS_GEN 
+    "SELECT UPAZELA_NAME, COUNT(UPAZELA_NAME) TOTAL_NUMBER
+			FROM SAL_LEADS_GEN
 					WHERE  TRUNC (ENTRY_DATE) BETWEEN SYSDATE-30 AND SYSDATE
 					AND STATUS IS NULL
 					AND ENTRY_BY IN
 						(SELECT RML_ID
-							 FROM RML_COLL_APPS_USER
-							WHERE     ACCESS_APP = 'RML_SAL'
-								  AND IS_ACTIVE = 1
-								  --AND LEASE_USER = 'SE'
-								  AND SAL_MM_ZH_ID = '$emp_session_id'
+							FROM RML_COLL_APPS_USER
+							WHERE   ACCESS_APP = 'RML_SAL'
+								AND IS_ACTIVE = 1
+								AND USER_TYPE = 'R-U'
+								AND SAL_MM_ZH_ID = '$emp_session_id'
 						)
 				GROUP BY UPAZELA_NAME";
 $salesSQL      = @oci_parse($objConnect, $salesSQL);

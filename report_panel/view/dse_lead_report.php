@@ -216,7 +216,8 @@ include_once('../../_helper/2step_com_conn.php');
                                                 aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                             FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
                                             where aa.ENTRY_BY=bb.RML_ID
-                                            AND bb.USER_TYPE ='R-U' AND bb.IS_ACTIVE = 1
+                                            AND bb.USER_TYPE ='R-U' 
+                                            AND bb.IS_ACTIVE = 1
                                             and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
                                             and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
                                             );
@@ -252,6 +253,7 @@ include_once('../../_helper/2step_com_conn.php');
                                                     aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                                 FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
                                                 WHERE aa.ENTRY_BY=bb.RML_ID
+                                                AND bb.USER_TYPE = 'R-U'
                                                 AND aa.ENTRY_BY='$emp_id'
                                                 AND ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
                                                 AND trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
