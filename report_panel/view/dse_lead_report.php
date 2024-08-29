@@ -29,7 +29,7 @@ include_once('../../_helper/2step_com_conn.php');
 													    where ACCESS_APP= 'RML_SAL'
 													    and IS_ACTIVE=1
 													    and LEASE_USER='SE'
-                                                        AND USER_TYPE ='R-U'
+                                                        AND USER_TYPE IS NULL
 													    order by  EMP_NAME ");
                                         oci_execute($strSQL);
                                         while ($row = oci_fetch_assoc($strSQL)) {
