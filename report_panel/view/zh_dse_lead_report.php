@@ -22,28 +22,29 @@ $selected_mode = isset($_POST['lead_mode']) ? $_POST['lead_mode'] : (isset($_SES
                         <form action="" method="post">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <select required="" name="emp_id" data-live-search="true" style="width:100%;">
-                                        <option selected value="">Select Executive</option>
-                                        <option value="ALL" <?php echo ($selected_emp_id === 'ALL') ? 'selected' : ''; ?>>ALL</option>
+                                <select required="" name="emp_id" data-live-search="true" style="width:100%;">
+                                    <option value="">Select Executive</option>
+                                    <option value="ALL" <?php echo ($selected_emp_id === 'ALL') ? 'selected' : ''; ?>>ALL</option>
+                                    <?php
+                                    $strSQL = @oci_parse($objConnect, "SELECT RML_ID, EMP_NAME FROM RML_COLL_APPS_USER
+                                                                        WHERE ACCESS_APP = 'RML_SAL'
+                                                                        AND IS_ACTIVE = 1
+                                                                        AND LEASE_USER = 'SE'
+                                                                        AND USER_TYPE IS NULL
+                                                                        AND SAL_MM_ZH_ID = '$emp_session_id'
+                                                                        ORDER BY EMP_NAME");
+                                    @oci_execute($strSQL);
+                                    while ($row = @oci_fetch_assoc($strSQL)) {
+                                        $selected = ($row['RML_ID'] == $selected_emp_id) ? 'selected' : '';
+                                        ?>
+                                        <option value="<?php echo $row['RML_ID']; ?>" <?php echo $selected; ?>>
+                                            <?php echo $row['EMP_NAME']; ?>
+                                        </option>
                                         <?php
+                                    }
+                                    ?>
+                                </select>
 
-                                        $strSQL = oci_parse($objConnect, "SELECT RML_ID,EMP_NAME from RML_COLL_APPS_USER
-													    WHERE ACCESS_APP= 'RML_SAL'
-													    AND IS_ACTIVE=1
-													    AND LEASE_USER='SE'
-                                                        AND USER_TYPE IS NULL
-													    ORDER BY  EMP_NAME ");
-                                        oci_execute($strSQL);
-                                        while ($row = oci_fetch_assoc($strSQL)) {
-                                            $selected = ($row['RML_ID'] == $selected_emp_id) ? 'selected' : '';
-                                        ?>
-                                            <option value="<?php echo $row['RML_ID']; ?>" <?php echo $selected; ?>>
-                                                <?php echo $row['EMP_NAME']; ?>
-                                            </option>
-                                            <?php
-                                        }
-                                        ?>
-                                    </select>
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="input-group">
@@ -58,13 +59,13 @@ $selected_mode = isset($_POST['lead_mode']) ? $_POST['lead_mode'] : (isset($_SES
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <select name="lead_mode" class="form-control">
-                                        <option value="" <?php echo ($selected_mode === '') ? 'selected' : ''; ?>>Select Mode</option>
-                                        <option value="Q0" <?php echo ($selected_mode === 'Q0') ? 'selected' : ''; ?>>Q0</option>
-                                        <option value="Q1" <?php echo ($selected_mode === 'Q1') ? 'selected' : ''; ?>>Q1</option>
-                                        <option value="Q2" <?php echo ($selected_mode === 'Q2') ? 'selected' : ''; ?>>Q2</option>
-                                        <option value="Q3" <?php echo ($selected_mode === 'Q3') ? 'selected' : ''; ?>>Q3</option>
-                                    </select>
+                                <select name="lead_mode" class="form-control">
+                                    <option value="" <?php echo ($selected_mode === '') ? 'selected' : ''; ?>>Select Mode</option>
+                                    <option value="Q0" <?php echo ($selected_mode === 'Q0') ? 'selected' : ''; ?>>Q0</option>
+                                    <option value="Q1" <?php echo ($selected_mode === 'Q1') ? 'selected' : ''; ?>>Q1</option>
+                                    <option value="Q2" <?php echo ($selected_mode === 'Q2') ? 'selected' : ''; ?>>Q2</option>
+                                    <option value="Q3" <?php echo ($selected_mode === 'Q3') ? 'selected' : ''; ?>>Q3</option>
+                                </select>
 
                                 </div>
                             </div>
@@ -187,43 +188,58 @@ $selected_mode = isset($_POST['lead_mode']) ? $_POST['lead_mode'] : (isset($_SES
                                         if ($emp_id == "ALL") {
                                             $strSQL = oci_parse(
                                                 $objConnect,
-                                                "SELECT aa.ID,aa.ENTRY_BY,aa.CUST_TYPE,
-                                                aa.ENTRY_BY,
-                                                aa.ZONE_NAME,
-                                                bb.EMP_NAME,
-                                                bb.AREA_ZONE,
-                                                CUST_NAME,
-                                                APPLICATION_TYPE,
-                                                INTERESTED_MODEL,
-                                                CUST_MOBL_1,
-                                                SALES_POTENTIAL,
-                                                CUST_ADR_1,
-                                                VISIT_DATE,
-                                                INTEREST_METHOD,
-                                                CUST_TYPE,
-                                                SOURCE_OF_ENQ,
-                                                CONTACT_MODE,
-                                                MODE_TYPE,
-                                                USES_SEGMENT,
-                                                TO_DATE(ENTRY_DATE,'dd/mm/YYYY') ENTRY_DATE,
-												TO_CHAR(ENTRY_DATE,'HH24:MI:SS AM') ENTRY_TIME,
-                                                FOLLOW_UP_METHOD,
-                                                PSBL_PURCHASES_DATE,
-                                                aa.UPAZELA_NAME,
-                                                STATUS,
-                                                APPLICATION_TYPE,
-                                                REASON_OF_LOST,
-                                                SAL_MM_ZH_ID AS ZH,
-												(select uu.EMP_NAME from RML_COLL_APPS_USER uu where uu.RML_ID=bb.SAL_MM_ZH_ID) ZH_NAME,
-                                                (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
-                                                aa.INTERESTED_BRAND,aa.LAT,aa.LANG
-                                            FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
-                                            where aa.ENTRY_BY=bb.RML_ID
-                                            AND bb.USER_TYPE IS NULL
-                                            AND bb.IS_ACTIVE = 1
-                                            and ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
-                                            and trunc(ENTRY_DATE) between to_date('$attn_start_date','dd/mm/yyyy') and to_date('$attn_end_date','dd/mm/yyyy')"
-                                            );
+                                                "SELECT aa.ID,
+                                                                aa.ENTRY_BY,
+                                                                aa.CUST_TYPE,
+                                                                aa.ENTRY_BY,
+                                                                aa.ZONE_NAME,
+                                                                bb.EMP_NAME,
+                                                                bb.AREA_ZONE,
+                                                                CUST_NAME,
+                                                                APPLICATION_TYPE,
+                                                                INTERESTED_MODEL,
+                                                                CUST_MOBL_1,
+                                                                SALES_POTENTIAL,
+                                                                CUST_ADR_1,
+                                                                VISIT_DATE,
+                                                                INTEREST_METHOD,
+                                                                CUST_TYPE,
+                                                                SOURCE_OF_ENQ,
+                                                                CONTACT_MODE,
+                                                                MODE_TYPE,
+                                                                USES_SEGMENT,
+                                                                TO_DATE (ENTRY_DATE, 'dd/mm/YYYY') ENTRY_DATE,
+                                                                TO_CHAR (ENTRY_DATE, 'HH24:MI:SS AM') ENTRY_TIME,
+                                                                FOLLOW_UP_METHOD,
+                                                                PSBL_PURCHASES_DATE,
+                                                                aa.UPAZELA_NAME,
+                                                                STATUS,
+                                                                APPLICATION_TYPE,
+                                                                REASON_OF_LOST,
+                                                                SAL_MM_ZH_ID AS ZH,
+                                                                (SELECT uu.EMP_NAME
+                                                                    FROM RML_COLL_APPS_USER uu
+                                                                    WHERE uu.RML_ID = bb.SAL_MM_ZH_ID)
+                                                                    ZH_NAME,
+                                                                (SELECT COUNT (ID)
+                                                                    FROM SAL_LEADS_FOLLOWUP mm
+                                                                    WHERE mm.SAL_LEADS_GEN_ID = AA.ID)
+                                                                    LEAD_NEW_OLD,
+                                                                aa.INTERESTED_BRAND,
+                                                                aa.LAT,
+                                                                aa.LANG
+                                                            FROM SAL_LEADS_GEN aa, RML_COLL_APPS_USER bb
+                                                            WHERE     bb.RML_ID = aa.ENTRY_BY
+                                                                AND aa.ENTRY_BY IN
+                                                                        (SELECT RML_ID
+                                                                            FROM RML_COLL_APPS_USER
+                                                                            WHERE     ACCESS_APP = 'RML_SAL'
+                                                                                AND IS_ACTIVE = 1
+                                                                                AND LEASE_USER = 'SE'
+                                                                                AND USER_TYPE IS NULL
+                                                                                AND SAL_MM_ZH_ID = '$emp_session_id')
+                                                                AND ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
+                                                                AND TRUNC (aa.ENTRY_DATE) BETWEEN SYSDATE - 30 AND SYSDATE");
                                         } else {
                                             $strSQL = oci_parse(
                                                 $objConnect,
@@ -255,7 +271,7 @@ $selected_mode = isset($_POST['lead_mode']) ? $_POST['lead_mode'] : (isset($_SES
                                                     (select count(ID) from SAL_LEADS_FOLLOWUP mm where mm.SAL_LEADS_GEN_ID=AA.ID) LEAD_NEW_OLD,
                                                     aa.INTERESTED_BRAND,aa.LAT,aa.LANG
                                                 FROM SAL_LEADS_GEN aa,RML_COLL_APPS_USER bb
-                                                WHERE aa.ENTRY_BY=bb.RML_ID
+                                                WHERE aa.ENTRY_BY = bb.RML_ID
                                                 AND bb.USER_TYPE IS NULL
                                                 AND aa.ENTRY_BY='$emp_id'
                                                 AND ('$lead_mode' is null OR MODE_TYPE='$lead_mode')
