@@ -99,7 +99,7 @@ include_once('../../_includes/footer.php');
     function exportF(elem) {
         var table = document.getElementById("table");
         var html = table.outerHTML;
-        var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url 
+        var url = 'data:application/vnd.ms-excel,' + escape(html); // Set your html table into url
         elem.setAttribute("href", url);
         elem.setAttribute("download", "Lead_Info.xls"); // Choose the file name
         return false;
