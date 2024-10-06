@@ -30,7 +30,7 @@
                         <li><a href="<?php echo $basePath ?>/report_panel/view/zh_dse_lead_report.php">DSE Lead Report </a></li>
                     </ul>
                 </li>
-                 <!--<li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                 <!-- <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                         <i class="flaticon-381-television"></i>
                         <span class="nav-text">Distributor Panel</span>
                     </a>
@@ -38,18 +38,15 @@
                         <li><a href="<?php echo $basePath ?>/distributor_panel/view/report.php">Distributor Report </a></li>
                         <li><a href="<?php echo $basePath ?>/distributor_panel/view/district_assign_report.php">District Assign Report </a></li>
                     </ul>
-                </li>
+                </li> -->
                 <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                        <i class="flaticon-381-bookmark"></i>
-                        <span class="nav-text">Configure Panel</span>
+                        <i class="flaticon-381-id-card-4"></i>
+                        <span class="nav-text">Team Member</span>
                     </a>
                     <ul aria-expanded="false" class="mm-collapse"> 
-                        <li><a href="<?php echo $basePath ?>/configure_panel/view/product_list.php">Product List </a></li>
-                        <li><a href="<?php echo $basePath ?>/configure_panel/view/add_zone.php">Zone List </a></li>
-                        <li><a href="<?php echo $basePath ?>/configure_panel/view/add_application.php">Application List </a></li>
-                        <li><a href="<?php echo $basePath ?>/configure_panel/view/add_company.php">Company List </a></li>
+                        <li><a href="<?php echo $basePath ?>/configure_panel/view/zh_member_list.php">Member List </a></li>
                     </ul>
-                </li>-->
+                </li>
             </ul>
 
         </div>
