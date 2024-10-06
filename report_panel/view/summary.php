@@ -136,7 +136,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <center>Total</center>
                                             </th>
                                             <th scope="col">
-                                                <center>TODAY-FOLLOW-UP</center>
+                                                <center>FOLLOW-UP</center>
                                             </th>
                                             <th scope="col">
                                                 <center>FOLLOW-UP-MISSING</center>
@@ -327,7 +327,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <center>TOTAL</center>
                                             </th>
                                             <th scope="col">
-                                                <center>TODAY-FOLLOW-UP</center>
+                                                <center>FOLLOW-UP</center>
                                             </th>
                                             <th scope="col">
                                                 <center>FOLLOW-UP-MISSING</center>
@@ -347,7 +347,6 @@ include_once ('../../_helper/2step_com_conn.php');
                                             SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
                                             COUNT (INTERESTED_MODEL) MODEL_COUNT
@@ -359,7 +358,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
                                                     AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
                                             GROUP BY INTERESTED_MODEL";
-                                            // ECHO $strSQL;
+                                            
                                         $strSQLZone = oci_parse(
                                             $objConnect,$strSQL);
 

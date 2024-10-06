@@ -63,7 +63,7 @@ if ($product_band == "Eicher") {
                                                 <center>Total</center>
                                             </th>
                                             <th scope="col">
-                                                <center>TODAY-FOLLOW-UP</center>
+                                                <center>FOLLOW-UP</center>
                                             </th>
                                             <th scope="col">
                                                 <center>FOLLOW-UP-MISSING</center>
@@ -273,7 +273,7 @@ if ($product_band == "Eicher") {
                                                 <center>TOTAL</center>
                                             </th>
                                             <th scope="col">
-                                                <center>TODAY-FOLLOW-UP</center>
+                                                <center>FOLLOW-UP</center>
                                             </th>
                                             <th scope="col">
                                                 <center>FOLLOW-UP-MISSING</center>

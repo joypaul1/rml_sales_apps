@@ -136,7 +136,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <center>Total</center>
                                             </th>
                                             <th scope="col">
-                                                <center>TODAY-FOLLOW-UP</center>
+                                                <center>FOLLOW-UP</center>
                                             </th>
                                             <th scope="col">
                                                 <center>FOLLOW-UP-MISSING</center>
@@ -145,33 +145,35 @@ include_once ('../../_helper/2step_com_conn.php');
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $strSQL = oci_parse(
-                                            $objConnect,
-                                            "SELECT INTERESTED_MODEL,
-                                            PH_ID RML_ID,
-                                            count(INTERESTED_MODEL) MODEL_COUNT,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
-                                            SAL_LEADS_COUNT_FINAL_UPDATED (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','WIN',INTERESTED_MODEL) AS  WIN,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','LOST',INTERESTED_MODEL) AS  LOST,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
-                                            SAL_LEADS_COUNT_FINAL_2023 (PH_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'PH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS
-                                            FROM
-                                            (SELECT  A.INTERESTED_MODEL,
-                                                (SELECT MAX(SS.PH_ID) FROM SAL_ZH_SETUP SS WHERE SS.ZH_ID=SAL_MM_ZH_ID AND SS.BRAND_NAME='$v_user_tag')PH_ID
-                                                FROM SAL_LEADS_GEN A, RML_COLL_APPS_USER B
-                                                WHERE A.ENTRY_BY = B.RML_ID
-                                                AND b.SAL_MM_ZH_ID='$emp_session_id'
-                                                AND A.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
-                                                AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
-                                                AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy') AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
-                                                GROUP BY INTERESTED_MODEL,SAL_MM_ZH_ID
-                                                )
-                                                GROUP BY  INTERESTED_MODEL,PH_ID
-                                                ORDER BY RML_ID"
-                                        );
+                                        $SQL = "SELECT
+                                                    EMP_NAME,RML_ID,
+                                                    INTERESTED_MODEL,
+                                                    count(INTERESTED_MODEL) MODEL_COUNT,
+                                                    SAL_LEADS_COUNT_FINAL_UPDATED (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'SC','Q0',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS  HOT,
+                                                    SAL_LEADS_COUNT_FINAL_UPDATED (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'), 'SC','Q1',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS WORM,
+                                                    SAL_LEADS_COUNT_FINAL_UPDATED (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'),  'SC','Q2',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS COLD,
+                                                    SAL_LEADS_COUNT_FINAL_UPDATED (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'),  'SC','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') AS NI,
+                                                    SAL_LEADS_COUNT_FINAL_2023 (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'),  'SC','WIN',INTERESTED_MODEL) AS  WIN,
+                                                    SAL_LEADS_COUNT_FINAL_2023 (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'),  'SC','LOST',INTERESTED_MODEL) AS  LOST,
+                                                    SAL_LEADS_COUNT_FINAL_2023 (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'),  'SC','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
+                                                    SAL_LEADS_COUNT_FINAL_2023 (b.RML_ID,TO_DATE('$v_start_date','DD/MM/YYYY'),TO_DATE('$v_end_date','DD/MM/YYYY'),  'SC','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS
+                                                    from SAL_LEADS_GEN a,RML_COLL_APPS_USER b
+                                                    where A.ENTRY_BY=b.RML_ID
+                                                    AND A.ENTRY_BY  IN (SELECT RML_ID FROM RML_COLL_APPS_USER
+                                                                    WHERE ACCESS_APP = 'RML_SAL'
+                                                                    AND IS_ACTIVE = 1
+                                                                    AND LEASE_USER = 'SE'
+                                                                    AND USER_TYPE IS NULL
+                                                                    AND SAL_MM_ZH_ID = '$emp_session_id')
+                                                    and b.SAL_MM_ZH_ID='$emp_session_id'
+                                                    AND a.INTERESTED_BRAND = '$V_INTERESTED_BRAND'
+                                                    AND ('$v_product_type' IS NULL OR A.PRODUCT_TYPE='$v_product_type')
+                                                    AND B.USER_FOR='$v_user_tag'
+                                                    and trunc(ENTRY_DATE) between to_date('$v_start_date','dd/mm/yyyy') and  to_date('$v_end_date','dd/mm/yyyy') 
+                                                    group by INTERESTED_MODEL,EMP_NAME,RML_ID
+                                                    order by EMP_NAME";
+                                        //ECHO  $SQL;
+                                        $strSQL = oci_parse( $objConnect,$SQL );
 
                                         oci_execute($strSQL);
                                         $number   = 0;
@@ -293,7 +295,7 @@ include_once ('../../_helper/2step_com_conn.php');
 
                                 </table>
                             </div>
-                            <div class="row col-12 col-sm-12 col-md-12 mt-3">
+                            <!-- <div class="row col-12 col-sm-12 col-md-12 mt-3">
                                 <table class="small table-bordered table-responsive">
                                     <thead class="table-success">
                                         <tr>
@@ -327,7 +329,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                 <center>TOTAL</center>
                                             </th>
                                             <th scope="col">
-                                                <center>TODAY-FOLLOW-UP</center>
+                                                <center>FOLLOW-UP</center>
                                             </th>
                                             <th scope="col">
                                                 <center>FOLLOW-UP-MISSING</center>
@@ -347,7 +349,6 @@ include_once ('../../_helper/2step_com_conn.php');
                                             SAL_LEADS_COUNT_FINAL_UPDATED('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','Not Interested',INTERESTED_MODEL,'$v_user_tag','$v_product_type') NI,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','WIN',INTERESTED_MODEL) WIN,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
-                                            SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','LOST',INTERESTED_MODEL) LOST,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP',INTERESTED_MODEL) AS TODAY_FOLLOW_UP,
                                             SAL_LEADS_COUNT_FINAL_2023('$emp_session_id',TO_DATE ('$v_start_date', 'dd/mm/yyyy'),TO_DATE ('$v_end_date', 'dd/mm/yyyy'),'BH','FOLLOW_UP_MISS',INTERESTED_MODEL) AS  FOLLOW_UP_MISS,
                                             COUNT (INTERESTED_MODEL) MODEL_COUNT
@@ -359,7 +360,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                                     AND TRUNC (ENTRY_DATE) BETWEEN TO_DATE ('$v_start_date', 'dd/mm/yyyy')
                                                     AND TO_DATE ('$v_end_date', 'dd/mm/yyyy')
                                             GROUP BY INTERESTED_MODEL";
-                                            // ECHO $strSQL;
+                                            
                                         $strSQLZone = oci_parse(
                                             $objConnect,$strSQL);
 
@@ -418,7 +419,7 @@ include_once ('../../_helper/2step_com_conn.php');
                                     </tbody>
                                 </table>
 
-                            </div>
+                            </div> -->
                         </div>
                         <?php
                     }
